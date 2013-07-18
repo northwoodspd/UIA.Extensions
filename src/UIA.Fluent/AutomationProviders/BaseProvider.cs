@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace UIA.Fluent.AutomationProviders
 {
     [ComVisible(true)]
-    public abstract class BaseProvider : IRawElementProviderFragmentRoot
+    public class BaseProvider : IRawElementProviderFragmentRoot
     {
         private readonly Control _control;
         private readonly Dictionary<int, object> _properties;
@@ -20,7 +20,7 @@ namespace UIA.Fluent.AutomationProviders
             get { return ControlType.Custom.Id; }
         }
 
-        protected BaseProvider(Control control)
+        public BaseProvider(Control control)
         {
             _control = control;
             _properties = new Dictionary<int, object>
@@ -32,7 +32,7 @@ namespace UIA.Fluent.AutomationProviders
                               };
         }
 
-        protected abstract List<int> SupportedPatterns { get; }
+        protected virtual List<int> SupportedPatterns { get { return new List<int>(); } }
 
         public const int ProviderUseComThreading = 0x20;
         public ProviderOptions ProviderOptions
@@ -129,6 +129,11 @@ namespace UIA.Fluent.AutomationProviders
         protected virtual IRawElementProviderFragment Parent
         {
             get { return null; }
+        }
+
+        public string Name
+        {
+            set { SetPropertyValue(AutomationElementIdentifiers.NameProperty.Id, value); }
         }
 
         public IRawElementProviderFragment ElementProviderFromPoint(double x, double y)

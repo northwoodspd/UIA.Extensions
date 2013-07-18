@@ -7,6 +7,8 @@ namespace UIA.Fluent.TestApplication
         public MainForm()
         {
             InitializeComponent();
+            basicPanel.ExposeAutomation()
+                .WithName("Custom Panel Name");
         }
     }
 }

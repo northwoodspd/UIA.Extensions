@@ -4,7 +4,6 @@ end
 
 Then(/^we are able to expose the following basic information from controls:$/) do |table|
   table.hashes.each do |info|
-    which_property = "panel_#{info['property']}"
-    @screen.send(which_property).should eq(info['value'])
+    @screen.panel_view.send(info['property']).to_s.should eq(info['value'])
   end
 end

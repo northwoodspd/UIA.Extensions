@@ -9,6 +9,7 @@ end
 Before do
   @app = ChildProcess.build app_path
   @app.start
+  RAutomation::WaitHelper.wait_until { RAutomation::Window.new(:pid => @app.pid).present? }
 end
 
 After do
