@@ -38,7 +38,6 @@ namespace UIA.Fluent
         public AutomationHandler(IWin32Window window, BaseProvider provider)
         {
             _provider = provider;
-            _provider.Name = "shit";
             AssignHandle(window.Handle);
         }
 
