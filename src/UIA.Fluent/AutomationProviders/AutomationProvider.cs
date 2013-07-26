@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace UIA.Fluent.AutomationProviders
 {
     [ComVisible(true)]
-    public class BaseProvider : IRawElementProviderFragmentRoot
+    public class AutomationProvider : IRawElementProviderFragmentRoot
     {
         private readonly Control _control;
         private readonly Dictionary<int, object> _properties;
@@ -20,7 +20,7 @@ namespace UIA.Fluent.AutomationProviders
             get { return ControlType.Custom.Id; }
         }
 
-        public BaseProvider(Control control)
+        public AutomationProvider(Control control)
         {
             _control = control;
             _properties = new Dictionary<int, object>

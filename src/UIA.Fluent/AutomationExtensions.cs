@@ -22,16 +22,16 @@ namespace UIA.Fluent
 
     public class AutomationConfigurer
     {
-        private readonly BaseProvider _provider;
+        private readonly AutomationProvider _provider;
         private AutomationHandler _automationHandler;
 
         public AutomationConfigurer(Control control)
         {
-            _provider = new BaseProvider(control);
+            _provider = new AutomationProvider(control);
             _automationHandler = new AutomationHandler(control, _provider);
         }
 
-        public AutomationConfigurer(Control control, BaseProvider provider)
+        public AutomationConfigurer(Control control, AutomationProvider provider)
         {
             _provider = provider;
             _automationHandler = new AutomationHandler(control, _provider);
@@ -44,7 +44,7 @@ namespace UIA.Fluent
         }
     }
 
-    public class ValueProvider : BaseProvider, IValueProvider
+    public class ValueProvider : AutomationProvider, IValueProvider
     {
         private readonly Func<string> _getter;
         private readonly Action<string> _setter;
@@ -76,10 +76,10 @@ namespace UIA.Fluent
 
     public class AutomationHandler : NativeWindow
     {
-        private readonly BaseProvider _provider;
+        private readonly AutomationProvider _provider;
         const int WmGetobject = 0x3d;
 
-        public AutomationHandler(IWin32Window window, BaseProvider provider)
+        public AutomationHandler(IWin32Window window, AutomationProvider provider)
         {
             _provider = provider;
             AssignHandle(window.Handle);

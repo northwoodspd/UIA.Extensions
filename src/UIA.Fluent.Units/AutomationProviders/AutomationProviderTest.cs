@@ -10,7 +10,7 @@ using Should.Fluent;
 namespace UIA.Fluent.AutomationProviders
 {
     [TestFixture]
-    public class BaseProviderTest
+    public class AutomationProviderTest
     {
         private TestAutomationProvider _provider;
         private Control _control;
@@ -54,9 +54,9 @@ namespace UIA.Fluent.AutomationProviders
         [Test]
         public void ItUsesComThreading()
         {
-            ((int)_provider.ProviderOptions & BaseProvider.ProviderUseComThreading)
+            ((int)_provider.ProviderOptions & AutomationProvider.ProviderUseComThreading)
                 .Should()
-                .Equal(BaseProvider.ProviderUseComThreading);
+                .Equal(AutomationProvider.ProviderUseComThreading);
         }
 
         [Test]
@@ -80,12 +80,12 @@ namespace UIA.Fluent.AutomationProviders
                      .Should().Be.SameAs(expectedSurrounding.Object);
         }
 
-        private Mock<BaseProvider> GetMockChild()
+        private Mock<AutomationProvider> GetMockChild()
         {
-            return new Mock<BaseProvider>(new Control());
+            return new Mock<AutomationProvider>(new Control());
         }
 
-        public class TestAutomationProvider : BaseProvider
+        public class TestAutomationProvider : AutomationProvider
         {
             private readonly Dictionary<NavigateDirection, IRawElementProviderFragment> _surroundings;
 
@@ -124,7 +124,7 @@ namespace UIA.Fluent.AutomationProviders
                 get { return _surroundings[NavigateDirection.Parent]; }
             }
 
-            public void Set(NavigateDirection whichWay, BaseProvider automationProvider)
+            public void Set(NavigateDirection whichWay, AutomationProvider automationProvider)
             {
                 _surroundings[whichWay] = automationProvider;
             }
