@@ -3,4 +3,5 @@ class MainScreen
   window :title => /UIA\.Fluent/
 
   control(:panel, :id => 'basicPanel')
+  control(:calendar, :id => 'monthCalendar')
 end
