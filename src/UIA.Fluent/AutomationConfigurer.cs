@@ -14,7 +14,7 @@ namespace UIA.Fluent
             _automationHandler = new AutomationHandler(control, _provider);
         }
 
-        public AutomationConfigurer(Control control, AutomationProvider provider)
+        public AutomationConfigurer(IWin32Window control, AutomationProvider provider)
         {
             _provider = provider;
             _automationHandler = new AutomationHandler(control, _provider);
