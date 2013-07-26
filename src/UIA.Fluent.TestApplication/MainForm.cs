@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace UIA.Fluent.TestApplication
 {
@@ -9,6 +10,9 @@ namespace UIA.Fluent.TestApplication
             InitializeComponent();
             basicPanel.ExposeAutomation()
                 .WithName("Custom Panel Name");
+
+            monthCalendar.AsValueControl(() => monthCalendar.SelectionStart.ToShortDateString(),
+                (x) => monthCalendar.SetDate(DateTime.Parse(x)));
         }
     }
 }
