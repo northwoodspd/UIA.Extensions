@@ -41,8 +41,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutomationConfigurer.cs" />
     <Compile Include="AutomationExtensions.cs" />
+    <Compile Include="AutomationHandler.cs" />
     <Compile Include="AutomationProviders\AutomationProvider.cs" />
+    <Compile Include="AutomationProviders\ValueProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
