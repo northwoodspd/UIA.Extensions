@@ -5,23 +5,6 @@ using System.Windows.Automation.Provider;
 
 namespace UIA.Fluent.AutomationProviders.Tables
 {
-    public class RowProvider : ChildProvider
-    {
-        private readonly TableProvider _tableProvider;
-
-        public RowProvider(TableProvider tableProvider, RowInformation rowInformation)
-            : base(tableProvider)
-        {
-            _tableProvider = tableProvider;
-            Name = rowInformation.Value;
-        }
-
-        protected override int ControlTypeId
-        {
-            get { return ControlType.DataItem.Id; }
-        }
-    }
-
     public class TableProvider : ControlProvider, ITableProvider
     {
         private readonly TableInformation _tableInformation;

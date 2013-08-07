@@ -55,6 +55,7 @@
     <Compile Include="AutomationProviders\ControlProviderTest.cs" />
     <Compile Include="AutomationProviders\Tables\HeaderItemProviderTest.cs" />
     <Compile Include="AutomationProviders\Tables\HeaderProviderTest.cs" />
+    <Compile Include="AutomationProviders\Tables\RowProviderTest.cs" />
     <Compile Include="AutomationProviders\Tables\TableProviderTest.cs" />
     <Compile Include="AutomationProviders\ValueProviderTest.cs" />
     <Compile Include="Extensions\EnumerableExtensionsTest.cs" />

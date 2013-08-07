@@ -168,11 +168,17 @@ namespace UIA.Fluent.AutomationProviders.Tables
             howMany.Times(x => _rows.Add(new FakeRowInformation(x)));
         }
 
-        class FakeRowInformation : RowInformation
+        public class FakeRowInformation : RowInformation
         {
-            public FakeRowInformation(int which)
+            public FakeRowInformation() : this("Default")
+            { }
+
+            public FakeRowInformation(int which) : this("Row" + which)
+            { }
+
+            public FakeRowInformation(string what)
             {
-                Value = "Row" + which;
+                Value = what;
             }
 
             public string Value { get; private set; }

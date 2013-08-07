@@ -48,6 +48,7 @@
     <Compile Include="AutomationProviders\AutomationProvider.cs" />
     <Compile Include="AutomationProviders\Tables\HeaderItemProvider.cs" />
     <Compile Include="AutomationProviders\Tables\HeaderProvider.cs" />
+    <Compile Include="AutomationProviders\Tables\RowProvider.cs" />
     <Compile Include="AutomationProviders\Tables\TableProvider.cs" />
     <Compile Include="AutomationProviders\Tables\DataGridTableInformation.cs" />
     <Compile Include="AutomationProviders\Tables\TableInformation.cs" />
