@@ -36,5 +36,10 @@ namespace UIA.Fluent.AutomationProviders
         {
             get { return _headerProvider.Children.After(this); }
         }
+
+        protected override IRawElementProviderFragment PreviousSibling
+        {
+            get { return _headerProvider.Children.Before(this); }
+        }
     }
 }

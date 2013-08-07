@@ -40,10 +40,17 @@ namespace UIA.Fluent.AutomationProviders
         }
 
         [Test]
-        public void HeaderItemsKnowAboutTheirSiblings()
+        public void HeaderItemsKnowAboutTheirNextSiblings()
         {
             _headers.AddRange(new[] { "First", "Second", "Third" });
             After(FirstChild).Name.Should().Equal("Second");
+        }
+
+        [Test]
+        public void HeaderItemsKnowAboutTheirPreviousSiblings()
+        {
+            _headers.AddRange(new[] { "First", "Second", "Third" });
+            Before(LastChild).Name.Should().Equal("Second");
         }
 
         private HeaderItemProvider FirstChild
@@ -59,6 +66,11 @@ namespace UIA.Fluent.AutomationProviders
         private static HeaderItemProvider After(HeaderItemProvider headerItem)
         {
             return headerItem.Navigate(NavigateDirection.NextSibling) as HeaderItemProvider;
+        }
+
+        private static HeaderItemProvider Before(HeaderItemProvider headerItem)
+        {
+            return headerItem.Navigate(NavigateDirection.PreviousSibling) as HeaderItemProvider;
         }
 
         private HeaderProvider _header;
