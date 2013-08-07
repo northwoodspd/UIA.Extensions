@@ -6,10 +6,10 @@ namespace UIA.Fluent
 {
     public class AutomationHandler : NativeWindow
     {
-        private readonly AutomationControlProvider _controlProvider;
+        private readonly ControlProvider _controlProvider;
         const int WmGetobject = 0x3d;
 
-        public AutomationHandler(IWin32Window window, AutomationControlProvider controlProvider)
+        public AutomationHandler(IWin32Window window, ControlProvider controlProvider)
         {
             _controlProvider = controlProvider;
             AssignHandle(window.Handle);

@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace UIA.Fluent.AutomationProviders
 {
-    public class ValueControlProvider : AutomationControlProvider, IValueProvider
+    public class ValueControlProvider : ControlProvider, IValueProvider
     {
         private readonly Func<string> _getter;
         private readonly Action<string> _setter;

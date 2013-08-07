@@ -5,7 +5,7 @@ using UIA.Fluent.AutomationProviders.Tables;
 
 namespace UIA.Fluent.AutomationProviders
 {
-    public class TableControlProvider : AutomationControlProvider, ITableProvider
+    public class TableControlProvider : ControlProvider, ITableProvider
     {
         private readonly TableInformation _tableInformation;
 

@@ -10,16 +10,16 @@ using Should.Fluent;
 namespace UIA.Fluent.AutomationProviders
 {
     [TestFixture]
-    public class AutomationControlProviderTest
+    public class ControlProviderTest
     {
-        private TestAutomationControlProvider _controlProvider;
+        private TestControlProvider _controlProvider;
         private Control _control;
 
         [SetUp]
         public void SetUp()
         {
             _control = new Control {Name = "expectedControlAutomationId"};
-            _controlProvider = new TestAutomationControlProvider(_control);
+            _controlProvider = new TestControlProvider(_control);
         }
 
         [Test]
@@ -54,9 +54,9 @@ namespace UIA.Fluent.AutomationProviders
         [Test]
         public void ItUsesComThreading()
         {
-            ((int)_controlProvider.ProviderOptions & AutomationControlProvider.ProviderUseComThreading)
+            ((int)_controlProvider.ProviderOptions & ControlProvider.ProviderUseComThreading)
                 .Should()
-                .Equal(AutomationControlProvider.ProviderUseComThreading);
+                .Equal(ControlProvider.ProviderUseComThreading);
         }
 
         [Test]
@@ -80,16 +80,16 @@ namespace UIA.Fluent.AutomationProviders
                      .Should().Be.SameAs(expectedSurrounding.Object);
         }
 
-        private Mock<AutomationControlProvider> GetMockChild()
+        private Mock<ControlProvider> GetMockChild()
         {
-            return new Mock<AutomationControlProvider>(new Control());
+            return new Mock<ControlProvider>(new Control());
         }
 
-        public class TestAutomationControlProvider : AutomationControlProvider
+        public class TestControlProvider : ControlProvider
         {
             private readonly Dictionary<NavigateDirection, IRawElementProviderFragment> _surroundings;
 
-            public TestAutomationControlProvider(Control control) : base(control)
+            public TestControlProvider(Control control) : base(control)
             {
                 _surroundings = new Dictionary<NavigateDirection, IRawElementProviderFragment>();
             }
@@ -124,9 +124,9 @@ namespace UIA.Fluent.AutomationProviders
                 get { return _surroundings[NavigateDirection.Parent]; }
             }
 
-            public void Set(NavigateDirection whichWay, AutomationControlProvider automationControlProvider)
+            public void Set(NavigateDirection whichWay, ControlProvider controlProvider)
             {
-                _surroundings[whichWay] = automationControlProvider;
+                _surroundings[whichWay] = controlProvider;
             }
         }
     }

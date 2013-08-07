@@ -4,11 +4,11 @@ using System.Windows.Forms;
 
 namespace UIA.Fluent.AutomationProviders
 {
-    public class AutomationControlProvider : AutomationProvider
+    public class ControlProvider : AutomationProvider
     {
         private readonly Control _control;
 
-        public AutomationControlProvider(Control control)
+        public ControlProvider(Control control)
         {
             _control = control;
             Id = _control.Name;

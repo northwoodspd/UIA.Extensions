@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="AutomationConfigurer.cs" />
     <Compile Include="AutomationHandler.cs" />
-    <Compile Include="AutomationProviders\AutomationControlProvider.cs" />
+    <Compile Include="AutomationProviders\ControlProvider.cs" />
     <Compile Include="AutomationProviders\AutomationProvider.cs" />
     <Compile Include="AutomationProviders\TableControlProvider.cs" />
     <Compile Include="AutomationProviders\Tables\DataGridTableInformation.cs" />
