@@ -6,7 +6,7 @@ namespace UIA.Fluent.AutomationProviders
 {
     public class ControlProvider : AutomationProvider
     {
-        private readonly Control _control;
+        protected readonly Control _control;
 
         public ControlProvider(Control control)
         {
