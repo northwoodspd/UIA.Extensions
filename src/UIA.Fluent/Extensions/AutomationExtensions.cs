@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using UIA.Fluent.AutomationProviders;
 using UIA.Fluent.AutomationProviders.Tables;
 
-namespace UIA.Fluent
+namespace UIA.Fluent.Extensions
 {
     public static class AutomationExtensions
     {
