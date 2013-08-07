@@ -143,8 +143,8 @@ namespace UIA.Fluent.AutomationProviders
             set { SetPropertyValue(AutomationElementIdentifiers.NameProperty.Id, value); }
         }
 
-        private readonly List<ChildProvider> _children;
-        protected List<ChildProvider> Children
+        protected readonly List<ChildProvider> _children = new List<ChildProvider>();
+        protected virtual List<ChildProvider> Children
         {
             get { return _children; }
         }

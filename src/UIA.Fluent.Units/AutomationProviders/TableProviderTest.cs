@@ -11,20 +11,19 @@ namespace UIA.Fluent.AutomationProviders
     [TestFixture]
     public class TableProviderTest
     {
-        private static TableProvider _tableProvider;
-        private static FakeTableInformation _tableInformation;
+        private TableProvider _tableProvider;
+        private FakeTableInformation _tableInformation;
 
         [SetUp]
         public void SetUp()
         {
             _tableInformation = new FakeTableInformation();
+            _tableProvider = new TableProvider(_tableInformation);
         }
 
         [Test]
         public void ItHasTheTableControlType()
         {
-            CreateTable();
-
             _tableProvider.GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
                 .Should().Equal(ControlType.Table.Id);
         }
@@ -32,8 +31,6 @@ namespace UIA.Fluent.AutomationProviders
         [Test]
         public void ItIsBothOfTypeGridAndOfTypeTable()
         {
-            CreateTable();
-
             _tableProvider.GetPatternProvider(TablePatternIdentifiers.Pattern.Id)
                 .Should().Be.SameAs(_tableProvider);
 
@@ -44,7 +41,6 @@ namespace UIA.Fluent.AutomationProviders
         [Test]
         public void ItReturnsTheNumberOfRows()
         {
-            CreateTable();
 
             _tableInformation.RowCount = 7;
             _tableProvider.RowCount.Should().Equal(7);
@@ -53,17 +49,20 @@ namespace UIA.Fluent.AutomationProviders
         [TestFixture]
         public class Headers
         {
+            private TableProvider _tableProvider;
+            private FakeTableInformation _tableInformation;
+
             [SetUp]
             public void SetUp()
             {
                 _tableInformation = new FakeTableInformation();
+                _tableProvider = new TableProvider(_tableInformation);
             }
 
             [Test]
             public void ArePresentIfThereAreHeaders()
             {
                 _tableInformation.AddHeaders("First Header", "Second Header");
-                CreateTable();
 
                 _tableProvider.Navigate(NavigateDirection.FirstChild)
                     .Should().Be.OfType<HeaderProvider>();
@@ -72,17 +71,17 @@ namespace UIA.Fluent.AutomationProviders
             [Test]
             public void IsMissingIfThereAreNonetoSpeakOf()
             {
-                CreateTable();
-                _tableInformation.Headers.Count.Should().Equal(0);
-
                 _tableProvider.Navigate(NavigateDirection.FirstChild)
                     .Should().Be.Null();
             }
-        }
 
-        private static void CreateTable()
-        {
-            _tableProvider = new TableProvider(_tableInformation);
+            [Test]
+            public void HeadersCanBeLazilyLoaded()
+            {
+                _tableProvider.Navigate(NavigateDirection.FirstChild).Should().Be.Null();
+                _tableInformation.AddHeaders("Some Header");
+                _tableProvider.Navigate(NavigateDirection.FirstChild).Should().Be.OfType<HeaderProvider>();
+            }
         }
     }
 

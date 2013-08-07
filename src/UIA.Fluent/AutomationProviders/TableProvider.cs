@@ -14,11 +14,25 @@ namespace UIA.Fluent.AutomationProviders
         {
             _tableInformation = tableInformation;
             SetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id, ControlType.Table.Id);
+        }
 
-            if (HasHeaders)
+        private ChildProvider _headerProvider = null;
+        private ChildProvider HeaderProvider
+        {
+            get
             {
-                Children.Add(new HeaderProvider(this));
+                if (null == _headerProvider && HasHeaders)
+                {
+                    _headerProvider = new HeaderProvider(this);
+                }
+
+                return _headerProvider;
             }
+        }
+
+        protected override List<ChildProvider> Children
+        {
+            get { return new[] { HeaderProvider }.Where(x => null != x).ToList(); }
         }
 
         public bool HasHeaders
