@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using UIA.Fluent.AutomationProviders;
+using UIA.Fluent.AutomationProviders.Tables;
 
 namespace UIA.Fluent
 {
@@ -18,7 +19,7 @@ namespace UIA.Fluent
 
         public static AutomationConfigurer AsTable(this DataGridView dataGridView)
         {
-            return new AutomationConfigurer(dataGridView, new TableProvider(dataGridView));
+            return new AutomationConfigurer(dataGridView, new TableProvider(new DataGridTableInformation(dataGridView)));
         }
     }
 }

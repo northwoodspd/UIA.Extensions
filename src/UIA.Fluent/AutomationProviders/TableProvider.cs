@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
-using System.Windows.Forms;
+using UIA.Fluent.AutomationProviders.Tables;
 
 namespace UIA.Fluent.AutomationProviders
 {
     public class TableProvider : AutomationProvider, ITableProvider
     {
-        private readonly DataGridView _dataGrid;
+        private readonly TableInformation _tableInformation;
 
-        public TableProvider(DataGridView dataGridView) : base(dataGridView)
+        public TableProvider(TableInformation tableInformation)
+            : base(tableInformation.Control)
         {
-            _dataGrid = dataGridView;
+            _tableInformation = tableInformation;
             SetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id, ControlType.Table.Id);
         }
 
@@ -25,7 +26,7 @@ namespace UIA.Fluent.AutomationProviders
             throw new System.NotImplementedException();
         }
 
-        public int RowCount { get { return _dataGrid.RowCount; }}
+        public int RowCount { get { return _tableInformation.RowCount; } }
         public int ColumnCount { get; private set; }
         public IRawElementProviderSimple[] GetRowHeaders()
         {
