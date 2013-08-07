@@ -9,8 +9,7 @@ namespace UIA.Fluent.AutomationProviders
     {
         private readonly TableInformation _tableInformation;
 
-        public TableProvider(TableInformation tableInformation)
-            : base(tableInformation.Control)
+        public TableProvider(TableInformation tableInformation) : base(tableInformation.Control)
         {
             _tableInformation = tableInformation;
             SetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id, ControlType.Table.Id);
