@@ -119,7 +119,7 @@ namespace UIA.Fluent.AutomationProviders
 
         protected virtual IRawElementProviderFragment FirstChild
         {
-            get { return null; }
+            get { return Children.FirstOrDefault(); }
         }
 
         protected virtual IRawElementProviderFragment NextSibling

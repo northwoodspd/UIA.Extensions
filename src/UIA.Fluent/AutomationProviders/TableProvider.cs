@@ -26,11 +26,6 @@ namespace UIA.Fluent.AutomationProviders
             get { return _tableInformation.Headers.Count != 0; }
         }
 
-        protected override IRawElementProviderFragment FirstChild
-        {
-            get { return Children.FirstOrDefault(); }
-        }
-
         protected override List<int> SupportedPatterns
         {
             get { return new List<int> { TablePatternIdentifiers.Pattern.Id, GridPatternIdentifiers.Pattern.Id }; }
