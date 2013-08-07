@@ -11,3 +11,13 @@ end
 Then(/^the table headers should be "([^"]*)"$/) do |expected_headers|
   on(MainScreen).the_grid_headers.should eq(expected_headers.split(', '))
 end
+
+Then(/^the table should look like this:$/) do |table_info|
+  on(MainScreen) do |screen|
+    table_info.hashes.each_with_index do |row_info, row|
+      the_row = screen.the_grid[row]
+      actual_values = row_info.keys.map(&the_row.method(:send))
+      actual_values.should eq(row_info.values)
+    end
+  end
+end
