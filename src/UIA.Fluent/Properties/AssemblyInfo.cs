@@ -5,9 +5,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("UIA.Fluent")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Fluent .NET library to expose controls to Automation")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Northwoods Consulting Partners")]
 [assembly: AssemblyProduct("UIA.Fluent")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
