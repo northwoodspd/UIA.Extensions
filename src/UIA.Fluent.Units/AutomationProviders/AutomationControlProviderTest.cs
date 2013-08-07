@@ -10,43 +10,43 @@ using Should.Fluent;
 namespace UIA.Fluent.AutomationProviders
 {
     [TestFixture]
-    public class AutomationProviderTest
+    public class AutomationControlProviderTest
     {
-        private TestAutomationProvider _provider;
+        private TestAutomationControlProvider _controlProvider;
         private Control _control;
 
         [SetUp]
         public void SetUp()
         {
             _control = new Control {Name = "expectedControlAutomationId"};
-            _provider = new TestAutomationProvider(_control);
+            _controlProvider = new TestAutomationControlProvider(_control);
         }
 
         [Test]
         public void ItDefaultsAsACustomControl()
         {
-            _provider.GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
+            _controlProvider.GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
                      .Should().Equal(ControlType.Custom.Id);
         }
 
         [Test]
         public void ItUsesTheControlsTypeForTheAutomationControlType()
         {
-            _provider.GetPropertyValue(AutomationElementIdentifiers.LocalizedControlTypeProperty.Id)
+            _controlProvider.GetPropertyValue(AutomationElementIdentifiers.LocalizedControlTypeProperty.Id)
                      .Should().Equal(typeof(Control).FullName);
         }
 
         [Test]
         public void ItUsesTheControlNameForTheAutomationId()
         {
-            _provider.GetPropertyValue(AutomationElementIdentifiers.AutomationIdProperty.Id)
+            _controlProvider.GetPropertyValue(AutomationElementIdentifiers.AutomationIdProperty.Id)
                      .Should().Equal("expectedControlAutomationId");
         }
 
         [Test]
         public void ItIsConsideredAServerSideProvider()
         {
-            (_provider.ProviderOptions & ProviderOptions.ServerSideProvider)
+            (_controlProvider.ProviderOptions & ProviderOptions.ServerSideProvider)
                 .Should()
                 .Equal(ProviderOptions.ServerSideProvider);
         }
@@ -54,16 +54,16 @@ namespace UIA.Fluent.AutomationProviders
         [Test]
         public void ItUsesComThreading()
         {
-            ((int)_provider.ProviderOptions & AutomationProvider.ProviderUseComThreading)
+            ((int)_controlProvider.ProviderOptions & AutomationControlProvider.ProviderUseComThreading)
                 .Should()
-                .Equal(AutomationProvider.ProviderUseComThreading);
+                .Equal(AutomationControlProvider.ProviderUseComThreading);
         }
 
         [Test]
         public void ItShouldAllowAdditionalPropertiesToBeSet()
         {
-            _provider.SetPropertyValue(AutomationElementIdentifiers.ClassNameProperty.Id, "ExpectedPropertyValue");
-            _provider.GetPropertyValue(AutomationElementIdentifiers.ClassNameProperty.Id)
+            _controlProvider.SetPropertyValue(AutomationElementIdentifiers.ClassNameProperty.Id, "ExpectedPropertyValue");
+            _controlProvider.GetPropertyValue(AutomationElementIdentifiers.ClassNameProperty.Id)
                      .Should().Equal("ExpectedPropertyValue");
         }
 
@@ -75,21 +75,21 @@ namespace UIA.Fluent.AutomationProviders
         public void ItIsAwareOfItsSurroundings(NavigateDirection whichWay)
         {
             var expectedSurrounding = GetMockChild();
-            _provider.Set(whichWay, expectedSurrounding.Object);
-            _provider.Navigate(whichWay)
+            _controlProvider.Set(whichWay, expectedSurrounding.Object);
+            _controlProvider.Navigate(whichWay)
                      .Should().Be.SameAs(expectedSurrounding.Object);
         }
 
-        private Mock<AutomationProvider> GetMockChild()
+        private Mock<AutomationControlProvider> GetMockChild()
         {
-            return new Mock<AutomationProvider>(new Control());
+            return new Mock<AutomationControlProvider>(new Control());
         }
 
-        public class TestAutomationProvider : AutomationProvider
+        public class TestAutomationControlProvider : AutomationControlProvider
         {
             private readonly Dictionary<NavigateDirection, IRawElementProviderFragment> _surroundings;
 
-            public TestAutomationProvider(Control control) : base(control)
+            public TestAutomationControlProvider(Control control) : base(control)
             {
                 _surroundings = new Dictionary<NavigateDirection, IRawElementProviderFragment>();
             }
@@ -124,9 +124,9 @@ namespace UIA.Fluent.AutomationProviders
                 get { return _surroundings[NavigateDirection.Parent]; }
             }
 
-            public void Set(NavigateDirection whichWay, AutomationProvider automationProvider)
+            public void Set(NavigateDirection whichWay, AutomationControlProvider automationControlProvider)
             {
-                _surroundings[whichWay] = automationProvider;
+                _surroundings[whichWay] = automationControlProvider;
             }
         }
     }

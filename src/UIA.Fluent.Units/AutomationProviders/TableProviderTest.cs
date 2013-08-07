@@ -11,7 +11,7 @@ namespace UIA.Fluent.AutomationProviders
     public class TableProviderTest
     {
         private Mock<TableInformation> _tableInformation;
-        private TableProvider _tableProvider;
+        private TableControlProvider _tableControlProvider;
 
         [SetUp]
         public void SetUp()
@@ -19,24 +19,24 @@ namespace UIA.Fluent.AutomationProviders
             _tableInformation = new Mock<TableInformation>();
             _tableInformation.Setup(x => x.Control).Returns(new Control());
 
-            _tableProvider = new TableProvider(_tableInformation.Object);
+            _tableControlProvider = new TableControlProvider(_tableInformation.Object);
         }
 
         [Test]
         public void ItHasTheTableControlType()
         {
-            _tableProvider.GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
+            _tableControlProvider.GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
                 .Should().Equal(ControlType.Table.Id);
         }
 
         [Test]
         public void ItIsBothOfTypeGridAndOfTypeTable()
         {
-            _tableProvider.GetPatternProvider(TablePatternIdentifiers.Pattern.Id)
-                .Should().Be.SameAs(_tableProvider);
+            _tableControlProvider.GetPatternProvider(TablePatternIdentifiers.Pattern.Id)
+                .Should().Be.SameAs(_tableControlProvider);
 
-            _tableProvider.GetPatternProvider(TablePatternIdentifiers.Pattern.Id)
-                .Should().Be.SameAs(_tableProvider);
+            _tableControlProvider.GetPatternProvider(TablePatternIdentifiers.Pattern.Id)
+                .Should().Be.SameAs(_tableControlProvider);
         }
 
         [Test]
@@ -44,7 +44,7 @@ namespace UIA.Fluent.AutomationProviders
         {
             _tableInformation.Setup(x => x.RowCount).Returns(7);
 
-            _tableProvider.RowCount.Should().Equal(7);
+            _tableControlProvider.RowCount.Should().Equal(7);
         }
     }
 }

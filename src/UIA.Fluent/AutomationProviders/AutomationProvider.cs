@@ -5,31 +5,37 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
-using System.Windows.Forms;
 
 namespace UIA.Fluent.AutomationProviders
 {
     [ComVisible(true)]
     public class AutomationProvider : IRawElementProviderFragmentRoot
     {
-        private readonly Control _control;
         private readonly Dictionary<int, object> _properties;
+
+        public AutomationProvider()
+        {
+            _properties = new Dictionary<int, object>
+            {
+                {AutomationElementIdentifiers.ControlTypeProperty.Id, ControlTypeId}, 
+                {AutomationElementIdentifiers.IsKeyboardFocusableProperty.Id, true}, 
+            };
+        }
 
         protected virtual int ControlTypeId
         {
             get { return ControlType.Custom.Id; }
         }
 
-        public AutomationProvider(Control control)
+        private string _id;
+        public string Id
         {
-            _control = control;
-            _properties = new Dictionary<int, object>
-                              {
-                                  {AutomationElementIdentifiers.ControlTypeProperty.Id, ControlTypeId}, 
-                                  {AutomationElementIdentifiers.LocalizedControlTypeProperty.Id, _control.GetType().FullName}, 
-                                  {AutomationElementIdentifiers.AutomationIdProperty.Id, _control.Name}, 
-                                  {AutomationElementIdentifiers.IsKeyboardFocusableProperty.Id, true}, 
-                              };
+            get { return _id; }
+            set
+            {
+                _id = value;
+                SetPropertyValue(AutomationElementIdentifiers.AutomationIdProperty.Id, value);
+            }
         }
 
         protected virtual List<int> SupportedPatterns { get { return new List<int>(); } }
@@ -45,7 +51,12 @@ namespace UIA.Fluent.AutomationProviders
 
         public IRawElementProviderSimple HostRawElementProvider
         {
-            get { return AutomationInteropProvider.HostProviderFromHandle(_control.Handle); }
+            get { return HostProvider; }
+        }
+
+        protected virtual IRawElementProviderSimple HostProvider
+        {
+            get { return null; }
         }
 
         public Rect BoundingRectangle { get; private set; }
@@ -58,8 +69,8 @@ namespace UIA.Fluent.AutomationProviders
         public object GetPropertyValue(int propertyId)
         {
             return _properties.Where(x => x.Key.Equals(propertyId))
-                              .Select(x => x.Value)
-                              .FirstOrDefault();
+                .Select(x => x.Value)
+                .FirstOrDefault();
         }
 
         public void SetPropertyValue(int propertyId, Object propertyValue)
@@ -79,7 +90,7 @@ namespace UIA.Fluent.AutomationProviders
 
         public int[] GetRuntimeId()
         {
-            return new[] { _control.GetHashCode() };
+            return new[] { GetHashCode() };
         }
 
         public void SetFocus()
@@ -90,7 +101,7 @@ namespace UIA.Fluent.AutomationProviders
         {
             switch (direction)
             {
-               case NavigateDirection.FirstChild:
+                case NavigateDirection.FirstChild:
                     return FirstChild;
                 case NavigateDirection.LastChild:
                     return LastChild;

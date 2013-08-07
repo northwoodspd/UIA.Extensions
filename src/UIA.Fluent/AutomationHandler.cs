@@ -6,12 +6,12 @@ namespace UIA.Fluent
 {
     public class AutomationHandler : NativeWindow
     {
-        private readonly AutomationProvider _provider;
+        private readonly AutomationControlProvider _controlProvider;
         const int WmGetobject = 0x3d;
 
-        public AutomationHandler(IWin32Window window, AutomationProvider provider)
+        public AutomationHandler(IWin32Window window, AutomationControlProvider controlProvider)
         {
-            _provider = provider;
+            _controlProvider = controlProvider;
             AssignHandle(window.Handle);
         }
 
@@ -19,7 +19,7 @@ namespace UIA.Fluent
         {
             if (m.Msg == WmGetobject)
             {
-                m.Result = AutomationInteropProvider.ReturnRawElementProvider(m.HWnd, m.WParam, m.LParam, _provider);
+                m.Result = AutomationInteropProvider.ReturnRawElementProvider(m.HWnd, m.WParam, m.LParam, _controlProvider);
                 return;
             }
 

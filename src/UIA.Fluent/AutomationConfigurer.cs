@@ -5,24 +5,24 @@ namespace UIA.Fluent
 {
     public class AutomationConfigurer
     {
-        private readonly AutomationProvider _provider;
+        private readonly AutomationControlProvider _controlProvider;
         private AutomationHandler _automationHandler;
 
         public AutomationConfigurer(Control control)
         {
-            _provider = new AutomationProvider(control);
-            _automationHandler = new AutomationHandler(control, _provider);
+            _controlProvider = new AutomationControlProvider(control);
+            _automationHandler = new AutomationHandler(control, _controlProvider);
         }
 
-        public AutomationConfigurer(IWin32Window control, AutomationProvider provider)
+        public AutomationConfigurer(IWin32Window control, AutomationControlProvider controlProvider)
         {
-            _provider = provider;
-            _automationHandler = new AutomationHandler(control, _provider);
+            _controlProvider = controlProvider;
+            _automationHandler = new AutomationHandler(control, _controlProvider);
         }
 
         public AutomationConfigurer WithName(string name)
         {
-            _provider.Name = name;
+            _controlProvider.Name = name;
             return this;
         }
     }
