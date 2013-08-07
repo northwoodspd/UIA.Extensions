@@ -5,6 +5,22 @@ using System.Windows.Automation.Provider;
 
 namespace UIA.Fluent.AutomationProviders.Tables
 {
+    public class RowProvider : ChildProvider
+    {
+        private readonly TableProvider _tableProvider;
+
+        public RowProvider(TableProvider tableProvider, RowInformation rowInformation) : base(tableProvider)
+        {
+            _tableProvider = tableProvider;
+            Name = rowInformation.Value;
+        }
+
+        protected override int ControlTypeId
+        {
+            get { return ControlType.DataItem.Id; }
+        }
+    }
+
     public class TableProvider : ControlProvider, ITableProvider
     {
         private readonly TableInformation _tableInformation;
@@ -32,9 +48,17 @@ namespace UIA.Fluent.AutomationProviders.Tables
             }
         }
 
+        private IEnumerable<ChildProvider> RowProviders
+        {
+            get
+            {
+                return _tableInformation.Rows.Select(x => new RowProvider(this, x)).Cast<ChildProvider>();
+            }
+        }
+
         public override List<ChildProvider> Children
         {
-            get { return new[] { HeaderProvider }.Where(x => null != x).ToList(); }
+            get { return new[] { HeaderProvider }.Concat(RowProviders).Where(x => null != x).ToList(); }
         }
 
         public bool HasHeaders

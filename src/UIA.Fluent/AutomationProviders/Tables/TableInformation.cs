@@ -9,5 +9,11 @@ namespace UIA.Fluent.AutomationProviders.Tables
         int ColumnCount { get; }
         Control Control { get; }
         List<string> Headers { get; }
+        List<RowInformation> Rows { get; }
+    }
+
+    public interface RowInformation
+    {
+        string Value { get; }
     }
 }
