@@ -193,7 +193,12 @@ namespace UIA.Fluent.AutomationProviders.Tables
                 Value = value;
             }
 
-            public string Value { get; private set; }
+            public FakeCellInformation()
+            {
+                Value = String.Empty;
+            }
+
+            public string Value { get; set; }
         }
     }
 }
