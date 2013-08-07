@@ -114,7 +114,7 @@ namespace UIA.Fluent.AutomationProviders
 
         protected virtual IRawElementProviderFragment LastChild
         {
-            get { return null; }
+            get { return Children.LastOrDefault(); }
         }
 
         protected virtual IRawElementProviderFragment FirstChild
@@ -142,10 +142,11 @@ namespace UIA.Fluent.AutomationProviders
         {
             set { SetPropertyValue(AutomationElementIdentifiers.NameProperty.Id, value); }
             get { return GetPropertyValue(AutomationElementIdentifiers.NameProperty.Id) as String; }
-        }
+}
 
-        protected List<ChildProvider> _children = new List<ChildProvider>();
-        protected virtual List<ChildProvider> Children
+        protected readonly List<ChildProvider> _children = new List<ChildProvider>();
+
+        public virtual List<ChildProvider> Children
         {
             get { return _children; }
         }

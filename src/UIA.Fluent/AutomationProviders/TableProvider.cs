@@ -30,7 +30,7 @@ namespace UIA.Fluent.AutomationProviders
             }
         }
 
-        protected override List<ChildProvider> Children
+        public override List<ChildProvider> Children
         {
             get { return new[] { HeaderProvider }.Where(x => null != x).ToList(); }
         }

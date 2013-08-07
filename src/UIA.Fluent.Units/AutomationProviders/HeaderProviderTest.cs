@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Remoting.Messaging;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
-using Moq;
 using NUnit.Framework;
 using Should.Fluent;
 
@@ -16,6 +14,7 @@ namespace UIA.Fluent.AutomationProviders
         [SetUp]
         public void SetUp()
         {
+            _header = null;
             _headers = new List<string>();
         }
 
@@ -32,6 +31,15 @@ namespace UIA.Fluent.AutomationProviders
             _headers.Add("First Column");
             var firstChild = HeaderProvider.Navigate(NavigateDirection.FirstChild) as HeaderItemProvider;
             firstChild.Name.Should().Equal("First Column");
+        }
+
+        [Test]
+        public void LastHeaderIsTheLastChild()
+        {
+            _headers.Add("First Column");
+            _headers.Add("Last Column");
+            var lastChild = HeaderProvider.Navigate(NavigateDirection.LastChild) as HeaderItemProvider;
+            lastChild.Name.Should().Equal("Last Column");
         }
 
         private HeaderProvider _header;

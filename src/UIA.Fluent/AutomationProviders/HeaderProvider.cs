@@ -8,7 +8,10 @@ namespace UIA.Fluent.AutomationProviders
     {
         public HeaderProvider(AutomationProvider automationProvider, IEnumerable<string> headers) : base(automationProvider)
         {
-            Children.AddRange(headers.Select(x => new HeaderItemProvider(this, x)).Cast<ChildProvider>());
+            foreach (var header in headers)
+            {
+                Children.Add(new HeaderItemProvider(this, header));
+            }
         }
 
         protected override int ControlTypeId
