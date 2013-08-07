@@ -122,6 +122,13 @@ namespace UIA.Fluent.AutomationProviders.Tables
 
                 theSecond.NextSibling().Should().Be.SameAs(theLast);
             }
+
+            [Test]
+            public void HaveValuesOnThem()
+            {
+                _tableInformation.AddRows(2);
+                _tableProvider.Children.Select(x => x.Name).Should().Equal(new[] { "Row0", "Row1" });
+            }
         }
     }
 
@@ -158,11 +165,16 @@ namespace UIA.Fluent.AutomationProviders.Tables
 
         public void AddRows(int howMany)
         {
-            howMany.Times(x => _rows.Add(new FakeRowInformation()));
+            howMany.Times(x => _rows.Add(new FakeRowInformation(x)));
         }
 
         class FakeRowInformation : RowInformation
         {
+            public FakeRowInformation(int which)
+            {
+                Value = "Row" + which;
+            }
+
             public string Value { get; private set; }
         }
     }
