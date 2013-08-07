@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="AutomationProviders\ChildProviderTest.cs" />
     <Compile Include="AutomationProviders\ControlProviderTest.cs" />
+    <Compile Include="AutomationProviders\HeaderProviderTest.cs" />
     <Compile Include="AutomationProviders\TableProviderTest.cs" />
     <Compile Include="AutomationProviders\ValueProviderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
