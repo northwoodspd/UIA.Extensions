@@ -18,7 +18,7 @@ namespace UIA.Fluent.AutomationProviders.Tables
             get { return _dataGrid; }
         }
 
-        public IList<string> Headers
+        public List<string> Headers
         {
             get { return (from DataGridViewColumn column in _dataGrid.Columns select column.HeaderText).ToList(); }
         }

@@ -23,7 +23,7 @@ namespace UIA.Fluent.AutomationProviders
             {
                 if (null == _headerProvider && HasHeaders)
                 {
-                    _headerProvider = new HeaderProvider(this);
+                    _headerProvider = new HeaderProvider(this, _tableInformation.Headers);
                 }
 
                 return _headerProvider;

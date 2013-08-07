@@ -101,7 +101,7 @@ namespace UIA.Fluent.AutomationProviders
             get { return new Control(); }
         }
 
-        public IList<string> Headers
+        public List<string> Headers
         {
             get { return _headers; }
         }

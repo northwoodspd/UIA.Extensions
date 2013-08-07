@@ -7,6 +7,6 @@ namespace UIA.Fluent.AutomationProviders.Tables
     {
         int RowCount { get; }
         Control Control { get; }
-        IList<string> Headers { get; }
+        List<string> Headers { get; }
     }
 }
