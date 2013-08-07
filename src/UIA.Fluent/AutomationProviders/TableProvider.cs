@@ -5,11 +5,11 @@ using UIA.Fluent.AutomationProviders.Tables;
 
 namespace UIA.Fluent.AutomationProviders
 {
-    public class TableControlProvider : ControlProvider, ITableProvider
+    public class TableProvider : ControlProvider, ITableProvider
     {
         private readonly TableInformation _tableInformation;
 
-        public TableControlProvider(TableInformation tableInformation)
+        public TableProvider(TableInformation tableInformation)
             : base(tableInformation.Control)
         {
             _tableInformation = tableInformation;

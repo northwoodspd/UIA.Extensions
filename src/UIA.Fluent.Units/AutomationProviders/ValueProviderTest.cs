@@ -37,9 +37,9 @@ namespace UIA.Fluent.AutomationProviders
             expectedValue.Should().Equal("The expected value to be set");
         }
 
-        private ValueControlProvider GetValueProvider(Func<string> getter = null, Action<string> setter = null)
+        private ValueProvider GetValueProvider(Func<string> getter = null, Action<string> setter = null)
         {
-            return new ValueControlProvider(new Control(), getter, setter);
+            return new ValueProvider(new Control(), getter, setter);
         }
     }
 }

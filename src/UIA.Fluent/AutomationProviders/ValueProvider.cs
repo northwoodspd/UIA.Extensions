@@ -6,12 +6,12 @@ using System.Windows.Forms;
 
 namespace UIA.Fluent.AutomationProviders
 {
-    public class ValueControlProvider : ControlProvider, IValueProvider
+    public class ValueProvider : ControlProvider, IValueProvider
     {
         private readonly Func<string> _getter;
         private readonly Action<string> _setter;
 
-        public ValueControlProvider(Control control, Func<string> getter, Action<string> setter)
+        public ValueProvider(Control control, Func<string> getter, Action<string> setter)
             : base(control)
         {
             _getter = getter;
