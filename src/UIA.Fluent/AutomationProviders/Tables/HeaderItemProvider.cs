@@ -1,6 +1,6 @@
 ﻿using System.Windows.Automation;
 
-namespace UIA.Fluent.AutomationProviders
+namespace UIA.Fluent.AutomationProviders.Tables
 {
     public class HeaderItemProvider : ChildProvider
     {

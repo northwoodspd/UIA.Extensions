@@ -2,9 +2,8 @@
 using System.Linq;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
-using UIA.Fluent.AutomationProviders.Tables;
 
-namespace UIA.Fluent.AutomationProviders
+namespace UIA.Fluent.AutomationProviders.Tables
 {
     public class TableProvider : ControlProvider, ITableProvider
     {

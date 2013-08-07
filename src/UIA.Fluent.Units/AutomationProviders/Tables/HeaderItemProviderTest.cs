@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using Should.Fluent;
 
-namespace UIA.Fluent.AutomationProviders
+namespace UIA.Fluent.AutomationProviders.Tables
 {
     [TestFixture]
     public class HeaderItemProviderTest

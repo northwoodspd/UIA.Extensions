@@ -4,9 +4,8 @@ using System.Windows.Automation.Provider;
 using System.Windows.Forms;
 using NUnit.Framework;
 using Should.Fluent;
-using UIA.Fluent.AutomationProviders.Tables;
 
-namespace UIA.Fluent.AutomationProviders
+namespace UIA.Fluent.AutomationProviders.Tables
 {
     [TestFixture]
     public class TableProviderTest
