@@ -32,6 +32,11 @@ namespace UIA.Fluent.AutomationProviders
             Name = header;
         }
 
+        protected override int ControlTypeId
+        {
+            get { return ControlType.HeaderItem.Id; }
+        }
+
         protected override IRawElementProviderFragment NextSibling
         {
             get { return _headerProvider.Children.After(this); }
