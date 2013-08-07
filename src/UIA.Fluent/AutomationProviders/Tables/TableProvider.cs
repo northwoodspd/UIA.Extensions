@@ -9,7 +9,8 @@ namespace UIA.Fluent.AutomationProviders.Tables
     {
         private readonly TableProvider _tableProvider;
 
-        public RowProvider(TableProvider tableProvider, RowInformation rowInformation) : base(tableProvider)
+        public RowProvider(TableProvider tableProvider, RowInformation rowInformation)
+            : base(tableProvider)
         {
             _tableProvider = tableProvider;
             Name = rowInformation.Value;
@@ -48,11 +49,17 @@ namespace UIA.Fluent.AutomationProviders.Tables
             }
         }
 
+        private List<ChildProvider> _rows;
         private IEnumerable<ChildProvider> RowProviders
         {
             get
             {
-                return _tableInformation.Rows.Select(x => new RowProvider(this, x)).Cast<ChildProvider>();
+                if (null == _rows && RowCount > 0)
+                {
+                    _rows = _tableInformation.Rows.Select(x => new RowProvider(this, x)).Cast<ChildProvider>().ToList();
+                }
+
+                return _rows ?? new List<ChildProvider>();
             }
         }
 

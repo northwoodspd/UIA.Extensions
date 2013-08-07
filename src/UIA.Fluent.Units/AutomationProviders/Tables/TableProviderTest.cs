@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
@@ -42,14 +43,14 @@ namespace UIA.Fluent.AutomationProviders.Tables
         [Test]
         public void ItHasTheRowCount()
         {
-            _tableInformation.RowCount = 7;
+            _tableInformation.AddRows(7);
             _tableProvider.RowCount.Should().Equal(7);
         }
 
         [Test]
         public void ItHasTheColumnCount()
         {
-            _tableInformation.ColumnCount = 42;
+            _tableInformation.AddHeaders(Enumerable.Range(0, 42).Select(x => String.Empty).ToArray());
             _tableProvider.ColumnCount.Should().Equal(42);
         }
 
@@ -110,6 +111,17 @@ namespace UIA.Fluent.AutomationProviders.Tables
                 _tableInformation.AddRows(5);
                 _tableProvider.Children.Count.Should().Equal(5);
             }
+
+            [Test]
+            public void AreWiredUpToOneAnother()
+            {
+                _tableInformation.AddRows(3);
+                var theFirst = _tableProvider.FirstChild();
+                var theSecond = theFirst.NextSibling();
+                var theLast = _tableProvider.LastChild();
+
+                theSecond.NextSibling().Should().Be.SameAs(theLast);
+            }
         }
     }
 
@@ -124,8 +136,8 @@ namespace UIA.Fluent.AutomationProviders.Tables
             _rows = new List<RowInformation>();
         }
 
-        public int RowCount { get; set; }
-        public int ColumnCount { get; set; }
+        public int RowCount { get { return _rows.Count; }}
+        public int ColumnCount { get { return _headers.Count; }}
 
         public Control Control
         {
