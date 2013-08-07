@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 
 namespace UIA.Fluent.AutomationProviders.Tables
@@ -15,6 +16,11 @@ namespace UIA.Fluent.AutomationProviders.Tables
     public interface RowInformation
     {
         string Value { get; }
-        List<string> Values { get; }
+        List<CellInformation> Cells { get; }
+    }
+
+    public interface CellInformation
+    {
+        string Value { get; }
     }
 }

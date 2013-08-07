@@ -178,12 +178,22 @@ namespace UIA.Fluent.AutomationProviders.Tables
 
             public FakeRowInformation(string what)
             {
-                Values = new List<string>();
+                Cells = new List<CellInformation>();
                 Value = what;
             }
 
             public string Value { get; private set; }
-            public List<string> Values { get; set; }
+            public List<CellInformation> Cells { get; set; }
+        }
+
+        public class FakeCellInformation : CellInformation
+        {
+            public FakeCellInformation(string value)
+            {
+                Value = value;
+            }
+
+            public string Value { get; private set; }
         }
     }
 }

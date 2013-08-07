@@ -5,6 +5,7 @@ using System.Windows.Automation.Provider;
 using Moq;
 using NUnit.Framework;
 using Should.Fluent;
+using UIA.Fluent.Extensions;
 
 namespace UIA.Fluent.AutomationProviders.Tables
 {
@@ -13,13 +14,13 @@ namespace UIA.Fluent.AutomationProviders.Tables
     {
         private FakeTableInformation.FakeRowInformation _rowInformation;
         private Mock<AutomationProvider> _parent;
-        private readonly List<string> _values = new List<string>();
+        private readonly List<CellInformation> _values = new List<CellInformation>();
 
         [SetUp]
         public void SetUp()
         {
             _provider = null;
-            _rowInformation = new FakeTableInformation.FakeRowInformation {Values = _values};
+            _rowInformation = new FakeTableInformation.FakeRowInformation { Cells = _values };
             _parent = new Mock<AutomationProvider>();
         }
 
@@ -41,7 +42,7 @@ namespace UIA.Fluent.AutomationProviders.Tables
         [Test]
         public void TheRowValuesAreTheChildren()
         {
-            _values.AddRange(new[] { "item 1", "item 2", "item 3" });
+            AddCells("item 1", "item 2", "item 3");
             RowProvider.Children.Count.Should().Equal(3);
             RowProvider.Children.Select(x => x.Name).Should().Equal(new[] { "item 1", "item 2", "item 3" });
         }
@@ -55,5 +56,9 @@ namespace UIA.Fluent.AutomationProviders.Tables
             }
         }
 
+        private void AddCells(params string[] values)
+        {
+            values.ForEach(x => _values.Add(new FakeTableInformation.FakeCellInformation(x)));
+        }
     }
 }

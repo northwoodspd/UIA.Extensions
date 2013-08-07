@@ -57,13 +57,28 @@ namespace UIA.Fluent.AutomationProviders.Tables
             get { return _dataGridViewRow.Cells[0].Value as string; }
         }
 
-        public List<string> Values
+        public List<CellInformation> Cells
         {
             get
             {
                 return (from DataGridViewCell cell in _dataGridViewRow.Cells
-                        select cell.Value.ToString()).ToList();
+                        select new DataGridCellInformation(cell)).Cast<CellInformation>().ToList();
             }
+        }
+    }
+
+    public class DataGridCellInformation : CellInformation
+    {
+        private readonly DataGridViewCell _cell;
+
+        public DataGridCellInformation(DataGridViewCell cell)
+        {
+            _cell = cell;
+        }
+
+        public string Value
+        {
+            get { return _cell.Value.ToString(); }
         }
     }
 }
