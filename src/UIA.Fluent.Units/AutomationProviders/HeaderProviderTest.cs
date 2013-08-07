@@ -29,17 +29,24 @@ namespace UIA.Fluent.AutomationProviders
         public void FirstHeaderIsTheFirstChild()
         {
             _headers.Add("First Column");
-            var firstChild = HeaderProvider.Navigate(NavigateDirection.FirstChild) as HeaderItemProvider;
-            firstChild.Name.Should().Equal("First Column");
+            FirstChild.Name.Should().Equal("First Column");
         }
 
         [Test]
         public void LastHeaderIsTheLastChild()
         {
-            _headers.Add("First Column");
-            _headers.Add("Last Column");
-            var lastChild = HeaderProvider.Navigate(NavigateDirection.LastChild) as HeaderItemProvider;
-            lastChild.Name.Should().Equal("Last Column");
+            _headers.AddRange(new[] { "First Column", "Last Column" });
+            LastChild.Name.Should().Equal("Last Column");
+        }
+
+        private HeaderItemProvider FirstChild
+        {
+            get { return HeaderProvider.Navigate(NavigateDirection.FirstChild) as HeaderItemProvider; }
+        }
+
+        private HeaderItemProvider LastChild
+        {
+            get { return HeaderProvider.Navigate(NavigateDirection.LastChild) as HeaderItemProvider; }
         }
 
         private HeaderProvider _header;
