@@ -38,11 +38,17 @@ namespace UIA.Fluent.AutomationProviders.Tables
         }
 
         [Test]
-        public void ItReturnsTheNumberOfRows()
+        public void ItHasTheRowCount()
         {
-
             _tableInformation.RowCount = 7;
             _tableProvider.RowCount.Should().Equal(7);
+        }
+
+        [Test]
+        public void ItHasTheColumnCount()
+        {
+            _tableInformation.ColumnCount = 42;
+            _tableProvider.ColumnCount.Should().Equal(42);
         }
 
         [TestFixture]
@@ -94,6 +100,7 @@ namespace UIA.Fluent.AutomationProviders.Tables
         }
 
         public int RowCount { get; set; }
+        public int ColumnCount { get; set; }
 
         public Control Control
         {

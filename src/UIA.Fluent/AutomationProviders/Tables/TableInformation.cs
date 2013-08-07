@@ -6,6 +6,7 @@ namespace UIA.Fluent.AutomationProviders.Tables
     public interface TableInformation
     {
         int RowCount { get; }
+        int ColumnCount { get; }
         Control Control { get; }
         List<string> Headers { get; }
     }

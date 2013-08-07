@@ -27,5 +27,10 @@ namespace UIA.Fluent.AutomationProviders.Tables
         {
             get { return _dataGrid.RowCount; }
         }
+
+        public int ColumnCount
+        {
+            get { return _dataGrid.ColumnCount; }
+        }
     }
 }

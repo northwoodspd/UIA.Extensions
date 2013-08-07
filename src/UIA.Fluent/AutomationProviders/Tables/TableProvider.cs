@@ -15,6 +15,9 @@ namespace UIA.Fluent.AutomationProviders.Tables
             SetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id, ControlType.Table.Id);
         }
 
+        public int RowCount { get { return _tableInformation.RowCount; } }
+        public int ColumnCount { get { return _tableInformation.ColumnCount; } }
+
         private ChildProvider _headerProvider;
         private ChildProvider HeaderProvider
         {
@@ -49,8 +52,6 @@ namespace UIA.Fluent.AutomationProviders.Tables
             throw new System.NotImplementedException();
         }
 
-        public int RowCount { get { return _tableInformation.RowCount; } }
-        public int ColumnCount { get; private set; }
         public IRawElementProviderSimple[] GetRowHeaders()
         {
             throw new System.NotImplementedException();
