@@ -56,7 +56,7 @@ namespace UIA.Fluent.AutomationProviders
 
         public Rect BoundingRectangle { get; private set; }
 
-        public IRawElementProviderFragmentRoot FragmentRoot
+        public virtual IRawElementProviderFragmentRoot FragmentRoot
         {
             get { return this; }
         }

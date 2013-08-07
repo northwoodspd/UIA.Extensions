@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="AutomationConfigurer.cs" />
     <Compile Include="AutomationHandler.cs" />
+    <Compile Include="AutomationProviders\ChildProvider.cs" />
     <Compile Include="AutomationProviders\ControlProvider.cs" />
     <Compile Include="AutomationProviders\AutomationProvider.cs" />
     <Compile Include="AutomationProviders\TableProvider.cs" />
