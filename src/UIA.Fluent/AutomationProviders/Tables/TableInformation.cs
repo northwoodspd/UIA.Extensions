@@ -15,5 +15,6 @@ namespace UIA.Fluent.AutomationProviders.Tables
     public interface RowInformation
     {
         string Value { get; }
+        List<string> Values { get; }
     }
 }

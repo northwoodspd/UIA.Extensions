@@ -28,7 +28,7 @@ namespace UIA.Fluent.AutomationProviders.Tables
             get
             {
                 return (from DataGridViewRow row in _dataGrid.Rows
-                    select new DataGridRowInformation(row.Cells[0].Value.ToString())).Cast<RowInformation>().ToList();
+                        select new DataGridRowInformation(row)).Cast<RowInformation>().ToList();
             }
         }
 
@@ -45,11 +45,25 @@ namespace UIA.Fluent.AutomationProviders.Tables
 
     public class DataGridRowInformation : RowInformation
     {
-        public DataGridRowInformation(string value)
+        private readonly DataGridViewRow _dataGridViewRow;
+
+        public DataGridRowInformation(DataGridViewRow dataGridViewRow)
         {
-            Value = value;
+            _dataGridViewRow = dataGridViewRow;
         }
 
-        public string Value { get; private set; }
+        public string Value
+        {
+            get { return _dataGridViewRow.Cells[0].Value as string; }
+        }
+
+        public List<string> Values
+        {
+            get
+            {
+                return (from DataGridViewCell cell in _dataGridViewRow.Cells
+                        select cell.Value.ToString()).ToList();
+            }
+        }
     }
 }

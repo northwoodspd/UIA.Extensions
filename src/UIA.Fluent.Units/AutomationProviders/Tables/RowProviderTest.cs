@@ -1,4 +1,6 @@
-﻿using System.Windows.Automation;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Automation;
 using System.Windows.Automation.Provider;
 using Moq;
 using NUnit.Framework;
@@ -11,29 +13,47 @@ namespace UIA.Fluent.AutomationProviders.Tables
     {
         private FakeTableInformation.FakeRowInformation _rowInformation;
         private Mock<AutomationProvider> _parent;
-        private RowProvider _rowProvider;
+        private readonly List<string> _values = new List<string>();
 
         [SetUp]
         public void SetUp()
         {
-            _rowInformation = new FakeTableInformation.FakeRowInformation();
+            _provider = null;
+            _rowInformation = new FakeTableInformation.FakeRowInformation {Values = _values};
             _parent = new Mock<AutomationProvider>();
-            _rowProvider = new RowProvider(_parent.Object, _rowInformation);
         }
 
         [Test]
         public void ItIsOfTheDataItemIlk()
         {
-            _rowProvider.GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
+            RowProvider.GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
                 .Should().Equal(ControlType.DataItem.Id);
         }
 
         [Test]
         public void ItDoublesAsASelectionItem()
         {
-            _rowProvider.Should().Be.AssignableFrom<ISelectionItemProvider>();
-            _rowProvider.GetPatternProvider(SelectionItemPatternIdentifiers.Pattern.Id).Should()
-                .Be.SameAs(_rowProvider);
+            RowProvider.Should().Be.AssignableFrom<ISelectionItemProvider>();
+            RowProvider.GetPatternProvider(SelectionItemPatternIdentifiers.Pattern.Id).Should()
+                .Be.SameAs(RowProvider);
         }
+
+        [Test]
+        public void TheRowValuesAreTheChildren()
+        {
+            _values.AddRange(new[] { "item 1", "item 2", "item 3" });
+            RowProvider.Children.Count.Should().Equal(3);
+            RowProvider.Children.Select(x => x.Name).Should().Equal(new[] { "item 1", "item 2", "item 3" });
+        }
+
+        private RowProvider _provider;
+        private RowProvider RowProvider
+        {
+            get
+            {
+               return _provider ?? (_provider = new RowProvider(_parent.Object, _rowInformation));
+            }
+        }
+
     }
 }
