@@ -1,8 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Automation;
-using System.Windows.Automation.Provider;
-using UIA.Fluent.Extensions;
 
 namespace UIA.Fluent.AutomationProviders
 {
@@ -35,16 +32,6 @@ namespace UIA.Fluent.AutomationProviders
         protected override int ControlTypeId
         {
             get { return ControlType.HeaderItem.Id; }
-        }
-
-        protected override IRawElementProviderFragment NextSibling
-        {
-            get { return _headerProvider.Children.After(this); }
-        }
-
-        protected override IRawElementProviderFragment PreviousSibling
-        {
-            get { return _headerProvider.Children.Before(this); }
         }
     }
 }

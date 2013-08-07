@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Automation;
-using System.Windows.Automation.Provider;
 using NUnit.Framework;
 using Should.Fluent;
 
@@ -26,51 +26,17 @@ namespace UIA.Fluent.AutomationProviders
         }
 
         [Test]
-        public void FirstHeaderIsTheFirstChild()
+        public void ItHasHeaderItemChildren()
         {
-            _headers.Add("First Column");
-            FirstChild.Name.Should().Equal("First Column");
+            _headers.AddRange(new[] { "first", "second", "other" });
+            HeaderProvider.Children.TrueForAll(x => x.GetType() == typeof (HeaderItemProvider)).Should().Be.True();
         }
 
         [Test]
-        public void LastHeaderIsTheLastChild()
+        public void TheHeaderStringsAreTheChildren()
         {
-            _headers.AddRange(new[] { "First Column", "Last Column" });
-            LastChild.Name.Should().Equal("Last Column");
-        }
-
-        [Test]
-        public void HeaderItemsKnowAboutTheirNextSiblings()
-        {
-            _headers.AddRange(new[] { "First", "Second", "Third" });
-            After(FirstChild).Name.Should().Equal("Second");
-        }
-
-        [Test]
-        public void HeaderItemsKnowAboutTheirPreviousSiblings()
-        {
-            _headers.AddRange(new[] { "First", "Second", "Third" });
-            Before(LastChild).Name.Should().Equal("Second");
-        }
-
-        private HeaderItemProvider FirstChild
-        {
-            get { return HeaderProvider.Navigate(NavigateDirection.FirstChild) as HeaderItemProvider; }
-        }
-
-        private HeaderItemProvider LastChild
-        {
-            get { return HeaderProvider.Navigate(NavigateDirection.LastChild) as HeaderItemProvider; }
-        }
-
-        private static HeaderItemProvider After(HeaderItemProvider headerItem)
-        {
-            return headerItem.Navigate(NavigateDirection.NextSibling) as HeaderItemProvider;
-        }
-
-        private static HeaderItemProvider Before(HeaderItemProvider headerItem)
-        {
-            return headerItem.Navigate(NavigateDirection.PreviousSibling) as HeaderItemProvider;
+            _headers.AddRange(new[] { "first", "second", "other" });
+            HeaderProvider.Children.Select(x => x.Name).Should().Equal(new[] {"first", "second", "other"});
         }
 
         private HeaderProvider _header;

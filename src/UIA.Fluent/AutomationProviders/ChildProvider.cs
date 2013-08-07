@@ -1,4 +1,6 @@
-﻿using System.Windows.Automation.Provider;
+﻿using System;
+using System.Windows.Automation.Provider;
+using UIA.Fluent.Extensions;
 
 namespace UIA.Fluent.AutomationProviders
 {
@@ -19,6 +21,16 @@ namespace UIA.Fluent.AutomationProviders
         protected override IRawElementProviderFragment Parent
         {
             get { return _parent; }
+        }
+
+        protected override IRawElementProviderFragment NextSibling
+        {
+            get { return _parent.Children.After(this); }
+        }
+
+        protected override IRawElementProviderFragment PreviousSibling
+        {
+            get { return _parent.Children.Before(this); }
         }
     }
 }
