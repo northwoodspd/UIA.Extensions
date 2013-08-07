@@ -199,6 +199,8 @@ namespace UIA.Fluent.AutomationProviders.Tables
             }
 
             public string Value { get; set; }
+            public int Row { get; set; }
+            public int Column { get; set; }
         }
     }
 }

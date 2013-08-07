@@ -80,5 +80,16 @@ namespace UIA.Fluent.AutomationProviders.Tables
         {
             get { return _cell.Value.ToString(); }
         }
+
+        public int Row
+        {
+            get { return _cell.RowIndex; }
+        }
+
+
+        public int Column
+        {
+            get { return _cell.ColumnIndex; }
+        }
     }
 }

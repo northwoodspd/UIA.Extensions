@@ -47,6 +47,20 @@ namespace UIA.Fluent.AutomationProviders.Tables
                 .Should().Be.SameAs(_cellProvider);
         }
 
+        [Test]
+        public void ItKnowsTheRow()
+        {
+            _cellInformation.Row = 7;
+            CellProvider.Row.Should().Equal(7);
+        }
+
+        [Test]
+        public void ItKnowsTheColumn()
+        {
+            _cellInformation.Column = 42;
+            CellProvider.Column.Should().Equal(42);
+        }
+
         private TableCellProvider _cellProvider;
         private TableCellProvider CellProvider
         {

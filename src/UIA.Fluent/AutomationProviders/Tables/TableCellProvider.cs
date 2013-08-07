@@ -6,9 +6,11 @@ namespace UIA.Fluent.AutomationProviders.Tables
 {
     public class TableCellProvider : ChildProvider, ITableItemProvider
     {
-        public TableCellProvider(AutomationProvider parent, CellInformation cell)
-            : base(parent)
+        private readonly CellInformation _cell;
+
+        public TableCellProvider(AutomationProvider parent, CellInformation cell) : base(parent)
         {
+            _cell = cell;
             Name = cell.Value;
         }
 
@@ -22,8 +24,16 @@ namespace UIA.Fluent.AutomationProviders.Tables
             get { return new List<int> { TableItemPatternIdentifiers.Pattern.Id, GridItemPatternIdentifiers.Pattern.Id }; }
         }
 
-        public int Row { get; private set; }
-        public int Column { get; private set; }
+        public int Row
+        {
+            get { return _cell.Row; }
+        }
+
+        public int Column
+        {
+            get { return _cell.Column; }
+        }
+
         public int RowSpan { get; private set; }
         public int ColumnSpan { get; private set; }
         public IRawElementProviderSimple ContainingGrid { get; private set; }

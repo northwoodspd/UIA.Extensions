@@ -22,5 +22,7 @@ namespace UIA.Fluent.AutomationProviders.Tables
     public interface CellInformation
     {
         string Value { get; }
+        int Row { get;  }
+        int Column { get;  }
     }
 }
