@@ -45,6 +45,7 @@
     <Compile Include="AutomationExtensions.cs" />
     <Compile Include="AutomationHandler.cs" />
     <Compile Include="AutomationProviders\AutomationProvider.cs" />
+    <Compile Include="AutomationProviders\TableProvider.cs" />
     <Compile Include="AutomationProviders\ValueProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

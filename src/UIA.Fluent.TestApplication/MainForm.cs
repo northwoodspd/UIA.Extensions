@@ -19,6 +19,8 @@ namespace UIA.Fluent.TestApplication
             monthCalendar.AsValueControl(() => monthCalendar.SelectionStart.ToShortDateString(),
                 (x) => monthCalendar.SetDate(DateTime.Parse(x)));
 
+            dataGridView.AsTable();
+
             _people = new List<Person>();
             _bindingSource = new BindingSource {DataSource = _people};
             dataGridView.DataSource = _bindingSource;

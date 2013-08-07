@@ -15,5 +15,10 @@ namespace UIA.Fluent
         {
             return new AutomationConfigurer(control, new ValueProvider(control, getter, setter));
         }
+
+        public static AutomationConfigurer AsTable(this DataGridView dataGridView)
+        {
+            return new AutomationConfigurer(dataGridView, new TableProvider(dataGridView));
+        }
     }
 }
