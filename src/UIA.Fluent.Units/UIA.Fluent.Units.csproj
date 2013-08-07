@@ -53,9 +53,9 @@
     <Compile Include="AutomationProviders\AutomationProviderTest.cs" />
     <Compile Include="AutomationProviders\ChildProviderTest.cs" />
     <Compile Include="AutomationProviders\ControlProviderTest.cs" />
-    <Compile Include="AutomationProviders\HeaderItemProviderTest.cs" />
-    <Compile Include="AutomationProviders\HeaderProviderTest.cs" />
-    <Compile Include="AutomationProviders\TableProviderTest.cs" />
+    <Compile Include="AutomationProviders\Tables\HeaderItemProviderTest.cs" />
+    <Compile Include="AutomationProviders\Tables\HeaderProviderTest.cs" />
+    <Compile Include="AutomationProviders\Tables\TableProviderTest.cs" />
     <Compile Include="AutomationProviders\ValueProviderTest.cs" />
     <Compile Include="Extensions\EnumerableExtensionsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
