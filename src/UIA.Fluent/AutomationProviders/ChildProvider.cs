@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Automation.Provider;
+﻿using System.Windows.Automation.Provider;
 using UIA.Fluent.Extensions;
 
 namespace UIA.Fluent.AutomationProviders

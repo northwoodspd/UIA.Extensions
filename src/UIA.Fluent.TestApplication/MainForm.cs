@@ -8,8 +8,7 @@ namespace UIA.Fluent.TestApplication
 {
     public partial class MainForm : Form
     {
-        private List<Person> _people;
-        private BindingSource _bindingSource;
+        private readonly BindingSource _bindingSource;
 
         public MainForm()
         {
@@ -18,17 +17,17 @@ namespace UIA.Fluent.TestApplication
                 .WithName("Custom Panel Name");
 
             monthCalendar.AsValueControl(() => monthCalendar.SelectionStart.ToShortDateString(),
-                (x) => monthCalendar.SetDate(DateTime.Parse(x)));
+                x => monthCalendar.SetDate(DateTime.Parse(x)));
 
             dataGridView.AsTable();
 
-            _people = new List<Person>();
-            _bindingSource = new BindingSource {DataSource = _people};
+            var people = new List<Person>();
+            _bindingSource = new BindingSource {DataSource = people};
             dataGridView.DataSource = _bindingSource;
             dataGridView.ReadOnly = true;
         }
 
-        class Person
+        public class Person
         {
             public string FirstName { get; set; }
             public string LastName { get; set; }

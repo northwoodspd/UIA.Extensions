@@ -18,20 +18,4 @@ namespace UIA.Fluent.AutomationProviders
             get { return ControlType.Header.Id; }
         }
     }
-
-    public class HeaderItemProvider : ChildProvider
-    {
-        private readonly HeaderProvider _headerProvider;
-
-        public HeaderItemProvider(HeaderProvider headerProviderProvider, string header) : base(headerProviderProvider)
-        {
-            _headerProvider = headerProviderProvider;
-            Name = header;
-        }
-
-        protected override int ControlTypeId
-        {
-            get { return ControlType.HeaderItem.Id; }
-        }
-    }
 }

@@ -46,9 +46,9 @@ namespace UIA.Fluent.AutomationProviders
         [Test]
         public void ItUsesComThreading()
         {
-            ((int)_automationProvider.ProviderOptions & ControlProvider.ProviderUseComThreading)
+            ((int)_automationProvider.ProviderOptions & AutomationProvider.ProviderUseComThreading)
                 .Should()
-                .Equal(ControlProvider.ProviderUseComThreading);
+                .Equal(AutomationProvider.ProviderUseComThreading);
         }
 
         [Test]
@@ -72,7 +72,7 @@ namespace UIA.Fluent.AutomationProviders
                 .Should().Be.SameAs(expectedSurrounding.Object);
         }
 
-        private Mock<ControlProvider> GetMockChild()
+        private static Mock<ControlProvider> GetMockChild()
         {
             return new Mock<ControlProvider>(new Control());
         }

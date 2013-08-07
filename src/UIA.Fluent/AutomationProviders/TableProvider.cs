@@ -16,7 +16,7 @@ namespace UIA.Fluent.AutomationProviders
             SetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id, ControlType.Table.Id);
         }
 
-        private ChildProvider _headerProvider = null;
+        private ChildProvider _headerProvider;
         private ChildProvider HeaderProvider
         {
             get

@@ -31,7 +31,7 @@ namespace UIA.Fluent.AutomationProviders
         {
             var expectedValue = string.Empty;
 
-            GetValueProvider(null, (x) => expectedValue = x)
+            GetValueProvider(null, x => expectedValue = x)
                 .SetValue("The expected value to be set");
 
             expectedValue.Should().Equal("The expected value to be set");

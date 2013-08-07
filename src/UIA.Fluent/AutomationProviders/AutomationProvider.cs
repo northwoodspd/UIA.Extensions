@@ -144,8 +144,7 @@ namespace UIA.Fluent.AutomationProviders
             get { return GetPropertyValue(AutomationElementIdentifiers.NameProperty.Id) as String; }
 }
 
-        protected readonly List<ChildProvider> _children = new List<ChildProvider>();
-
+        private readonly List<ChildProvider> _children = new List<ChildProvider>();
         public virtual List<ChildProvider> Children
         {
             get { return _children; }

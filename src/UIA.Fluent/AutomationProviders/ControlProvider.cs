@@ -6,18 +6,18 @@ namespace UIA.Fluent.AutomationProviders
 {
     public class ControlProvider : AutomationProvider
     {
-        protected readonly Control _control;
+        protected readonly Control Control;
 
         public ControlProvider(Control control)
         {
-            _control = control;
-            Id = _control.Name;
-            SetPropertyValue(AutomationElementIdentifiers.LocalizedControlTypeProperty.Id, _control.GetType().FullName);
+            Control = control;
+            Id = Control.Name;
+            SetPropertyValue(AutomationElementIdentifiers.LocalizedControlTypeProperty.Id, Control.GetType().FullName);
         }
 
         public  override IRawElementProviderSimple HostRawElementProvider
         {
-            get { return AutomationInteropProvider.HostProviderFromHandle(_control.Handle); }
+            get { return AutomationInteropProvider.HostProviderFromHandle(Control.Handle); }
         }
     }
 }
