@@ -15,7 +15,7 @@ namespace UIA.Fluent.AutomationProviders
             SetPropertyValue(AutomationElementIdentifiers.LocalizedControlTypeProperty.Id, _control.GetType().FullName);
         }
 
-        protected override IRawElementProviderSimple HostProvider
+        public  override IRawElementProviderSimple HostRawElementProvider
         {
             get { return AutomationInteropProvider.HostProviderFromHandle(_control.Handle); }
         }

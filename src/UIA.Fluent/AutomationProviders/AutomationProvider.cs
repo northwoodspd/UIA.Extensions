@@ -49,12 +49,7 @@ namespace UIA.Fluent.AutomationProviders
             }
         }
 
-        public IRawElementProviderSimple HostRawElementProvider
-        {
-            get { return HostProvider; }
-        }
-
-        protected virtual IRawElementProviderSimple HostProvider
+        public virtual IRawElementProviderSimple HostRawElementProvider
         {
             get { return null; }
         }
