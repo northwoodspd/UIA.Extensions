@@ -39,7 +39,7 @@ namespace UIA.Fluent.AutomationProviders.Tables
             {
                 if (null == _rows && RowCount > 0)
                 {
-                    _rows = _tableInformation.Rows.Select(x => new RowProvider(this, x)).Cast<ChildProvider>().ToList();
+                    _rows = _tableInformation.Rows.Select(x => new TableRowProvider(this, x)).Cast<ChildProvider>().ToList();
                 }
 
                 return _rows ?? new List<ChildProvider>();

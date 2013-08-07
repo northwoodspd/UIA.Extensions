@@ -4,16 +4,16 @@ using System.Windows.Automation.Provider;
 
 namespace UIA.Fluent.AutomationProviders.Tables
 {
-    public class RowProvider : ChildProvider, ISelectionItemProvider
+    public class TableRowProvider : ChildProvider, ISelectionItemProvider
     {
         private readonly RowInformation _rowInformation;
 
-        public RowProvider(AutomationProvider parent, RowInformation rowInformation) : base(parent)
+        public TableRowProvider(AutomationProvider parent, RowInformation rowInformation) : base(parent)
         {
             _rowInformation = rowInformation;
             Name = rowInformation.Value;
 
-            rowInformation.Cells.ForEach(x => Children.Add(new TableValueProvider(this, x)));
+            rowInformation.Cells.ForEach(x => Children.Add(new TableCellProvider(this, x)));
         }
 
         protected override List<int> SupportedPatterns

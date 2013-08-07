@@ -10,7 +10,7 @@ using UIA.Fluent.Extensions;
 namespace UIA.Fluent.AutomationProviders.Tables
 {
     [TestFixture]
-    public class RowProviderTest
+    public class TableRowProviderTest
     {
         private FakeTableInformation.FakeRowInformation _rowInformation;
         private Mock<AutomationProvider> _parent;
@@ -27,32 +27,32 @@ namespace UIA.Fluent.AutomationProviders.Tables
         [Test]
         public void ItIsOfTheDataItemIlk()
         {
-            RowProvider.GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
+            TableRowProvider.GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
                 .Should().Equal(ControlType.DataItem.Id);
         }
 
         [Test]
         public void ItDoublesAsASelectionItem()
         {
-            RowProvider.Should().Be.AssignableFrom<ISelectionItemProvider>();
-            RowProvider.GetPatternProvider(SelectionItemPatternIdentifiers.Pattern.Id).Should()
-                .Be.SameAs(RowProvider);
+            TableRowProvider.Should().Be.AssignableFrom<ISelectionItemProvider>();
+            TableRowProvider.GetPatternProvider(SelectionItemPatternIdentifiers.Pattern.Id).Should()
+                .Be.SameAs(TableRowProvider);
         }
 
         [Test]
         public void TheRowValuesAreTheChildren()
         {
             AddCells("item 1", "item 2", "item 3");
-            RowProvider.Children.Count.Should().Equal(3);
-            RowProvider.Children.Select(x => x.Name).Should().Equal(new[] { "item 1", "item 2", "item 3" });
+            TableRowProvider.Children.Count.Should().Equal(3);
+            TableRowProvider.Children.Select(x => x.Name).Should().Equal(new[] { "item 1", "item 2", "item 3" });
         }
 
-        private RowProvider _provider;
-        private RowProvider RowProvider
+        private TableRowProvider _provider;
+        private TableRowProvider TableRowProvider
         {
             get
             {
-               return _provider ?? (_provider = new RowProvider(_parent.Object, _rowInformation));
+               return _provider ?? (_provider = new TableRowProvider(_parent.Object, _rowInformation));
             }
         }
 
