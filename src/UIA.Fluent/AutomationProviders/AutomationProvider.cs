@@ -20,6 +20,7 @@ namespace UIA.Fluent.AutomationProviders
                 {AutomationElementIdentifiers.ControlTypeProperty.Id, ControlTypeId}, 
                 {AutomationElementIdentifiers.IsKeyboardFocusableProperty.Id, true}, 
             };
+            _children = new List<ChildProvider>();
         }
 
         protected virtual int ControlTypeId
@@ -140,6 +141,12 @@ namespace UIA.Fluent.AutomationProviders
         public string Name
         {
             set { SetPropertyValue(AutomationElementIdentifiers.NameProperty.Id, value); }
+        }
+
+        private readonly List<ChildProvider> _children;
+        protected List<ChildProvider> Children
+        {
+            get { return _children; }
         }
 
         public IRawElementProviderFragment ElementProviderFromPoint(double x, double y)

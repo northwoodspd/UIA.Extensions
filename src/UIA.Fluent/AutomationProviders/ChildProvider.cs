@@ -4,21 +4,21 @@ namespace UIA.Fluent.AutomationProviders
 {
     public class ChildProvider : AutomationProvider
     {
-        private readonly AutomationProvider _automationProvider;
+        private readonly AutomationProvider _parent;
 
-        public ChildProvider(AutomationProvider automationProvider)
+        public ChildProvider(AutomationProvider parent)
         {
-            _automationProvider = automationProvider;
+            _parent = parent;
         }
 
         public override IRawElementProviderFragmentRoot FragmentRoot
         {
-            get { return _automationProvider.FragmentRoot; }
+            get { return _parent.FragmentRoot; }
         }
 
         protected override IRawElementProviderFragment Parent
         {
-            get { return _automationProvider; }
+            get { return _parent; }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
 using UIA.Fluent.AutomationProviders.Tables;
@@ -13,6 +14,21 @@ namespace UIA.Fluent.AutomationProviders
         {
             _tableInformation = tableInformation;
             SetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id, ControlType.Table.Id);
+
+            if (HasHeaders)
+            {
+                Children.Add(new HeaderProvider(this));
+            }
+        }
+
+        public bool HasHeaders
+        {
+            get { return _tableInformation.Headers.Count != 0; }
+        }
+
+        protected override IRawElementProviderFragment FirstChild
+        {
+            get { return Children.FirstOrDefault(); }
         }
 
         protected override List<int> SupportedPatterns
@@ -36,7 +52,6 @@ namespace UIA.Fluent.AutomationProviders
         {
             throw new System.NotImplementedException();
         }
-
         public RowOrColumnMajor RowOrColumnMajor { get; private set; }
     }
 }

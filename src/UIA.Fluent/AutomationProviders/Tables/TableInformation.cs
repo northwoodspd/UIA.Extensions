@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace UIA.Fluent.AutomationProviders.Tables
 {
@@ -6,5 +7,6 @@ namespace UIA.Fluent.AutomationProviders.Tables
     {
         int RowCount { get; }
         Control Control { get; }
+        IList<string> Headers { get; }
     }
 }
