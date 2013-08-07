@@ -39,6 +39,13 @@ namespace UIA.Fluent.AutomationProviders
             LastChild.Name.Should().Equal("Last Column");
         }
 
+        [Test]
+        public void HeaderItemsKnowAboutTheirSiblings()
+        {
+            _headers.AddRange(new[] { "First", "Second", "Third" });
+            After(FirstChild).Name.Should().Equal("Second");
+        }
+
         private HeaderItemProvider FirstChild
         {
             get { return HeaderProvider.Navigate(NavigateDirection.FirstChild) as HeaderItemProvider; }
@@ -47,6 +54,11 @@ namespace UIA.Fluent.AutomationProviders
         private HeaderItemProvider LastChild
         {
             get { return HeaderProvider.Navigate(NavigateDirection.LastChild) as HeaderItemProvider; }
+        }
+
+        private static HeaderItemProvider After(HeaderItemProvider headerItem)
+        {
+            return headerItem.Navigate(NavigateDirection.NextSibling) as HeaderItemProvider;
         }
 
         private HeaderProvider _header;

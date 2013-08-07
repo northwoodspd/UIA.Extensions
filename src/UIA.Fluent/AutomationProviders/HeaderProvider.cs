@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Automation;
+using System.Windows.Automation.Provider;
+using UIA.Fluent.Extensions;
 
 namespace UIA.Fluent.AutomationProviders
 {
@@ -28,6 +30,11 @@ namespace UIA.Fluent.AutomationProviders
         {
             _headerProvider = headerProviderProvider;
             Name = header;
+        }
+
+        protected override IRawElementProviderFragment NextSibling
+        {
+            get { return _headerProvider.Children.After(this); }
         }
     }
 }
