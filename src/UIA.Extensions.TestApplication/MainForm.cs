@@ -36,8 +36,9 @@ namespace UIA.Extensions.TestApplication
 
         private void addRowButton_Click(object sender, EventArgs e)
         {
-            Builder<Person>.CreateListOfSize(int.Parse(howManyToAdd.Text))
-                .Build().ForEach(x => _bindingSource.Add(x));
+            var people = Builder<Person>.CreateListOfSize(int.Parse(howManyToAdd.Text)).Build();
+            foreach (var person in people)
+                _bindingSource.Add(person);
         }
     }
 }

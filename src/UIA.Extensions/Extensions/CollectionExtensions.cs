@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace UIA.Extensions.Extensions
 {
-    public static class CollectionExtensions
+    static class CollectionExtensions
     {
         public static IEnumerable<T> As<T>(this BaseCollection collection)
         {

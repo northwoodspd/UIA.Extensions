@@ -1,8 +1,9 @@
-﻿using System.Windows.Automation.Provider;
+﻿using System.Runtime.CompilerServices;
+using System.Windows.Automation.Provider;
 
 namespace UIA.Extensions.Extensions
 {
-    public static class ProviderExtensions
+    static class ProviderExtensions
     {
         public static IRawElementProviderFragment Parent(this IRawElementProviderFragment element)
         {

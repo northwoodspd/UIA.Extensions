@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace UIA.Extensions.Extensions
 {
-    public static class EnumerableExtensions
+    static class EnumerableExtensions
     {
         public static T Before<T>(this IList<T> items, T what)
         {
