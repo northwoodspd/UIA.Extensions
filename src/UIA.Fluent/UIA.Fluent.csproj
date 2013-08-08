@@ -57,6 +57,7 @@
     <Compile Include="AutomationProviders\Tables\TableCellProvider.cs" />
     <Compile Include="AutomationProviders\ValueProvider.cs" />
     <Compile Include="Extensions\AutomationExtensions.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\ProviderExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

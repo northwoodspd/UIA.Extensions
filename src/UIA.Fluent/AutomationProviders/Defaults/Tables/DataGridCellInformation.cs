@@ -7,9 +7,14 @@ namespace UIA.Fluent.AutomationProviders.Defaults.Tables
     {
         private readonly DataGridViewCell _cell;
 
-        public DataGridCellInformation(DataGridViewCell cell)
+        private DataGridCellInformation(DataGridViewCell cell)
         {
             _cell = cell;
+        }
+
+        public static CellInformation FromCell(DataGridViewCell cell)
+        {
+            return new DataGridCellInformation(cell);
         }
 
         public string Value

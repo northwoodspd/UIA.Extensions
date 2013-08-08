@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 using UIA.Fluent.AutomationProviders.Tables;
+using UIA.Fluent.Extensions;
 
 namespace UIA.Fluent.AutomationProviders.Defaults.Tables
 {
@@ -21,16 +22,12 @@ namespace UIA.Fluent.AutomationProviders.Defaults.Tables
 
         public List<string> Headers
         {
-            get { return (from DataGridViewColumn column in _dataGrid.Columns select column.HeaderText).ToList(); }
+            get { return _dataGrid.Columns.Select(x => x.HeaderText).ToList(); }
         }
 
         public List<RowInformation> Rows
         {
-            get
-            {
-                return (from DataGridViewRow row in _dataGrid.Rows
-                        select new DataGridRowInformation(row)).Cast<RowInformation>().ToList();
-            }
+            get { return _dataGrid.Rows.Select(DataGridRowInformation.FromRow).ToList(); }
         }
 
         public int RowCount

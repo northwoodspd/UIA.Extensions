@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 using UIA.Fluent.AutomationProviders.Tables;
+using UIA.Fluent.Extensions;
 
 namespace UIA.Fluent.AutomationProviders.Defaults.Tables
 {
@@ -9,9 +10,14 @@ namespace UIA.Fluent.AutomationProviders.Defaults.Tables
     {
         private readonly DataGridViewRow _dataGridViewRow;
 
-        public DataGridRowInformation(DataGridViewRow dataGridViewRow)
+        private DataGridRowInformation(DataGridViewRow dataGridViewRow)
         {
             _dataGridViewRow = dataGridViewRow;
+        }
+
+        public static RowInformation FromRow(DataGridViewRow row)
+        {
+            return new DataGridRowInformation(row);
         }
 
         public string Value
@@ -21,11 +27,7 @@ namespace UIA.Fluent.AutomationProviders.Defaults.Tables
 
         public List<CellInformation> Cells
         {
-            get
-            {
-                return (from DataGridViewCell cell in _dataGridViewRow.Cells
-                    select new DataGridCellInformation(cell)).Cast<CellInformation>().ToList();
-            }
+            get { return _dataGridViewRow.Cells.Select(DataGridCellInformation.FromCell).ToList(); }
         }
 
         public void Select()
