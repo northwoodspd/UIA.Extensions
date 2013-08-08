@@ -11,7 +11,7 @@ end
 
 task :default => [:build, :features]
 
-desc 'Build UIA.Fluent'
+desc 'Build UIA.Extensions'
 build :build do |b|
-  b.sln = 'src/UIA.Fluent.sln'
+  b.sln = 'src/UIA.Extensions.sln'
 end

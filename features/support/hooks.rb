@@ -3,7 +3,7 @@ require 'childprocess'
 include Mohawk::Navigation
 
 def app_path
-  File.join(File.dirname(__FILE__), '../../src/UIA.Fluent.TestApplication/bin/Debug/UIA.Fluent.TestApplication.exe')
+  File.join(File.dirname(__FILE__), '../../src/UIA.Extensions.TestApplication/bin/Debug/UIA.Extensions.TestApplication.exe')
 end
 
 Before do
