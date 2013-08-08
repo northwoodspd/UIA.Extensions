@@ -19,7 +19,7 @@ namespace UIA.Fluent.AutomationProviders.Defaults.Tables
 
         public string Value
         {
-            get { return _cell.Value.ToString(); }
+            get { return (_cell.Value ?? "").ToString(); }
         }
 
         public int Row
