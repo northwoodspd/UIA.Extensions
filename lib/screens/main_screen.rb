@@ -5,7 +5,8 @@ class MainScreen
   control(:panel, :id => 'basicPanel')
   control(:calendar, :id => 'monthCalendar')
 
-  button(:add_row, :value => 'Add Row')
+  button(:add_rows, :value => 'Add Row')
 
   table(:the_grid, :id => 'dataGridView')
+  text(:how_many, :id => 'howManyToAdd')
 end

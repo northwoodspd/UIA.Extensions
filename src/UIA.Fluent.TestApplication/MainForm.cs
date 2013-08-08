@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using FizzWare.NBuilder;
 using UIA.Fluent.Extensions;
@@ -36,7 +37,8 @@ namespace UIA.Fluent.TestApplication
 
         private void addRowButton_Click(object sender, EventArgs e)
         {
-            _bindingSource.Add(Builder<Person>.CreateNew().Build());
+            Builder<Person>.CreateListOfSize(int.Parse(howManyToAdd.Text))
+                .Build().ForEach(x => _bindingSource.Add(x));
         }
     }
 }

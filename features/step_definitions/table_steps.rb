@@ -1,6 +1,7 @@
 When(/^we add "([^"]*)" rows to the table$/) do |rows_to_add|
   on(MainScreen) do |screen|
-    rows_to_add.to_i.times { screen.add_row }
+    screen.how_many = rows_to_add
+    screen.add_rows
   end
 end
 

@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             this.basicPanel = new System.Windows.Forms.Panel();
-            this.monthCalendar = new System.Windows.Forms.MonthCalendar();
-            this.dataGridView = new System.Windows.Forms.DataGridView();
             this.addRowButton = new System.Windows.Forms.Button();
+            this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.monthCalendar = new System.Windows.Forms.MonthCalendar();
+            this.howManyToAdd = new System.Windows.Forms.TextBox();
             this.basicPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -41,6 +42,7 @@
             this.basicPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.basicPanel.Controls.Add(this.howManyToAdd);
             this.basicPanel.Controls.Add(this.addRowButton);
             this.basicPanel.Controls.Add(this.dataGridView);
             this.basicPanel.Controls.Add(this.monthCalendar);
@@ -49,11 +51,15 @@
             this.basicPanel.Size = new System.Drawing.Size(613, 262);
             this.basicPanel.TabIndex = 0;
             // 
-            // monthCalendar
+            // addRowButton
             // 
-            this.monthCalendar.Location = new System.Drawing.Point(9, 9);
-            this.monthCalendar.Name = "monthCalendar";
-            this.monthCalendar.TabIndex = 0;
+            this.addRowButton.Location = new System.Drawing.Point(269, 177);
+            this.addRowButton.Name = "addRowButton";
+            this.addRowButton.Size = new System.Drawing.Size(75, 23);
+            this.addRowButton.TabIndex = 2;
+            this.addRowButton.Text = "Add Row";
+            this.addRowButton.UseVisualStyleBackColor = true;
+            this.addRowButton.Click += new System.EventHandler(this.addRowButton_Click);
             // 
             // dataGridView
             // 
@@ -67,15 +73,19 @@
             this.dataGridView.Size = new System.Drawing.Size(341, 162);
             this.dataGridView.TabIndex = 1;
             // 
-            // addRowButton
+            // monthCalendar
             // 
-            this.addRowButton.Location = new System.Drawing.Point(269, 177);
-            this.addRowButton.Name = "addRowButton";
-            this.addRowButton.Size = new System.Drawing.Size(75, 23);
-            this.addRowButton.TabIndex = 2;
-            this.addRowButton.Text = "Add Row";
-            this.addRowButton.UseVisualStyleBackColor = true;
-            this.addRowButton.Click += new System.EventHandler(this.addRowButton_Click);
+            this.monthCalendar.Location = new System.Drawing.Point(9, 9);
+            this.monthCalendar.Name = "monthCalendar";
+            this.monthCalendar.TabIndex = 0;
+            // 
+            // howManyToAdd
+            // 
+            this.howManyToAdd.Location = new System.Drawing.Point(350, 179);
+            this.howManyToAdd.Name = "howManyToAdd";
+            this.howManyToAdd.Size = new System.Drawing.Size(45, 20);
+            this.howManyToAdd.TabIndex = 3;
+            this.howManyToAdd.Text = "1";
             // 
             // MainForm
             // 
@@ -86,6 +96,7 @@
             this.Name = "MainForm";
             this.Text = "UIA.Fluent Test Application";
             this.basicPanel.ResumeLayout(false);
+            this.basicPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 
@@ -97,6 +108,7 @@
         private System.Windows.Forms.MonthCalendar monthCalendar;
         private System.Windows.Forms.Button addRowButton;
         private System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.TextBox howManyToAdd;
     }
 }
 
