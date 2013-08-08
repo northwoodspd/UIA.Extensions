@@ -26,6 +26,11 @@ namespace UIA.Fluent.AutomationProviders.Tables
             get { return ControlType.DataItem.Id; }
         }
 
+        public bool IsSelected
+        {
+            get { return _rowInformation.IsSelected; }
+        }
+
         public void Select()
         {
             _rowInformation.Select();
@@ -41,7 +46,6 @@ namespace UIA.Fluent.AutomationProviders.Tables
             throw new System.NotImplementedException();
         }
 
-        public bool IsSelected { get; private set; }
         public IRawElementProviderSimple SelectionContainer { get; private set; }
     }
 }

@@ -71,6 +71,11 @@ namespace UIA.Fluent.AutomationProviders.Tables
             _dataGridViewRow.DataGridView.ClearSelection();
             _dataGridViewRow.Selected = true;
         }
+
+        public bool IsSelected
+        {
+            get { return _dataGridViewRow.Selected; }
+        }
     }
 
     public class DataGridCellInformation : CellInformation

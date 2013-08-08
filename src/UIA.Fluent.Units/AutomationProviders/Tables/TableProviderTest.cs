@@ -192,6 +192,13 @@ namespace UIA.Fluent.AutomationProviders.Tables
                 _wasSelected = true;
             }
 
+            public bool IsSelected {
+                get
+                {
+                    return _wasSelected;
+                }
+            }
+
             public void ShouldHaveBeenSelected()
             {
                 Assert.That(_wasSelected, Is.True, "Expected Select to have been called but it was not");

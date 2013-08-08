@@ -48,6 +48,14 @@ namespace UIA.Fluent.AutomationProviders.Tables
         }
 
         [Test]
+        public void ItKnowsIfItIsSelected()
+        {
+            TableRowProvider.Select();
+
+            TableRowProvider.IsSelected.Should().Be.True();
+        }
+
+        [Test]
         public void TheRowValuesAreTheChildren()
         {
             AddCells("item 1", "item 2", "item 3");
