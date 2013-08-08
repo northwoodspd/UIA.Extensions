@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("UIA.Fluent")]
-[assembly: AssemblyDescription("Fluent .NET library to expose controls to Automation")]
+[assembly: AssemblyTitle("UIA.Extensions")]
+[assembly: AssemblyDescription(".NET library to expose controls to Automation")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Northwoods Consulting Partners")]
-[assembly: AssemblyProduct("UIA.Fluent")]
+[assembly: AssemblyProduct("UIA.Extensions")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
