@@ -65,6 +65,12 @@ namespace UIA.Fluent.AutomationProviders.Tables
                         select new DataGridCellInformation(cell)).Cast<CellInformation>().ToList();
             }
         }
+
+        public void Select()
+        {
+            _dataGridViewRow.DataGridView.ClearSelection();
+            _dataGridViewRow.Selected = true;
+        }
     }
 
     public class DataGridCellInformation : CellInformation

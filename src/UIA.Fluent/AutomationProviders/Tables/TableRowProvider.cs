@@ -28,7 +28,7 @@ namespace UIA.Fluent.AutomationProviders.Tables
 
         public void Select()
         {
-            throw new System.NotImplementedException();
+            _rowInformation.Select();
         }
 
         public void AddToSelection()

@@ -17,6 +17,7 @@ namespace UIA.Fluent.AutomationProviders.Tables
     {
         string Value { get; }
         List<CellInformation> Cells { get; }
+        void Select();
     }
 
     public interface CellInformation

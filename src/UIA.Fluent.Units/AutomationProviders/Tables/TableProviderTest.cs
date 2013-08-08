@@ -170,6 +170,8 @@ namespace UIA.Fluent.AutomationProviders.Tables
 
         public class FakeRowInformation : RowInformation
         {
+            private bool _wasSelected;
+
             public FakeRowInformation() : this("Default")
             { }
 
@@ -184,6 +186,16 @@ namespace UIA.Fluent.AutomationProviders.Tables
 
             public string Value { get; private set; }
             public List<CellInformation> Cells { get; set; }
+
+            public void Select()
+            {
+                _wasSelected = true;
+            }
+
+            public void ShouldHaveBeenSelected()
+            {
+                Assert.That(_wasSelected, Is.True, "Expected Select to have been called but it was not");
+            }
         }
 
         public class FakeCellInformation : CellInformation
