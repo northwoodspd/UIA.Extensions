@@ -46,11 +46,13 @@
     <Compile Include="AutomationProviders\ChildProvider.cs" />
     <Compile Include="AutomationProviders\ControlProvider.cs" />
     <Compile Include="AutomationProviders\AutomationProvider.cs" />
+    <Compile Include="AutomationProviders\Defaults\Tables\DataGridCellInformation.cs" />
+    <Compile Include="AutomationProviders\Defaults\Tables\DataGridRowInformation.cs" />
+    <Compile Include="AutomationProviders\Defaults\Tables\DataGridTableInformation.cs" />
     <Compile Include="AutomationProviders\Tables\HeaderItemProvider.cs" />
     <Compile Include="AutomationProviders\Tables\HeaderProvider.cs" />
     <Compile Include="AutomationProviders\Tables\TableRowProvider.cs" />
     <Compile Include="AutomationProviders\Tables\TableProvider.cs" />
-    <Compile Include="AutomationProviders\Tables\DataGridTableInformation.cs" />
     <Compile Include="AutomationProviders\Tables\TableInformation.cs" />
     <Compile Include="AutomationProviders\Tables\TableCellProvider.cs" />
     <Compile Include="AutomationProviders\ValueProvider.cs" />
@@ -59,6 +61,7 @@
     <Compile Include="Extensions\ProviderExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

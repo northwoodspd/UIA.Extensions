@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using UIA.Fluent.AutomationProviders;
+using UIA.Fluent.AutomationProviders.Defaults.Tables;
 using UIA.Fluent.AutomationProviders.Tables;
 
 namespace UIA.Fluent.Extensions
