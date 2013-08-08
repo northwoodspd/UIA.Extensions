@@ -55,6 +55,9 @@
     <Compile Include="AutomationProviders\ControlProviderTest.cs" />
     <Compile Include="AutomationProviders\Tables\HeaderItemProviderTest.cs" />
     <Compile Include="AutomationProviders\Tables\HeaderProviderTest.cs" />
+    <Compile Include="AutomationProviders\Tables\Stubs\CellInformationStub.cs" />
+    <Compile Include="AutomationProviders\Tables\Stubs\RowInformationStub.cs" />
+    <Compile Include="AutomationProviders\Tables\Stubs\TableInformationStub.cs" />
     <Compile Include="AutomationProviders\Tables\TableCellProviderTest.cs" />
     <Compile Include="AutomationProviders\Tables\TableRowProviderTest.cs" />
     <Compile Include="AutomationProviders\Tables\TableProviderTest.cs" />
@@ -70,6 +73,9 @@
       <Project>{27FDFE95-4641-4929-9887-0FB39BD52594}</Project>
       <Name>UIA.Fluent</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AutomationProviders\Stubs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

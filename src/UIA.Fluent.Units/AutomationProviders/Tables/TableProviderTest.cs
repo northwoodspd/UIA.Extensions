@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
-using System.Windows.Forms;
 using NUnit.Framework;
 using Should.Fluent;
+using UIA.Fluent.AutomationProviders.Tables.Stubs;
 using UIA.Fluent.Extensions;
 
 namespace UIA.Fluent.AutomationProviders.Tables
@@ -14,13 +13,13 @@ namespace UIA.Fluent.AutomationProviders.Tables
     public class TableProviderTest
     {
         private TableProvider _tableProvider;
-        private FakeTableInformation _tableInformation;
+        private TableInformationStub _tableInformationStub;
 
         [SetUp]
         public void SetUp()
         {
-            _tableInformation = new FakeTableInformation();
-            _tableProvider = new TableProvider(_tableInformation);
+            _tableInformationStub = new TableInformationStub();
+            _tableProvider = new TableProvider(_tableInformationStub);
         }
 
         [Test]
@@ -43,14 +42,14 @@ namespace UIA.Fluent.AutomationProviders.Tables
         [Test]
         public void ItHasTheRowCount()
         {
-            _tableInformation.AddRows(7);
+            _tableInformationStub.AddRows(7);
             _tableProvider.RowCount.Should().Equal(7);
         }
 
         [Test]
         public void ItHasTheColumnCount()
         {
-            _tableInformation.AddHeaders(Enumerable.Range(0, 42).Select(x => String.Empty).ToArray());
+            _tableInformationStub.AddHeaders(Enumerable.Range(0, 42).Select(x => String.Empty).ToArray());
             _tableProvider.ColumnCount.Should().Equal(42);
         }
 
@@ -58,19 +57,19 @@ namespace UIA.Fluent.AutomationProviders.Tables
         public class Headers
         {
             private TableProvider _tableProvider;
-            private FakeTableInformation _tableInformation;
+            private TableInformationStub _tableInformationStub;
 
             [SetUp]
             public void SetUp()
             {
-                _tableInformation = new FakeTableInformation();
-                _tableProvider = new TableProvider(_tableInformation);
+                _tableInformationStub = new TableInformationStub();
+                _tableProvider = new TableProvider(_tableInformationStub);
             }
 
             [Test]
             public void ArePresentIfThereAreHeaders()
             {
-                _tableInformation.AddHeaders("First Header", "Second Header");
+                _tableInformationStub.AddHeaders("First Header", "Second Header");
 
                 _tableProvider.Navigate(NavigateDirection.FirstChild)
                     .Should().Be.OfType<HeaderProvider>();
@@ -87,7 +86,7 @@ namespace UIA.Fluent.AutomationProviders.Tables
             public void HeadersCanBeLazilyLoaded()
             {
                 _tableProvider.Navigate(NavigateDirection.FirstChild).Should().Be.Null();
-                _tableInformation.AddHeaders("Some Header");
+                _tableInformationStub.AddHeaders("Some Header");
                 _tableProvider.Navigate(NavigateDirection.FirstChild).Should().Be.OfType<HeaderProvider>();
             }
         }
@@ -96,26 +95,26 @@ namespace UIA.Fluent.AutomationProviders.Tables
         public class DataItems
         {
             private TableProvider _tableProvider;
-            private FakeTableInformation _tableInformation;
+            private TableInformationStub _tableInformationStub;
 
             [SetUp]
             public void SetUp()
             {
-                _tableInformation = new FakeTableInformation();
-                _tableProvider = new TableProvider(_tableInformation);
+                _tableInformationStub = new TableInformationStub();
+                _tableProvider = new TableProvider(_tableInformationStub);
             }
 
             [Test]
             public void ArePresentForEachRow()
             {
-                _tableInformation.AddRows(5);
+                _tableInformationStub.AddRows(5);
                 _tableProvider.Children.Count.Should().Equal(5);
             }
 
             [Test]
             public void AreWiredUpToOneAnother()
             {
-                _tableInformation.AddRows(3);
+                _tableInformationStub.AddRows(3);
                 var theFirst = _tableProvider.FirstChild();
                 var theSecond = theFirst.NextSibling();
                 var theLast = _tableProvider.LastChild();
@@ -126,100 +125,9 @@ namespace UIA.Fluent.AutomationProviders.Tables
             [Test]
             public void HaveValuesOnThem()
             {
-                _tableInformation.AddRows(2);
+                _tableInformationStub.AddRows(2);
                 _tableProvider.Children.Select(x => x.Name).Should().Equal(new[] { "Row0", "Row1" });
             }
-        }
-    }
-
-    public class FakeTableInformation : TableInformation
-    {
-        private readonly List<string> _headers;
-        private readonly List<RowInformation> _rows;
-
-        public FakeTableInformation()
-        {
-            _headers = new List<string>();
-            _rows = new List<RowInformation>();
-        }
-
-        public int RowCount { get { return _rows.Count; }}
-        public int ColumnCount { get { return _headers.Count; }}
-
-        public Control Control
-        {
-            get { return new Control(); }
-        }
-
-        public List<string> Headers
-        {
-            get { return _headers; }
-        }
-
-        public List<RowInformation> Rows { get { return _rows; }}
-
-        public void AddHeaders(params string[] headers)
-        {
-            _headers.AddRange(headers);
-        }
-
-        public void AddRows(int howMany)
-        {
-            howMany.Times(x => _rows.Add(new FakeRowInformation(x)));
-        }
-
-        public class FakeRowInformation : RowInformation
-        {
-            private bool _wasSelected;
-
-            public FakeRowInformation() : this("Default")
-            { }
-
-            public FakeRowInformation(int which) : this("Row" + which)
-            { }
-
-            public FakeRowInformation(string what)
-            {
-                Cells = new List<CellInformation>();
-                Value = what;
-            }
-
-            public string Value { get; private set; }
-            public List<CellInformation> Cells { get; set; }
-
-            public void Select()
-            {
-                _wasSelected = true;
-            }
-
-            public bool IsSelected {
-                get
-                {
-                    return _wasSelected;
-                }
-            }
-
-            public void ShouldHaveBeenSelected()
-            {
-                Assert.That(_wasSelected, Is.True, "Expected Select to have been called but it was not");
-            }
-        }
-
-        public class FakeCellInformation : CellInformation
-        {
-            public FakeCellInformation(string value)
-            {
-                Value = value;
-            }
-
-            public FakeCellInformation()
-            {
-                Value = String.Empty;
-            }
-
-            public string Value { get; set; }
-            public int Row { get; set; }
-            public int Column { get; set; }
         }
     }
 }

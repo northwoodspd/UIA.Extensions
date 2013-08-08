@@ -5,6 +5,7 @@ using System.Windows.Automation.Provider;
 using Moq;
 using NUnit.Framework;
 using Should.Fluent;
+using UIA.Fluent.AutomationProviders.Tables.Stubs;
 using UIA.Fluent.Extensions;
 
 namespace UIA.Fluent.AutomationProviders.Tables
@@ -12,7 +13,7 @@ namespace UIA.Fluent.AutomationProviders.Tables
     [TestFixture]
     public class TableRowProviderTest
     {
-        private FakeTableInformation.FakeRowInformation _rowInformation;
+        private RowInformationStub _rowInformationStub;
         private Mock<AutomationProvider> _parent;
         private readonly List<CellInformation> _values = new List<CellInformation>();
 
@@ -20,7 +21,7 @@ namespace UIA.Fluent.AutomationProviders.Tables
         public void SetUp()
         {
             _provider = null;
-            _rowInformation = new FakeTableInformation.FakeRowInformation { Cells = _values };
+            _rowInformationStub = new RowInformationStub { Cells = _values };
             _parent = new Mock<AutomationProvider>();
         }
 
@@ -44,7 +45,7 @@ namespace UIA.Fluent.AutomationProviders.Tables
         {
             TableRowProvider.Select();
 
-            _rowInformation.ShouldHaveBeenSelected();
+            _rowInformationStub.ShouldHaveBeenSelected();
         }
 
         [Test]
@@ -68,13 +69,13 @@ namespace UIA.Fluent.AutomationProviders.Tables
         {
             get
             {
-               return _provider ?? (_provider = new TableRowProvider(_parent.Object, _rowInformation));
+               return _provider ?? (_provider = new TableRowProvider(_parent.Object, _rowInformationStub));
             }
         }
 
         private void AddCells(params string[] values)
         {
-            values.ForEach(x => _values.Add(new FakeTableInformation.FakeCellInformation(x)));
+            values.ForEach(x => _values.Add(new CellInformationStub(x)));
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Windows.Automation.Provider;
 using Moq;
 using NUnit.Framework;
 using Should.Fluent;
+using UIA.Fluent.AutomationProviders.Tables.Stubs;
 
 namespace UIA.Fluent.AutomationProviders.Tables
 {
@@ -10,13 +11,13 @@ namespace UIA.Fluent.AutomationProviders.Tables
     public class TableCellProviderTest
     {
         private Mock<AutomationProvider> _parent;
-        private FakeTableInformation.FakeCellInformation _cellInformation;
+        private CellInformationStub _cellInformationStub;
 
         [SetUp]
         public void SetUp()
         {
             _parent = new Mock<AutomationProvider>();
-            _cellInformation = new FakeTableInformation.FakeCellInformation();
+            _cellInformationStub = new CellInformationStub();
         }
         
         [TearDown]
@@ -35,7 +36,7 @@ namespace UIA.Fluent.AutomationProviders.Tables
         [Test]
         public void TheNameIsTheValue()
         {
-            _cellInformation.Value = "Expected Name";
+            _cellInformationStub.Value = "Expected Name";
             CellProvider.Name.Should().Equal("Expected Name");
         }
 
@@ -50,21 +51,21 @@ namespace UIA.Fluent.AutomationProviders.Tables
         [Test]
         public void ItKnowsTheRow()
         {
-            _cellInformation.Row = 7;
+            _cellInformationStub.Row = 7;
             CellProvider.Row.Should().Equal(7);
         }
 
         [Test]
         public void ItKnowsTheColumn()
         {
-            _cellInformation.Column = 42;
+            _cellInformationStub.Column = 42;
             CellProvider.Column.Should().Equal(42);
         }
 
         private TableCellProvider _cellProvider;
         private TableCellProvider CellProvider
         {
-            get { return _cellProvider ?? (_cellProvider = new TableCellProvider(_parent.Object, _cellInformation)); }
+            get { return _cellProvider ?? (_cellProvider = new TableCellProvider(_parent.Object, _cellInformationStub)); }
         }
     }
 }
