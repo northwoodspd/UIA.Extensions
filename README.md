@@ -20,6 +20,18 @@ public MainForm
 }
 ```
 
+### Tables
+The [`TablePattern`](http://msdn.microsoft.com/en-us/library/system.windows.automation.tablepattern.aspx) is one that is used by `ListView`, `ListBox` and other various controls. Sometimes, however, controls that visually appear to be tables to not behave like `TablePattern` controls to automation. The [`DataGridView`](http://msdn.microsoft.com/en-us/library/system.windows.forms.datagridview.aspx) class is one of those. Here is an example of how do expose the `DataGridView` control to automation:
+
+```csharp
+public MainForm
+{
+  InitializeComponent();
+  
+  dataGridView.AsTable(); // yes, that's it
+}
+```
+
 ## Contributing
 
 1. Fork it
