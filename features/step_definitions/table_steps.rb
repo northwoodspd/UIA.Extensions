@@ -22,3 +22,11 @@ Then(/^the table should look like this:$/) do |table_info|
     end
   end
 end
+
+When(/^we select the item with the "([^"]*)" of "([^"]*)"$/) do |column, value|
+  on(MainScreen).select_the_grid column.to_sym => value
+end
+
+Then(/^the row at index "([^"]*)" is selected$/) do |expected_index|
+  on(MainScreen).the_grid[expected_index.to_i].should be_selected
+end

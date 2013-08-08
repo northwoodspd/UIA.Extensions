@@ -17,3 +17,7 @@ Feature: Automating table controls
       | FirstName4 | LastName4 | 4   |
       | FirstName5 | LastName5 | 5   |
 
+  Scenario: Selecting grid items
+    Given we add "4" rows to the table
+    When we select the item with the "age" of "3"
+    Then the row at index "2" is selected
