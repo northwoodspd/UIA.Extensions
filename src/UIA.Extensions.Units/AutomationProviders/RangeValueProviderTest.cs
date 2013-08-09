@@ -1,4 +1,5 @@
 ﻿using System.Windows.Automation;
+using System.Windows.Automation.Provider;
 using System.Windows.Forms;
 using NUnit.Framework;
 using Should.Fluent;
@@ -21,6 +22,12 @@ namespace UIA.Extensions.AutomationProviders
         {
             _provider.GetPatternProvider(RangeValuePatternIdentifiers.Pattern.Id)
                 .Should().Be.SameAs(_provider);
+        }
+        
+        [Test]
+        public void ItCanDoWhatItSaysItCanDo()
+        {
+            _provider.Should().Be.AssignableFrom<IRangeValueProvider>();
         }
     }
 }
