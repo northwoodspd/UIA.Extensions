@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutomationConfigurer.cs" />
+    <Compile Include="AutomationExtensions.cs" />
     <Compile Include="AutomationHandler.cs" />
     <Compile Include="AutomationProviders\ChildProvider.cs" />
     <Compile Include="AutomationProviders\ControlProvider.cs" />
@@ -60,7 +61,6 @@
     <Compile Include="AutomationProviders\Tables\TableInformation.cs" />
     <Compile Include="AutomationProviders\Tables\TableCellProvider.cs" />
     <Compile Include="AutomationProviders\ValueProvider.cs" />
-    <Compile Include="Extensions\AutomationExtensions.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\ProviderExtensions.cs" />

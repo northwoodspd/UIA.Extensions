@@ -6,7 +6,7 @@ using UIA.Extensions.AutomationProviders.Defaults.Tables;
 using UIA.Extensions.AutomationProviders.Interfaces;
 using UIA.Extensions.AutomationProviders.Tables;
 
-namespace UIA.Extensions.Extensions
+namespace UIA.Extensions
 {
     public static class AutomationExtensions
     {
