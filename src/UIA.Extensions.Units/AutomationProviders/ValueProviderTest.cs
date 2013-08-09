@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Automation;
+﻿using System.Windows.Automation;
 using System.Windows.Forms;
 using NUnit.Framework;
 using Should.Fluent;
