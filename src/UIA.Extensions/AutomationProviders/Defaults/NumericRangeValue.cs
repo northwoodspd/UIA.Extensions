@@ -18,10 +18,26 @@ namespace UIA.Extensions.AutomationProviders.Defaults
             set { _numericUpDown.Value = Convert.ToDecimal(value); }
         }
 
-        public override bool IsReadOnly { get; set; }
-        public override double Maximum { get; set; }
-        public override double Minimum { get; set; }
+        public override bool IsReadOnly
+        {
+            get { return _numericUpDown.ReadOnly; }
+        }
+
+        public override double Maximum
+        {
+            get { return Convert.ToDouble(_numericUpDown.Maximum); }
+        }
+
+        public override double Minimum
+        {
+            get { return Convert.ToDouble(_numericUpDown.Minimum); }
+        }
+
+        public override double SmallChange
+        {
+            get { return Convert.ToDouble(_numericUpDown.Increment); }
+        }
+
         public override double LargeChange { get; set; }
-        public override double SmallChange { get; set; }
     }
 }

@@ -30,5 +30,39 @@ namespace UIA.Extensions.AutomationProviders.Defaults
             _numericProvider.Value = 10.0;
             _spinner.Value.Should().Equal(10.0m);
         }
+
+        [Test]
+        public void ItHonorsTheReadOnlyStatus()
+        {
+            _spinner.ReadOnly = true;
+            _numericProvider.IsReadOnly.Should().Be.True();
+        }
+
+        [Test]
+        public void ItKnowsTheMinimum()
+        {
+            _spinner.Minimum = -1.0m;
+            _numericProvider.Minimum.Should().Equal(-1.0);
+        }
+
+        [Test]
+        public void ItKnowsTheMaxiumum()
+        {
+            _spinner.Maximum = 100.0m;
+            _numericProvider.Maximum.Should().Equal(100.0);
+        }
+
+        [Test]
+        public void WhoKnowsWhatLargeChangesAre()
+        {
+            // ??????
+        }
+
+        [Test]
+        public void SmallChangesAreTheIncrement()
+        {
+            _spinner.Increment = 2.0m;
+            _numericProvider.SmallChange.Should().Equal(2.0);
+        }
     }
 }
