@@ -47,7 +47,7 @@
     <Compile Include="AutomationProviders\ChildProvider.cs" />
     <Compile Include="AutomationProviders\ControlProvider.cs" />
     <Compile Include="AutomationProviders\AutomationProvider.cs" />
-    <Compile Include="AutomationProviders\Defaults\NumericRangeValue.cs" />
+    <Compile Include="AutomationProviders\Defaults\NumericUpDownRangeValue.cs" />
     <Compile Include="AutomationProviders\Defaults\Tables\DataGridCellInformation.cs" />
     <Compile Include="AutomationProviders\Defaults\Tables\DataGridRowInformation.cs" />
     <Compile Include="AutomationProviders\Defaults\Tables\DataGridTableInformation.cs" />

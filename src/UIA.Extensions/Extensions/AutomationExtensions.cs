@@ -21,7 +21,7 @@ namespace UIA.Extensions.Extensions
 
         public static AutomationConfigurer AsRangeValue(this NumericUpDown numericControl)
         {
-            return numericControl.AsRangeValue<NumericRangeValue>();
+            return numericControl.AsRangeValue<NumericUpDownRangeValue>();
         }
 
         public static AutomationConfigurer AsRangeValue<T>(this Control control) where T : RangeValueControl

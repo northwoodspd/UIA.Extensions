@@ -3,11 +3,11 @@ using System.Windows.Forms;
 
 namespace UIA.Extensions.AutomationProviders.Defaults
 {
-    public class NumericRangeValue : RangeValueControl
+    public class NumericUpDownRangeValue : RangeValueControl
     {
         private readonly NumericUpDown _numericUpDown;
 
-        public NumericRangeValue(NumericUpDown numericUpDown) : base(numericUpDown)
+        public NumericUpDownRangeValue(NumericUpDown numericUpDown) : base(numericUpDown)
         {
             _numericUpDown = numericUpDown;
         }
