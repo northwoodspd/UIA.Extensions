@@ -20,6 +20,7 @@ namespace UIA.Extensions
         }
 
         public AutomationHandler AutomationHandler { get; set; }
+        public ControlProvider ControlProvider { get { return _controlProvider; } }
 
         public AutomationConfigurer WithName(string name)
         {

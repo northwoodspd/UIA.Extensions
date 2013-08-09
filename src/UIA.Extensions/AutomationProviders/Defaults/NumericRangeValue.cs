@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace UIA.Extensions.AutomationProviders.Defaults
 {
@@ -11,7 +12,12 @@ namespace UIA.Extensions.AutomationProviders.Defaults
             _numericUpDown = numericUpDown;
         }
 
-        public override double Value { get; set; }
+        public override double Value
+        {
+            get { return Convert.ToDouble(_numericUpDown.Value); }
+            set { _numericUpDown.Value = Convert.ToDecimal(value); }
+        }
+
         public override bool IsReadOnly { get; set; }
         public override double Maximum { get; set; }
         public override double Minimum { get; set; }
