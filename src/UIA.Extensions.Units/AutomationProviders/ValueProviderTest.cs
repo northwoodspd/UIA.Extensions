@@ -9,37 +9,43 @@ namespace UIA.Extensions.AutomationProviders
     [TestFixture]
     public class ValueProviderTest
     {
+        private ValueControlStub _valueControl;
+        private ValueProvider _valueProvider;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _valueControl = new ValueControlStub(new Control());
+            _valueProvider = new ValueProvider(_valueControl);
+        }
 
         [Test]
         public void ItHasTheCorrectPattern()
         {
-            var valueProvider = GetValueProvider();
-
-            valueProvider.GetPatternProvider(ValuePatternIdentifiers.Pattern.Id)
-                .Should().Be.SameAs(valueProvider);
+            _valueProvider.GetPatternProvider(ValuePatternIdentifiers.Pattern.Id)
+                .Should().Be.SameAs(_valueProvider);
         }
 
         [Test]
         public void ValuesCanBeRetrieved()
         {
-            GetValueProvider(() => "Expected Value").Value
-                .Should().Equal("Expected Value");
+            _valueControl.Value = "Expected Value";
+            _valueProvider.Value.Should().Equal("Expected Value");
         }
 
         [Test]
         public void ValuesCanBeSet()
         {
-            var expectedValue = string.Empty;
-
-            GetValueProvider(null, x => expectedValue = x)
-                .SetValue("The expected value to be set");
-
-            expectedValue.Should().Equal("The expected value to be set");
+            _valueProvider.SetValue("The expected value to be set");
+            _valueControl.Value.Should().Equal("The expected value to be set");
         }
 
-        private ValueProvider GetValueProvider(Func<string> getter = null, Action<string> setter = null)
+        class ValueControlStub : ValueControl
         {
-            return new ValueProvider(new Control(), getter, setter);
+            public ValueControlStub(Control control) : base(control)
+            { }
+
+            public override string Value { get; set; }
         }
     }
 }

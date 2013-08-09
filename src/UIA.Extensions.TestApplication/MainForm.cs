@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using FizzWare.NBuilder;
+using UIA.Extensions.TestApplication.Implementations;
 
 namespace UIA.Extensions.TestApplication
 {
@@ -15,11 +16,8 @@ namespace UIA.Extensions.TestApplication
             basicPanel.ExposeAutomation()
                 .WithName("Custom Panel Name");
 
-            monthCalendar.AsValueControl(() => monthCalendar.SelectionStart.ToShortDateString(),
-                x => monthCalendar.SetDate(DateTime.Parse(x)));
-
+            monthCalendar.AsValueControl<ValueMonthCalendar>();
             numericUpDown.AsRangeValue();
-
             dataGridView.AsTable();
 
             var people = new List<Person>();

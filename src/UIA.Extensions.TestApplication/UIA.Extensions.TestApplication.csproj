@@ -48,6 +48,7 @@
     <Reference Include="UIAutomationTypes" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementations\ValueMonthCalendar.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -16,9 +16,10 @@ namespace UIA.Extensions
             return new AutomationConfigurer(control);
         }
 
-        public static AutomationConfigurer AsValueControl(this Control control, Func<string> getter, Action<string> setter)
+        public static AutomationConfigurer AsValueControl<T>(this Control control) where T : ValueControl
         {
-            return new AutomationConfigurer(control, new ValueProvider(control, getter, setter));
+            var valueControl = (T) Activator.CreateInstance(typeof (T), control);
+            return new AutomationConfigurer(control, new ValueProvider(valueControl));
         }
 
         public static AutomationConfigurer AsRangeValue(this NumericUpDown numericControl)

@@ -1,21 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
 using System.Windows.Forms;
 
 namespace UIA.Extensions.AutomationProviders
 {
+    public abstract class ValueControl
+    {
+        protected ValueControl(Control control)
+        {
+            Control = control;
+        }
+
+        public Control Control { get; private set; }
+        public abstract string Value { get; set; }
+        public virtual bool ReadOnly { get; set; }
+    }
+
     public class ValueProvider : ControlProvider, IValueProvider
     {
-        private readonly Func<string> _getter;
-        private readonly Action<string> _setter;
+        private readonly ValueControl _valueControl;
 
-        public ValueProvider(Control control, Func<string> getter, Action<string> setter)
-            : base(control)
+        public ValueProvider(ValueControl valueControl) : base(valueControl.Control)
         {
-            _getter = getter;
-            _setter = setter;
+            _valueControl = valueControl;
         }
 
         protected override List<int> SupportedPatterns
@@ -25,14 +33,17 @@ namespace UIA.Extensions.AutomationProviders
 
         public void SetValue(string value)
         {
-            _setter(value);
+            _valueControl.Value = value;
         }
 
         public string Value
         {
-            get { return _getter(); }
+            get { return _valueControl.Value; }
         }
 
-        public bool IsReadOnly { get; private set; }
+        public bool IsReadOnly
+        {
+            get { return _valueControl.ReadOnly; }
+        }
     }
 }
