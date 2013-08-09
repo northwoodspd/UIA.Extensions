@@ -18,9 +18,15 @@ namespace UIA.Extensions.Extensions
             return new AutomationConfigurer(control, new ValueProvider(control, getter, setter));
         }
 
-        public static AutomationConfigurer AsTable(this DataGridView dataGridView)
+        public static AutomationConfigurer AsTable(this DataGridView control)
         {
-            return new AutomationConfigurer(dataGridView, new TableProvider(new DataGridTableInformation(dataGridView)));
+            return control.AsTable<DataGridTableInformation>();
+        }
+
+        public static AutomationConfigurer AsTable<T>(this Control control) where T : TableInformation
+        {
+            var provider = (T)Activator.CreateInstance(typeof (T), control);
+            return new AutomationConfigurer(control, new TableProvider(provider));
         }
     }
 }
