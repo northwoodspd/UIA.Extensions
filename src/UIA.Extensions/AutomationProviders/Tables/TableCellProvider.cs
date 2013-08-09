@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
 
@@ -34,9 +35,11 @@ namespace UIA.Extensions.AutomationProviders.Tables
             get { return _cell.Column; }
         }
 
+        public IRawElementProviderSimple ContainingGrid { get { return FragmentRoot; }}
+
         public int RowSpan { get; private set; }
         public int ColumnSpan { get; private set; }
-        public IRawElementProviderSimple ContainingGrid { get; private set; }
+
         public IRawElementProviderSimple[] GetRowHeaderItems()
         {
             throw new System.NotImplementedException();

@@ -62,6 +62,15 @@ namespace UIA.Extensions.AutomationProviders.Tables
             CellProvider.Column.Should().Equal(42);
         }
 
+        [Test]
+        public void TheRootIsTheContainingGrid()
+        {
+            var expectedGrid = new AutomationProvider();
+            _parent.Setup(x => x.FragmentRoot).Returns(expectedGrid);
+
+            CellProvider.ContainingGrid.Should().Be.SameAs(expectedGrid);
+        }
+
         private TableCellProvider _cellProvider;
         private TableCellProvider CellProvider
         {
