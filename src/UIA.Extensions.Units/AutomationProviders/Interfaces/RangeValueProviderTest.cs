@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using NUnit.Framework;
 using Should.Fluent;
 
-namespace UIA.Extensions.AutomationProviders
+namespace UIA.Extensions.AutomationProviders.Interfaces
 {
     [TestFixture]
     class RangeValueProviderTest

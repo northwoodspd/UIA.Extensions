@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using UIA.Extensions.AutomationProviders.Interfaces;
 
 namespace UIA.Extensions.AutomationProviders.Defaults
 {

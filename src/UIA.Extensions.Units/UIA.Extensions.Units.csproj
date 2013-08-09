@@ -56,7 +56,7 @@
     <Compile Include="AutomationProviders\ControlProviderTest.cs" />
     <Compile Include="AutomationProviders\Defaults\NumericUpDownRangeValueTest.cs" />
     <Compile Include="AutomationProviders\Defaults\Tables\DataGridCellInformationTest.cs" />
-    <Compile Include="AutomationProviders\RangeValueProviderTest.cs" />
+    <Compile Include="AutomationProviders\Interfaces\RangeValueProviderTest.cs" />
     <Compile Include="AutomationProviders\Tables\HeaderItemProviderTest.cs" />
     <Compile Include="AutomationProviders\Tables\HeaderProviderTest.cs" />
     <Compile Include="AutomationProviders\Tables\Stubs\CellInformationStub.cs" />
