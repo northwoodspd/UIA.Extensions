@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace UIA.Extensions.Extensions
+namespace UIA.Extensions.InternalExtensions
 {
     static class CollectionExtensions
     {

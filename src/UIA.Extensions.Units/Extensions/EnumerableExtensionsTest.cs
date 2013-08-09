@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using Should.Fluent;
+using UIA.Extensions.InternalExtensions;
 
 namespace UIA.Extensions.Extensions
 {

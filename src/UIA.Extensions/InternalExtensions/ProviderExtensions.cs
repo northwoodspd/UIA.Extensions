@@ -1,7 +1,6 @@
-﻿using System.Runtime.CompilerServices;
-using System.Windows.Automation.Provider;
+﻿using System.Windows.Automation.Provider;
 
-namespace UIA.Extensions.Extensions
+namespace UIA.Extensions.InternalExtensions
 {
     static class ProviderExtensions
     {

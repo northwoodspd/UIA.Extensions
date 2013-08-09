@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using FizzWare.NBuilder;
-using UIA.Extensions.Extensions;
 
 namespace UIA.Extensions.TestApplication
 {

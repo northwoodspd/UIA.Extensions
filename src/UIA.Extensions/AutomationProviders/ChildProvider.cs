@@ -1,5 +1,5 @@
 ﻿using System.Windows.Automation.Provider;
-using UIA.Extensions.Extensions;
+using UIA.Extensions.InternalExtensions;
 
 namespace UIA.Extensions.AutomationProviders
 {

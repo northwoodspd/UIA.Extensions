@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 using UIA.Extensions.AutomationProviders.Interfaces.Tables;
-using UIA.Extensions.Extensions;
+using UIA.Extensions.InternalExtensions;
 
 namespace UIA.Extensions.AutomationProviders.Defaults.Tables
 {

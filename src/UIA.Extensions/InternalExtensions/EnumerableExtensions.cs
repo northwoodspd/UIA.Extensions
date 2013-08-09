@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace UIA.Extensions.Extensions
+namespace UIA.Extensions.InternalExtensions
 {
     static class EnumerableExtensions
     {
