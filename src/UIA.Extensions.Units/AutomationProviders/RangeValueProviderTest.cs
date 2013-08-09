@@ -23,6 +23,13 @@ namespace UIA.Extensions.AutomationProviders
             _provider.GetPatternProvider(RangeValuePatternIdentifiers.Pattern.Id)
                 .Should().Be.SameAs(_provider);
         }
+
+        [Test]
+        public void ItIsOfTypeSpinner()
+        {
+            _provider.GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
+                .Should().Equal(ControlType.Spinner.Id);
+        }
         
         [Test]
         public void ItCanDoWhatItSaysItCanDo()

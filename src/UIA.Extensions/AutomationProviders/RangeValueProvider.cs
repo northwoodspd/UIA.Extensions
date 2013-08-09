@@ -30,6 +30,11 @@ namespace UIA.Extensions.AutomationProviders
             _rangeValue = rangeValue;
         }
 
+        protected override int ControlTypeId
+        {
+            get { return ControlType.Spinner.Id; }
+        }
+
         protected override List<int> SupportedPatterns
         {
             get { return new List<int> { RangeValuePatternIdentifiers.Pattern.Id }; }
