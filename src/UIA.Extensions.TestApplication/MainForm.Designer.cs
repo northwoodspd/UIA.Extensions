@@ -29,12 +29,14 @@
         private void InitializeComponent()
         {
             this.basicPanel = new System.Windows.Forms.Panel();
+            this.howManyToAdd = new System.Windows.Forms.TextBox();
             this.addRowButton = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.monthCalendar = new System.Windows.Forms.MonthCalendar();
-            this.howManyToAdd = new System.Windows.Forms.TextBox();
+            this.numericUpDown = new System.Windows.Forms.NumericUpDown();
             this.basicPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // basicPanel
@@ -42,6 +44,7 @@
             this.basicPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.basicPanel.Controls.Add(this.numericUpDown);
             this.basicPanel.Controls.Add(this.howManyToAdd);
             this.basicPanel.Controls.Add(this.addRowButton);
             this.basicPanel.Controls.Add(this.dataGridView);
@@ -50,6 +53,14 @@
             this.basicPanel.Name = "basicPanel";
             this.basicPanel.Size = new System.Drawing.Size(613, 262);
             this.basicPanel.TabIndex = 0;
+            // 
+            // howManyToAdd
+            // 
+            this.howManyToAdd.Location = new System.Drawing.Point(350, 179);
+            this.howManyToAdd.Name = "howManyToAdd";
+            this.howManyToAdd.Size = new System.Drawing.Size(45, 20);
+            this.howManyToAdd.TabIndex = 3;
+            this.howManyToAdd.Text = "1";
             // 
             // addRowButton
             // 
@@ -79,13 +90,12 @@
             this.monthCalendar.Name = "monthCalendar";
             this.monthCalendar.TabIndex = 0;
             // 
-            // howManyToAdd
+            // numericUpDown
             // 
-            this.howManyToAdd.Location = new System.Drawing.Point(350, 179);
-            this.howManyToAdd.Name = "howManyToAdd";
-            this.howManyToAdd.Size = new System.Drawing.Size(45, 20);
-            this.howManyToAdd.TabIndex = 3;
-            this.howManyToAdd.Text = "1";
+            this.numericUpDown.Location = new System.Drawing.Point(9, 183);
+            this.numericUpDown.Name = "numericUpDown";
+            this.numericUpDown.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown.TabIndex = 4;
             // 
             // MainForm
             // 
@@ -98,6 +108,7 @@
             this.basicPanel.ResumeLayout(false);
             this.basicPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -109,6 +120,7 @@
         private System.Windows.Forms.Button addRowButton;
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.TextBox howManyToAdd;
+        private System.Windows.Forms.NumericUpDown numericUpDown;
     }
 }
 
