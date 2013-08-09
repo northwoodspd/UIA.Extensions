@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using NUnit.Framework;
 using Should.Fluent;
-using UIA.Extensions.AutomationProviders.Tables;
+using UIA.Extensions.AutomationProviders.Interfaces.Tables;
 
 namespace UIA.Extensions.AutomationProviders.Defaults.Tables
 {

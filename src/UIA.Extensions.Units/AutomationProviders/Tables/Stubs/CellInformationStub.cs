@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using UIA.Extensions.AutomationProviders.Interfaces.Tables;
 
 namespace UIA.Extensions.AutomationProviders.Tables.Stubs
 {

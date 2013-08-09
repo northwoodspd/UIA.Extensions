@@ -4,6 +4,7 @@ using UIA.Extensions.AutomationProviders;
 using UIA.Extensions.AutomationProviders.Defaults;
 using UIA.Extensions.AutomationProviders.Defaults.Tables;
 using UIA.Extensions.AutomationProviders.Interfaces;
+using UIA.Extensions.AutomationProviders.Interfaces.Tables;
 using UIA.Extensions.AutomationProviders.Tables;
 
 namespace UIA.Extensions

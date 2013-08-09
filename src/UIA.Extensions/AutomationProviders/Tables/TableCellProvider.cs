@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
+using UIA.Extensions.AutomationProviders.Interfaces.Tables;
 
 namespace UIA.Extensions.AutomationProviders.Tables
 {

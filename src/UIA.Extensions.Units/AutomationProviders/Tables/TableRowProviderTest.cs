@@ -5,6 +5,7 @@ using System.Windows.Automation.Provider;
 using Moq;
 using NUnit.Framework;
 using Should.Fluent;
+using UIA.Extensions.AutomationProviders.Interfaces.Tables;
 using UIA.Extensions.AutomationProviders.Tables.Stubs;
 using UIA.Extensions.Extensions;
 
