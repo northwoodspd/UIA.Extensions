@@ -50,6 +50,7 @@
     <Compile Include="AutomationProviders\Defaults\Tables\DataGridCellInformation.cs" />
     <Compile Include="AutomationProviders\Defaults\Tables\DataGridRowInformation.cs" />
     <Compile Include="AutomationProviders\Defaults\Tables\DataGridTableInformation.cs" />
+    <Compile Include="AutomationProviders\RangeValueProvider.cs" />
     <Compile Include="AutomationProviders\Tables\HeaderItemProvider.cs" />
     <Compile Include="AutomationProviders\Tables\HeaderProvider.cs" />
     <Compile Include="AutomationProviders\Tables\TableRowProvider.cs" />
