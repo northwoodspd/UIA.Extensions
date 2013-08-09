@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 
 namespace UIA.Extensions.AutomationProviders.Tables.Stubs
 {
@@ -17,5 +18,6 @@ namespace UIA.Extensions.AutomationProviders.Tables.Stubs
         public string Value { get; set; }
         public int Row { get; set; }
         public int Column { get; set; }
+        public Rect Location { get; set; }
     }
 }

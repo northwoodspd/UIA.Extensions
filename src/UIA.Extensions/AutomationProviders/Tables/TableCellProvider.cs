@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
 
@@ -33,6 +34,11 @@ namespace UIA.Extensions.AutomationProviders.Tables
         public int Column
         {
             get { return _cell.Column; }
+        }
+
+        public override Rect BoundingRectangle
+        {
+            get { return _cell.Location; }
         }
 
         public IRawElementProviderSimple ContainingGrid { get { return FragmentRoot; }}

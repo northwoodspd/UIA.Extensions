@@ -1,4 +1,5 @@
-﻿using System.Windows.Automation;
+﻿using System.Windows;
+using System.Windows.Automation;
 using System.Windows.Automation.Provider;
 using Moq;
 using NUnit.Framework;
@@ -69,6 +70,15 @@ namespace UIA.Extensions.AutomationProviders.Tables
             _parent.Setup(x => x.FragmentRoot).Returns(expectedGrid);
 
             CellProvider.ContainingGrid.Should().Be.SameAs(expectedGrid);
+        }
+
+        [Test]
+        public void ShouldKnowWhereItIs()
+        {
+            var expectedLocation = new Rect(0, 0, 100, 100);
+            _cellInformationStub.Location = expectedLocation;
+
+            CellProvider.BoundingRectangle.Should().Equal(expectedLocation);
         }
 
         private TableCellProvider _cellProvider;

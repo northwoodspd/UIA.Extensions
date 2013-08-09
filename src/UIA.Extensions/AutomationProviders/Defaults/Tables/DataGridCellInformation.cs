@@ -1,5 +1,8 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows;
+using System.Windows.Forms;
 using UIA.Extensions.AutomationProviders.Tables;
+using UIA.Extensions.Extensions;
 
 namespace UIA.Extensions.AutomationProviders.Defaults.Tables
 {
@@ -31,6 +34,11 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
         public int Column
         {
             get { return _cell.ColumnIndex; }
+        }
+
+        public Rect Location
+        {
+            get { return _cell.DataGridView.GetCellDisplayRectangle(Column, Row, false).AsWindowsRect(); }
         }
     }
 }

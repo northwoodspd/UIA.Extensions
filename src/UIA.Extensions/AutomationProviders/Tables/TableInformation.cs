@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Forms;
 
 namespace UIA.Extensions.AutomationProviders.Tables
@@ -25,5 +26,6 @@ namespace UIA.Extensions.AutomationProviders.Tables
         string Value { get; }
         int Row { get;  }
         int Column { get;  }
+        Rect Location { get; }
     }
 }
