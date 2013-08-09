@@ -56,6 +56,7 @@
     <Compile Include="AutomationProviders\Interfaces\Tables\CellInformation.cs" />
     <Compile Include="AutomationProviders\Interfaces\Tables\RowInformation.cs" />
     <Compile Include="AutomationProviders\Interfaces\Tables\TableInformation.cs" />
+    <Compile Include="AutomationProviders\Interfaces\ValueControl.cs" />
     <Compile Include="AutomationProviders\RangeValueProvider.cs" />
     <Compile Include="AutomationProviders\Tables\HeaderItemProvider.cs" />
     <Compile Include="AutomationProviders\Tables\HeaderProvider.cs" />

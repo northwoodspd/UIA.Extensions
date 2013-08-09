@@ -1,22 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
-using System.Windows.Forms;
+using UIA.Extensions.AutomationProviders.Interfaces;
 
 namespace UIA.Extensions.AutomationProviders
 {
-    public abstract class ValueControl
-    {
-        protected ValueControl(Control control)
-        {
-            Control = control;
-        }
-
-        public Control Control { get; private set; }
-        public abstract string Value { get; set; }
-        public virtual bool ReadOnly { get; set; }
-    }
-
     public class ValueProvider : ControlProvider, IValueProvider
     {
         private readonly ValueControl _valueControl;

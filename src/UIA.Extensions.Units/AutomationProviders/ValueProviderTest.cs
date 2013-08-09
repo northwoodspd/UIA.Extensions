@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using NUnit.Framework;
 using Should.Fluent;
+using UIA.Extensions.AutomationProviders.Interfaces;
 
 namespace UIA.Extensions.AutomationProviders
 {
