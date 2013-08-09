@@ -5,10 +5,18 @@ using System.Windows.Forms;
 
 namespace UIA.Extensions.AutomationProviders
 {
+    public interface RangeValueControl : IRangeValueProvider
+    {
+        Control Control { get; }
+    }
+
     public class RangeValueProvider : ControlProvider, IRangeValueProvider
     {
-        public RangeValueProvider(Control control) : base(control)
+        private readonly RangeValueControl _rangeValue;
+
+        public RangeValueProvider(RangeValueControl rangeValue) : base(rangeValue.Control)
         {
+            _rangeValue = rangeValue;
         }
 
         protected override List<int> SupportedPatterns
@@ -18,14 +26,37 @@ namespace UIA.Extensions.AutomationProviders
 
         public void SetValue(double value)
         {
-            throw new System.NotImplementedException();
+            _rangeValue.SetValue(value);
         }
 
-        public double Value { get; private set; }
-        public bool IsReadOnly { get; private set; }
-        public double Maximum { get; private set; }
-        public double Minimum { get; private set; }
-        public double LargeChange { get; private set; }
-        public double SmallChange { get; private set; }
+        public double Value
+        {
+            get { return _rangeValue.Value; }
+        }
+
+        public bool IsReadOnly
+        {
+            get { return _rangeValue.IsReadOnly; }
+        }
+
+        public double Maximum
+        {
+            get { return _rangeValue.Maximum; }
+        }
+
+        public double Minimum
+        {
+            get { return _rangeValue.Minimum; }
+        }
+
+        public double LargeChange
+        {
+            get { return _rangeValue.LargeChange; }
+        }
+
+        public double SmallChange
+        {
+            get { return _rangeValue.SmallChange; }
+        }
     }
 }
