@@ -19,6 +19,8 @@ namespace UIA.Extensions.TestApplication
             monthCalendar.AsValueControl(() => monthCalendar.SelectionStart.ToShortDateString(),
                 x => monthCalendar.SetDate(DateTime.Parse(x)));
 
+            numericUpDown.AsRangeValue();
+
             dataGridView.AsTable();
 
             var people = new List<Person>();

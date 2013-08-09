@@ -93,6 +93,11 @@
             // numericUpDown
             // 
             this.numericUpDown.Location = new System.Drawing.Point(9, 183);
+            this.numericUpDown.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.numericUpDown.Name = "numericUpDown";
             this.numericUpDown.Size = new System.Drawing.Size(120, 20);
             this.numericUpDown.TabIndex = 4;
