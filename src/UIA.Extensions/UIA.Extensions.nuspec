@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://raw.github.com/northwoodspd/UIA.Extensions/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/northwoodspd/UIA.Extensions</projectUrl>
+    <iconUrl>http://www.gravatar.com/avatar/168ea36931db8b19d9e3ec1566075b2f.jpg</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Initial release</releaseNotes>
+    <copyright>Copyright 2013</copyright>
+    <tags>UIA automation accessibility</tags>
+  </metadata>
+</package>
