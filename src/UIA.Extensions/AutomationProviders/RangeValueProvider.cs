@@ -5,9 +5,15 @@ using System.Windows.Forms;
 
 namespace UIA.Extensions.AutomationProviders
 {
-    public interface RangeValueControl : IRangeValueProvider
+    public interface RangeValueControl
     {
         Control Control { get; }
+        double Value { get; set; }
+        bool IsReadOnly { get; }
+        double Maximum { get; }
+        double Minimum { get; }
+        double LargeChange { get; }
+        double SmallChange { get; }
     }
 
     public class RangeValueProvider : ControlProvider, IRangeValueProvider
@@ -26,7 +32,7 @@ namespace UIA.Extensions.AutomationProviders
 
         public void SetValue(double value)
         {
-            _rangeValue.SetValue(value);
+            _rangeValue.Value = value;
         }
 
         public double Value
