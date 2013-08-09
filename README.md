@@ -53,6 +53,23 @@ namespace YourApp
 }
 ```
 
+### Spinners
+The [`RangeValuePattern`](http://msdn.microsoft.com/en-us/library/system.windows.automation.rangevaluepattern.aspx) is one that is generally used by spinner controls, such as the [`NumericUpDown`](http://msdn.microsoft.com/en-us/library/system.windows.forms.numericupdown.aspx) control. Looking at the default `NumericUpDown` automation information that is expose yields what _looks_ like is something that is usable but in fact is not. Out of the box, the `NumericUpDown` control will not allow you to set its value through automation, but with `UIA.Extensions` you can. There is already a default implementation for this, and it is used like this:
+
+```csharp
+using UIA.Extensions;
+
+namespace YourApp
+{
+  public partial class MainForm : Form
+  {
+    InitializeComponent();
+
+    numericUpDown.AsRangeValue(); // yes, that's it
+  }
+}
+```
+
 ### Tables
 The [`TablePattern`](http://msdn.microsoft.com/en-us/library/system.windows.automation.tablepattern.aspx) is one that is used by `ListView`, `ListBox` and other various controls. Sometimes, however, controls that visually appear to be tables to not behave like `TablePattern` controls to automation. The [`DataGridView`](http://msdn.microsoft.com/en-us/library/system.windows.forms.datagridview.aspx) class is one of those. Here is an example of how do expose the `DataGridView` control to automation:
 
