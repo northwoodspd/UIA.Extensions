@@ -4,7 +4,9 @@
 
 ## Supported Controls
 
-`UIA.Extensions` support the following:
+* [Value Controls](#value-pattern)
+* [RangeValue Controls](#spinners)
+* [Table Controls](#tables)
 
 ### Value Pattern
 The [`ValuePattern`](http://msdn.microsoft.com/en-us/library/system.windows.automation.valuepattern.aspx) allows you to get an set the value of a control. Not all controls support this pattern out of the box. Here is an example of how you might use `UIA.Extensions` to expose a [`MonthCalendar`](http://msdn.microsoft.com/en-us/library/system.windows.forms.monthcalendar.aspx) control to automation:
