@@ -49,10 +49,7 @@ namespace YourApp
   {
     InitializeComponent();
 
-    monthCalendar.AsValueControl(
-        () => monthCalendar.SelectionStart.ToString() /* getter */,
-        x => monthCalendar.SetDate(DateTime.Parse(x)) /* setter */);
-  }
+    monthCalendar.AsValueControl<ValueMonthCalendar>();
 }
 ```
 
