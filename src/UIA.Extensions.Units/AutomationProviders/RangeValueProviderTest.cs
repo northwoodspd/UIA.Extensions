@@ -14,7 +14,7 @@ namespace UIA.Extensions.AutomationProviders
         [SetUp]
         public void SetUp()
         {
-            _provider = new RangeValueProvider(new RangeValueControlStub());
+            _provider = new RangeValueProvider(new RangeValueControlStub(new Control()));
         }
 
         [Test]
@@ -39,7 +39,7 @@ namespace UIA.Extensions.AutomationProviders
             [SetUp]
             public void SetUp()
             {
-                _rangeValue = new RangeValueControlStub();
+                _rangeValue = new RangeValueControlStub(new Control());
                 _provider = new RangeValueProvider(_rangeValue);
             }
 
@@ -95,24 +95,16 @@ namespace UIA.Extensions.AutomationProviders
 
         class RangeValueControlStub : RangeValueControl
         {
-            public Control Control { get; private set; }
-
-            public RangeValueControlStub()
+            public RangeValueControlStub(Control control) : base(control)
             {
-                Control = new Control();
             }
 
-            public void SetValue(double value)
-            {
-                Value = value;
-            }
-
-            public double Value { get; set; }
-            public bool IsReadOnly { get; set; }
-            public double Maximum { get; set; }
-            public double Minimum { get; set; }
-            public double LargeChange { get; set; }
-            public double SmallChange { get; set; }
+            public override double Value { get; set; }
+            public override bool IsReadOnly { get; set; }
+            public override double Maximum { get; set; }
+            public override double Minimum { get; set; }
+            public override double LargeChange { get; set; }
+            public override double SmallChange { get; set; }
         }
     }
 }

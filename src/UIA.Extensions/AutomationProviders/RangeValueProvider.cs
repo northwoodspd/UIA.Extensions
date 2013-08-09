@@ -5,15 +5,20 @@ using System.Windows.Forms;
 
 namespace UIA.Extensions.AutomationProviders
 {
-    public interface RangeValueControl
+    public abstract class RangeValueControl
     {
-        Control Control { get; }
-        double Value { get; set; }
-        bool IsReadOnly { get; }
-        double Maximum { get; }
-        double Minimum { get; }
-        double LargeChange { get; }
-        double SmallChange { get; }
+        protected RangeValueControl(Control control)
+        {
+            Control = control;
+        }
+
+        public Control Control { get; private set; }
+        public virtual double Value { get; set; }
+        public virtual bool IsReadOnly { get; set; }
+        public virtual double Maximum { get; set; }
+        public virtual double Minimum { get; set; }
+        public virtual double LargeChange { get; set; }
+        public virtual double SmallChange { get; set; }
     }
 
     public class RangeValueProvider : ControlProvider, IRangeValueProvider
