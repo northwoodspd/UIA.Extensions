@@ -9,14 +9,50 @@
 ### Value Pattern
 The [`ValuePattern`](http://msdn.microsoft.com/en-us/library/system.windows.automation.valuepattern.aspx) allows you to get an set the value of a control. Not all controls support this pattern out of the box. Here is an example of how you might use `UIA.Extensions` to expose a [`MonthCalendar`](http://msdn.microsoft.com/en-us/library/system.windows.forms.monthcalendar.aspx) control to automation:
 
+
+#### `ValueMonthCalendar.cs`
+
 ```csharp
-public MainForm
+using System;
+using System.Windows.Forms;
+using UIA.Extensions.AutomationProviders;
+
+namespace UIA.Extensions.TestApplication.Implementations
 {
-  InitializeComponent();
-  
-  monthCalendar.AsValueControl(
-    () => monthCalendar.SelectionStart.ToString() /* getter */,
-    x => monthCalendar.SetDate(DateTime.Parse(x)) /* setter */);
+  public class ValueMonthCalendar : ValueControl
+  {
+    private readonly MonthCalendar _monthCalendar;
+
+    public ValueMonthCalendar(MonthCalendar monthCalendar) : base(monthCalendar)
+    {
+      _monthCalendar = monthCalendar;
+    }
+
+    public override string Value
+    {
+      get { return _monthCalendar.SelectionStart.ToShortDateString(); }
+      set { _monthCalendar.SetDate(DateTime.Parse(value)); }
+    }
+  }
+}
+
+```
+
+#### `MainForm.cs`
+
+```csharp
+using UIA.Extensions;
+
+namespace YourApp
+{
+  public partial class MainForm : Form
+  {
+    InitializeComponent();
+
+    monthCalendar.AsValueControl(
+        () => monthCalendar.SelectionStart.ToString() /* getter */,
+        x => monthCalendar.SetDate(DateTime.Parse(x)) /* setter */);
+  }
 }
 ```
 
@@ -24,11 +60,16 @@ public MainForm
 The [`TablePattern`](http://msdn.microsoft.com/en-us/library/system.windows.automation.tablepattern.aspx) is one that is used by `ListView`, `ListBox` and other various controls. Sometimes, however, controls that visually appear to be tables to not behave like `TablePattern` controls to automation. The [`DataGridView`](http://msdn.microsoft.com/en-us/library/system.windows.forms.datagridview.aspx) class is one of those. Here is an example of how do expose the `DataGridView` control to automation:
 
 ```csharp
-public MainForm
+using UIA.Extensions;
+
+namespace YourApp
 {
-  InitializeComponent();
-  
-  dataGridView.AsTable(); // yes, that's it
+  public partial class MainForm : Form
+  {
+    InitializeComponent();
+
+    dataGridView.AsTable(); // yes, that's it
+  }
 }
 ```
 
