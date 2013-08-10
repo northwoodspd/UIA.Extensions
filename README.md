@@ -49,9 +49,13 @@ namespace YourApp
 {
   public partial class MainForm : Form
   {
-    InitializeComponent();
+    public MainForm()
+    {
+      InitializeComponent();
 
-    monthCalendar.AsValueControl<ValueMonthCalendar>();
+      monthCalendar.AsValueControl<ValueMonthCalendar>();
+    }
+  }
 }
 ```
 
@@ -65,9 +69,12 @@ namespace YourApp
 {
   public partial class MainForm : Form
   {
-    InitializeComponent();
+    public MainForm()
+    {
+      InitializeComponent();
 
-    numericUpDown.AsRangeValue(); // yes, that's it
+      numericUpDown.AsRangeValue(); // yes, that's it
+    }
   }
 }
 ```
@@ -82,9 +89,12 @@ namespace YourApp
 {
   public partial class MainForm : Form
   {
-    InitializeComponent();
+    public MainForm()
+    {
+      InitializeComponent();
 
-    dataGridView.AsTable(); // yes, that's it
+      dataGridView.AsTable(); // yes, that's it
+    }
   }
 }
 ```
