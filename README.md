@@ -12,15 +12,25 @@
 The [`ValuePattern`](http://msdn.microsoft.com/en-us/library/system.windows.automation.valuepattern.aspx) allows you to get an set the value of a control. Not all controls support this pattern out of the box. Here is an example of how you might use `UIA.Extensions` to expose a [`MonthCalendar`](http://msdn.microsoft.com/en-us/library/system.windows.forms.monthcalendar.aspx) control to automation:
 
 
-#### `ValueMonthCalendar.cs`
+#### `MainForm.cs`
 
 ```csharp
 using System;
 using System.Windows.Forms;
 using UIA.Extensions.AutomationProviders;
 
-namespace UIA.Extensions.TestApplication.Implementations
+namespace YourApp
 {
+  public partial class MainForm : Form
+  {
+    public MainForm()
+    {
+      InitializeComponent();
+
+      monthCalendar.AsValueControl<ValueMonthCalendar>();
+    }
+  }
+
   public class ValueMonthCalendar : ValueControl
   {
     private readonly MonthCalendar _monthCalendar;
@@ -38,25 +48,6 @@ namespace UIA.Extensions.TestApplication.Implementations
   }
 }
 
-```
-
-#### `MainForm.cs`
-
-```csharp
-using UIA.Extensions;
-
-namespace YourApp
-{
-  public partial class MainForm : Form
-  {
-    public MainForm()
-    {
-      InitializeComponent();
-
-      monthCalendar.AsValueControl<ValueMonthCalendar>();
-    }
-  }
-}
 ```
 
 ### Spinners
