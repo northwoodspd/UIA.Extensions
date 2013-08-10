@@ -13,6 +13,6 @@
     <description>$description$</description>
     <releaseNotes>Initial release</releaseNotes>
     <copyright>Copyright 2013</copyright>
-    <tags>UIA automation accessibility</tags>
+    <tags>UIA UIAutomation Automation WinForms Accessibility</tags>
   </metadata>
 </package>
