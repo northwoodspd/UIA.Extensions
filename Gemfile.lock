@@ -31,7 +31,7 @@ GEM
       yml_reader (>= 0.2)
     diff-lcs (1.2.4)
     facter (1.7.2)
-    faker (1.1.2)
+    faker (1.2.0)
       i18n (~> 0.5)
     ffi (1.9.0-x86-mingw32)
     gherkin (2.12.0-x86-mingw32)
@@ -40,10 +40,10 @@ GEM
     i18n (0.6.4)
     map (6.5.1)
     mini_portile (0.5.1)
-    mohawk (0.0.7)
+    mohawk (0.0.8)
       childprocess (~> 0.3.9)
       page_navigation (>= 0.7)
-      rautomation (~> 0.10.0)
+      rautomation (~> 0.11.0)
       require_all
     multi_json (1.7.7)
     multi_test (0.0.1)
@@ -53,7 +53,7 @@ GEM
       data_magic (>= 0.14)
     rUtilAnts (1.0.1.20130320)
     rake (10.0.4)
-    rautomation (0.10.0)
+    rautomation (0.11.0)
       ffi
     require_all (1.2.1)
     rspec (2.14.1)
@@ -74,6 +74,6 @@ DEPENDENCIES
   albacore!
   childprocess
   cucumber
-  mohawk (~> 0.0.7)
+  mohawk (~> 0.0.8)
   rake
   rspec
