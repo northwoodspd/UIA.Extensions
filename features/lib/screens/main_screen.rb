@@ -9,4 +9,6 @@ class MainScreen
 
   table(:the_grid, :id => 'dataGridView')
   text(:how_many, :id => 'howManyToAdd')
+
+  spinner(:range_value, :id => 'numericUpDown')
 end
