@@ -12,11 +12,7 @@ namespace UIA.Extensions.AutomationProviders
         public RangeValueProvider(RangeValueControl rangeValue) : base(rangeValue.Control)
         {
             _rangeValue = rangeValue;
-        }
-
-        protected override int ControlTypeId
-        {
-            get { return ControlType.Spinner.Id; }
+            ControlType = ControlType.Spinner;
         }
 
         protected override List<int> SupportedPatterns

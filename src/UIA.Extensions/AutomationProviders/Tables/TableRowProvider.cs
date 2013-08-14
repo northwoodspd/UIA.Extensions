@@ -13,6 +13,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
         {
             _rowInformation = rowInformation;
             Name = rowInformation.Value;
+            ControlType = ControlType.DataItem;
 
             rowInformation.Cells.ForEach(x => Children.Add(new TableCellProvider(this, x)));
         }
@@ -20,11 +21,6 @@ namespace UIA.Extensions.AutomationProviders.Tables
         protected override List<int> SupportedPatterns
         {
             get { return new List<int> { SelectionItemPatternIdentifiers.Pattern.Id }; }
-        }
-
-        protected override int ControlTypeId
-        {
-            get { return ControlType.DataItem.Id; }
         }
 
         public bool IsSelected

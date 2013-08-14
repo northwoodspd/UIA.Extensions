@@ -11,11 +11,8 @@ namespace UIA.Extensions.AutomationProviders.Tables
             {
                 Children.Add(new HeaderItemProvider(this, header));
             }
-        }
 
-        protected override int ControlTypeId
-        {
-            get { return ControlType.Header.Id; }
+            ControlType = ControlType.Header;
         }
     }
 }

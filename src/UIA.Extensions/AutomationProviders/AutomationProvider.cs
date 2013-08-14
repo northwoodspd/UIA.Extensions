@@ -16,7 +16,7 @@ namespace UIA.Extensions.AutomationProviders
         public AutomationProvider()
         {
             _properties = new Dictionary<int, Func<object>>();
-            SetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id, () => ControlTypeId);
+            SetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id, () => ControlType.Id);
             SetPropertyValue(AutomationElementIdentifiers.LocalizedControlTypeProperty.Id, () => ControlType.LocalizedControlType);
             SetPropertyValue(AutomationElementIdentifiers.IsKeyboardFocusableProperty.Id, true);
             SetPropertyValue(AutomationElementIdentifiers.AutomationIdProperty.Id, () => Id);
@@ -27,12 +27,6 @@ namespace UIA.Extensions.AutomationProviders
         }
 
         public virtual ControlType ControlType { get; set; }
-
-        protected virtual int ControlTypeId
-        {
-            get { return ControlType.Id; }
-        }
-
         public virtual string Id { get; set; }
 
         protected virtual List<int> SupportedPatterns { get { return new List<int>(); } }

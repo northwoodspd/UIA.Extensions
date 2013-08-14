@@ -14,11 +14,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
         {
             _cell = cell;
             Name = cell.Value;
-        }
-
-        protected override int ControlTypeId
-        {
-            get { return ControlType.Text.Id; }
+            ControlType = ControlType.Text;
         }
 
         protected override List<int> SupportedPatterns
