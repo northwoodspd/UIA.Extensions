@@ -17,9 +17,11 @@ namespace UIA.Extensions.AutomationProviders
             get { return Control.Name; }
         }
 
+        private string _name;
         public override string Name
         {
-            get { return Control.Text; }
+            get { return _name ?? Control.Text; }
+            set { _name = value; }
         }
 
         public  override IRawElementProviderSimple HostRawElementProvider
