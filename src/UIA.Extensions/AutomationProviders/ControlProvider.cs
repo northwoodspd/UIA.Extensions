@@ -11,7 +11,6 @@ namespace UIA.Extensions.AutomationProviders
         public ControlProvider(Control control)
         {
             Control = control;
-            SetPropertyValue(AutomationElementIdentifiers.LocalizedControlTypeProperty.Id, Control.GetType().FullName);
         }
 
         public override string Id

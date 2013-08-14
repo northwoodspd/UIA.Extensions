@@ -28,6 +28,23 @@ namespace UIA.Extensions.AutomationProviders
         }
 
         [Test]
+        public void ControlTypesCanBeOverridden()
+        {
+            _automationProvider.ControlType = ControlType.Spinner;
+            _automationProvider.GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
+                .Should().Equal(ControlType.Spinner.Id);
+        }
+
+        [Test]
+        public void TheLocalizedControlTypeIsReflected()
+        {
+            _automationProvider.ControlType = ControlType.Spinner;
+
+            _automationProvider.GetPropertyValue(AutomationElementIdentifiers.LocalizedControlTypeProperty.Id)
+                     .Should().Equal("spinner");
+        }
+
+        [Test]
         public void TheIdCanBeOverridden()
         {
             _automationProvider.Id = "expectedAutomationId";

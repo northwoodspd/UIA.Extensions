@@ -17,13 +17,6 @@ namespace UIA.Extensions.AutomationProviders
         }
 
         [Test]
-        public void ItUsesTheControlsTypeForTheAutomationControlType()
-        {
-            _controlProvider.GetPropertyValue(AutomationElementIdentifiers.LocalizedControlTypeProperty.Id)
-                     .Should().Equal(typeof(Control).FullName);
-        }
-
-        [Test]
         public void ItUsesTheControlNameForTheAutomationId()
         {
             _controlProvider.GetPropertyValue(AutomationElementIdentifiers.AutomationIdProperty.Id)
