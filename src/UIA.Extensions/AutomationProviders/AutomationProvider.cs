@@ -29,7 +29,7 @@ namespace UIA.Extensions.AutomationProviders
 
         public virtual ControlType ControlType { get; set; }
         public virtual string Id { get; set; }
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
         protected virtual List<int> SupportedPatterns { get { return new List<int>(); } }
 

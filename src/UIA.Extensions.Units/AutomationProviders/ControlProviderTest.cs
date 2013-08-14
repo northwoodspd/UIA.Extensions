@@ -24,6 +24,15 @@ namespace UIA.Extensions.AutomationProviders
         }
 
         [Test]
+        public void ItUsesTheControlTextForTheAutomationName()
+        {
+            _controlProvider.Control.Text = "The Control Text";
+
+            _controlProvider.GetPropertyValue(AutomationElementIdentifiers.NameProperty.Id)
+                     .Should().Equal("The Control Text");
+        }
+
+        [Test]
         public void ItProperlyReflectsAChangedNameInTheAutomationId()
         {
             var originalName = "expectedControlAutomationId";
