@@ -45,6 +45,14 @@ namespace UIA.Extensions.AutomationProviders
         }
 
         [Test]
+        public void ItReflectsTheName()
+        {
+            _automationProvider.Name = "whatever";
+            _automationProvider.GetPropertyValue(AutomationElementIdentifiers.NameProperty.Id)
+                .Should().Equal("whatever");
+        }
+
+        [Test]
         public void TheIdCanBeOverridden()
         {
             _automationProvider.Id = "expectedAutomationId";

@@ -19,6 +19,7 @@ namespace UIA.Extensions.AutomationProviders
             SetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id, () => ControlType.Id);
             SetPropertyValue(AutomationElementIdentifiers.LocalizedControlTypeProperty.Id, () => ControlType.LocalizedControlType);
             SetPropertyValue(AutomationElementIdentifiers.IsKeyboardFocusableProperty.Id, true);
+            SetPropertyValue(AutomationElementIdentifiers.NameProperty.Id, () => Name);
             SetPropertyValue(AutomationElementIdentifiers.AutomationIdProperty.Id, () => Id);
 
             _children = new List<ChildProvider>();
@@ -28,10 +29,12 @@ namespace UIA.Extensions.AutomationProviders
 
         public virtual ControlType ControlType { get; set; }
         public virtual string Id { get; set; }
+        public string Name { get; set; }
 
         protected virtual List<int> SupportedPatterns { get { return new List<int>(); } }
 
         public const int ProviderUseComThreading = 0x20;
+
         public ProviderOptions ProviderOptions
         {
             get
@@ -133,12 +136,6 @@ namespace UIA.Extensions.AutomationProviders
         {
             get { return null; }
         }
-
-        public string Name
-        {
-            set { SetPropertyValue(AutomationElementIdentifiers.NameProperty.Id, value); }
-            get { return GetPropertyValue(AutomationElementIdentifiers.NameProperty.Id) as String; }
-}
 
         private readonly List<ChildProvider> _children = new List<ChildProvider>();
         public virtual List<ChildProvider> Children
