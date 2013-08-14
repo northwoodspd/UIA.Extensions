@@ -6,13 +6,17 @@ namespace UIA.Extensions.AutomationProviders
 {
     public class ControlProvider : AutomationProvider
     {
-        protected readonly Control Control;
+        public readonly Control Control;
 
         public ControlProvider(Control control)
         {
             Control = control;
-            Id = Control.Name;
             SetPropertyValue(AutomationElementIdentifiers.LocalizedControlTypeProperty.Id, Control.GetType().FullName);
+        }
+
+        public override string Id
+        {
+            get { return Control.Name; }
         }
 
         public  override IRawElementProviderSimple HostRawElementProvider

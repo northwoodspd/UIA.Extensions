@@ -30,6 +30,18 @@ namespace UIA.Extensions.AutomationProviders
                      .Should().Equal("expectedControlAutomationId");
         }
 
+        [Test]
+        public void ItProperlyReflectsAChangedNameInTheAutomationId()
+        {
+            var originalName = "expectedControlAutomationId";
+            _controlProvider.GetPropertyValue(AutomationElementIdentifiers.AutomationIdProperty.Id)
+                     .Should().Equal(originalName);
+
+            _controlProvider.Control.Name = "modifiedAutomationId";
+            _controlProvider.GetPropertyValue(AutomationElementIdentifiers.AutomationIdProperty.Id)
+                     .Should().Equal("modifiedAutomationId");
+        }
+
         public class TestControlProvider : ControlProvider
         {
             public TestControlProvider(Control control) : base(control)

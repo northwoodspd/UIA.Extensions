@@ -11,15 +11,15 @@ namespace UIA.Extensions.AutomationProviders
     [ComVisible(true)]
     public class AutomationProvider : IRawElementProviderFragmentRoot
     {
-        private readonly Dictionary<int, object> _properties;
+        private readonly Dictionary<int, Func<object>> _properties;
 
         public AutomationProvider()
         {
-            _properties = new Dictionary<int, object>
-            {
-                {AutomationElementIdentifiers.ControlTypeProperty.Id, ControlTypeId}, 
-                {AutomationElementIdentifiers.IsKeyboardFocusableProperty.Id, true}, 
-            };
+            _properties = new Dictionary<int, Func<object>>();
+            SetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id, ControlTypeId);
+            SetPropertyValue(AutomationElementIdentifiers.IsKeyboardFocusableProperty.Id, true);
+            SetPropertyValue(AutomationElementIdentifiers.AutomationIdProperty.Id, () => Id);
+
             _children = new List<ChildProvider>();
         }
 
@@ -28,16 +28,7 @@ namespace UIA.Extensions.AutomationProviders
             get { return ControlType.Custom.Id; }
         }
 
-        private string _id;
-        public string Id
-        {
-            get { return _id; }
-            set
-            {
-                _id = value;
-                SetPropertyValue(AutomationElementIdentifiers.AutomationIdProperty.Id, value);
-            }
-        }
+        public virtual string Id { get; set; }
 
         protected virtual List<int> SupportedPatterns { get { return new List<int>(); } }
 
@@ -64,14 +55,20 @@ namespace UIA.Extensions.AutomationProviders
 
         public object GetPropertyValue(int propertyId)
         {
-            return _properties.Where(x => x.Key.Equals(propertyId))
+            var propertyGetter = _properties.Where(x => x.Key.Equals(propertyId))
                 .Select(x => x.Value)
                 .FirstOrDefault();
+            return null == propertyGetter ? null : propertyGetter();
         }
 
         public void SetPropertyValue(int propertyId, Object propertyValue)
         {
-            _properties[propertyId] = propertyValue;
+            _properties[propertyId] = () => propertyValue;
+        }
+
+        public void SetPropertyValue(int propertyId, Func<Object> propertyGetter)
+        {
+            _properties[propertyId] = propertyGetter;
         }
 
         public object GetPatternProvider(int patternId)
