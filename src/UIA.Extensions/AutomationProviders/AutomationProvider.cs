@@ -137,7 +137,7 @@ namespace UIA.Extensions.AutomationProviders
             get { return null; }
         }
 
-        private readonly List<ChildProvider> _children = new List<ChildProvider>();
+        protected readonly List<ChildProvider> _children = new List<ChildProvider>();
         public virtual List<ChildProvider> Children
         {
             get { return _children; }

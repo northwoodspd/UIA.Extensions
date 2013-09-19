@@ -5,7 +5,6 @@ using System.Windows.Automation.Provider;
 using NUnit.Framework;
 using Should.Fluent;
 using UIA.Extensions.AutomationProviders.Tables.Stubs;
-using UIA.Extensions.Extensions;
 using UIA.Extensions.InternalExtensions;
 
 namespace UIA.Extensions.AutomationProviders.Tables
@@ -128,6 +127,16 @@ namespace UIA.Extensions.AutomationProviders.Tables
             {
                 _tableInformationStub.AddRows(2);
                 _tableProvider.Children.Select(x => x.Name).Should().Equal(new[] { "Row0", "Row1" });
+            }
+
+            [Test]
+            public void CanBeAdded()
+            {
+                _tableInformationStub.AddRows(3);
+                _tableProvider.Children.Count.Should().Equal(3);
+
+                _tableInformationStub.AddRows(2);
+                _tableProvider.Children.Count.Should().Equal(5);
             }
         }
     }

@@ -7,7 +7,6 @@ using NUnit.Framework;
 using Should.Fluent;
 using UIA.Extensions.AutomationProviders.Interfaces.Tables;
 using UIA.Extensions.AutomationProviders.Tables.Stubs;
-using UIA.Extensions.Extensions;
 using UIA.Extensions.InternalExtensions;
 
 namespace UIA.Extensions.AutomationProviders.Tables
@@ -64,6 +63,15 @@ namespace UIA.Extensions.AutomationProviders.Tables
             AddCells("item 1", "item 2", "item 3");
             TableRowProvider.Children.Count.Should().Equal(3);
             TableRowProvider.Children.Select(x => x.Name).Should().Equal(new[] { "item 1", "item 2", "item 3" });
+        }
+
+        [Test]
+        public void RowsWithTheSameValueAndChildrenAreEqual()
+        {
+            var oneRow = new TableRowProvider(_parent.Object, _rowInformationStub);
+            var sameRow = new TableRowProvider(_parent.Object, _rowInformationStub);
+
+            oneRow.Should().Equal(sameRow);
         }
 
         private TableRowProvider _provider;

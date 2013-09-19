@@ -33,17 +33,22 @@ namespace UIA.Extensions.AutomationProviders.Tables
             }
         }
 
-        private List<ChildProvider> _rows;
+        private List<ChildProvider> _rows = new List<ChildProvider>();
         private IEnumerable<ChildProvider> RowProviders
         {
             get
             {
-                if (null == _rows && RowCount > 0)
-                {
-                    _rows = _tableInformation.Rows.Select(x => new TableRowProvider(this, x)).Cast<ChildProvider>().ToList();
-                }
+                UpdateRowsIfNecessary();
+                return _rows;
+            }
+        }
 
-                return _rows ?? new List<ChildProvider>();
+        private void UpdateRowsIfNecessary()
+        {
+            var currentRows = _tableInformation.Rows.Select(x => new TableRowProvider(this, x)).Cast<ChildProvider>().ToList();
+            if (!_rows.SequenceEqual(currentRows))
+            {
+                _rows = currentRows;
             }
         }
 
