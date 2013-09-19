@@ -21,3 +21,16 @@ Feature: Automating table controls
     Given we add "4" rows to the table
     When we select the item with the "age" of "3"
     Then the row at index "2" is selected
+
+  Scenario: Changing Grid Items
+    When we add "1" rows to the table
+    Then the table should look like this:
+      | firstname  | lastname  | age |
+      | FirstName1 | LastName1 | 1   |
+    When we add "2" more rows to the table
+    Then the table should look like this:
+      | firstname  | lastname  | age |
+      | FirstName1 | LastName1 | 1   |
+      | FirstName1 | LastName1 | 1   |
+      | FirstName2 | LastName2 | 2   |
+

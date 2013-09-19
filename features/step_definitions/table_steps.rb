@@ -1,4 +1,4 @@
-When(/^we add "([^"]*)" rows to the table$/) do |rows_to_add|
+When(/^we add "([^"]*)"( more)? rows to the table$/) do |rows_to_add, moar_rows|
   on(MainScreen) do |screen|
     screen.how_many = rows_to_add
     screen.add_rows
@@ -15,11 +15,7 @@ end
 
 Then(/^the table should look like this:$/) do |table_info|
   on(MainScreen) do |screen|
-    table_info.hashes.each_with_index do |row_info, row|
-      the_row = screen.the_grid[row]
-      actual_values = row_info.keys.map(&the_row.method(:send))
-      actual_values.should eq(row_info.values)
-    end
+    screen.the_grid.map(&:cells).should eq(table_info.hashes.map(&:values))
   end
 end
 

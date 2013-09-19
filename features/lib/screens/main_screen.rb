@@ -6,6 +6,7 @@ class MainScreen
   control(:calendar, :id => 'monthCalendar')
 
   button(:add_rows, :value => 'Add Row')
+  button(:delete_last, :value => 'Delete Last')
 
   table(:the_grid, :id => 'dataGridView')
   text(:how_many, :id => 'howManyToAdd')
