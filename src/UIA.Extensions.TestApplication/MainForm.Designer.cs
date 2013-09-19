@@ -29,14 +29,15 @@
         private void InitializeComponent()
         {
             this.basicPanel = new System.Windows.Forms.Panel();
+            this.numericUpDown = new System.Windows.Forms.NumericUpDown();
             this.howManyToAdd = new System.Windows.Forms.TextBox();
             this.addRowButton = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.monthCalendar = new System.Windows.Forms.MonthCalendar();
-            this.numericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.deleteButton = new System.Windows.Forms.Button();
             this.basicPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // basicPanel
@@ -44,6 +45,7 @@
             this.basicPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.basicPanel.Controls.Add(this.deleteButton);
             this.basicPanel.Controls.Add(this.numericUpDown);
             this.basicPanel.Controls.Add(this.howManyToAdd);
             this.basicPanel.Controls.Add(this.addRowButton);
@@ -53,6 +55,18 @@
             this.basicPanel.Name = "basicPanel";
             this.basicPanel.Size = new System.Drawing.Size(613, 262);
             this.basicPanel.TabIndex = 0;
+            // 
+            // numericUpDown
+            // 
+            this.numericUpDown.Location = new System.Drawing.Point(9, 183);
+            this.numericUpDown.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown.Name = "numericUpDown";
+            this.numericUpDown.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown.TabIndex = 4;
             // 
             // howManyToAdd
             // 
@@ -90,17 +104,16 @@
             this.monthCalendar.Name = "monthCalendar";
             this.monthCalendar.TabIndex = 0;
             // 
-            // numericUpDown
+            // deleteButton
             // 
-            this.numericUpDown.Location = new System.Drawing.Point(9, 183);
-            this.numericUpDown.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown.Name = "numericUpDown";
-            this.numericUpDown.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown.TabIndex = 4;
+            this.deleteButton.Enabled = false;
+            this.deleteButton.Location = new System.Drawing.Point(535, 177);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(75, 23);
+            this.deleteButton.TabIndex = 5;
+            this.deleteButton.Text = "Delete Last";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // MainForm
             // 
@@ -112,8 +125,8 @@
             this.Text = "UIA.Fluent Test Application";
             this.basicPanel.ResumeLayout(false);
             this.basicPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -126,6 +139,7 @@
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.TextBox howManyToAdd;
         private System.Windows.Forms.NumericUpDown numericUpDown;
+		private System.Windows.Forms.Button deleteButton;
     }
 }
 

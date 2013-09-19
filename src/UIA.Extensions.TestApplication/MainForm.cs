@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Forms;
 using FizzWare.NBuilder;
 using UIA.Extensions.TestApplication.Implementations;
@@ -21,9 +22,17 @@ namespace UIA.Extensions.TestApplication
             dataGridView.AsTable();
 
             var people = new List<Person>();
-            _bindingSource = new BindingSource {DataSource = people};
+            _bindingSource = new BindingSource { DataSource = people };
             dataGridView.DataSource = _bindingSource;
             dataGridView.ReadOnly = true;
+
+
+            _bindingSource.ListChanged += _bindingSource_ListChanged;
+        }
+
+        void _bindingSource_ListChanged(object sender, System.ComponentModel.ListChangedEventArgs e)
+        {
+            deleteButton.Enabled = _bindingSource.Count != 0;
         }
 
         public class Person
@@ -38,6 +47,11 @@ namespace UIA.Extensions.TestApplication
             var people = Builder<Person>.CreateListOfSize(int.Parse(howManyToAdd.Text)).Build();
             foreach (var person in people)
                 _bindingSource.Add(person);
+        }
+
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            _bindingSource.RemoveAt(_bindingSource.Count - 1);
         }
     }
 }
