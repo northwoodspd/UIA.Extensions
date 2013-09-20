@@ -10,8 +10,37 @@ namespace UIA.Extensions.AutomationProviders.Tables
         [Test]
         public void ItHasTheHeaderItemType()
         {
-            new HeaderItemProvider(null, null).GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
+            new HeaderItemProvider(null, null, 0).GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
                 .Should().Equal(ControlType.HeaderItem.Id);
+        }
+
+        [TestFixture]
+        public class AreEqual
+        {
+            [Test]
+            public void SameValueSameIndex()
+            {
+                var firstHeader = HeaderFor("value", 0);
+                var secondHeader = HeaderFor("value", 0);
+                firstHeader.Should().Equal(secondHeader);
+            }
+        }
+
+        [TestFixture]
+        public class AreDifferent
+        {
+            [Test]
+            public void SameValueDifferentIndex()
+            {
+                var firstHeader = HeaderFor("value", 0);
+                var secondHeader = HeaderFor("value", 1);
+                firstHeader.Should().Not.Equal(secondHeader);
+            }
+        }
+
+        private static HeaderItemProvider HeaderFor(string value, int index)
+        {
+            return new HeaderItemProvider(null, value, index);
         }
     }
 }

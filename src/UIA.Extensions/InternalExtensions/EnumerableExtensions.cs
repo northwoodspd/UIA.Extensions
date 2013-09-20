@@ -30,5 +30,11 @@ namespace UIA.Extensions.InternalExtensions
                 doIt(item);
             }
         }
+
+        public static void ForEachWithIndex<T>(this IEnumerable<T> items, Action<T, int> doIt)
+        {
+            var index = 0;
+            items.ForEach(x => doIt(x, index++));
+        }
     }
 }

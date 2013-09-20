@@ -5,20 +5,23 @@ namespace UIA.Extensions.AutomationProviders.Tables
 {
     public class HeaderItemProvider : ChildProvider
     {
-        public HeaderItemProvider(AutomationProvider headerProvider, string header) : base(headerProvider)
+        public HeaderItemProvider(AutomationProvider headerProvider, string header, int index) : base(headerProvider)
         {
+            Index = index;
             Name = header;
             ControlType = ControlType.HeaderItem;
         }
 
         public override bool Equals(object obj)
         {
-            return this.CeremoniallyEquals(obj, (other) => Equals(Name, other.Name));
+            return this.CeremoniallyEquals(obj, (other) => Equals(Index, other.Index) && Equals(Name, other.Name));
         }
 
         public override int GetHashCode()
         {
             return Name.GetHashCode();
         }
+
+        protected int Index { get; private set; }
     }
 }
