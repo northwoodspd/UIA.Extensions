@@ -26,7 +26,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
             get
             {
                 var currentHeader = new HeaderProvider(this, _tableInformation.Headers);
-                if (!Equals(_headerProvider, currentHeader))
+                if (HasHeaders && !Equals(_headerProvider, currentHeader))
                 {
                     _headerProvider = currentHeader;
                 }
