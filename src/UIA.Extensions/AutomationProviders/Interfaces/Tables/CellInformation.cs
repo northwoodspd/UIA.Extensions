@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using UIA.Extensions.InternalExtensions;
 
 namespace UIA.Extensions.AutomationProviders.Interfaces.Tables
 {
@@ -9,19 +10,21 @@ namespace UIA.Extensions.AutomationProviders.Interfaces.Tables
         public abstract int Column { get;  }
         public abstract Rect Location { get; }
 
-        protected bool Equals(CellInformation other)
+        public override bool Equals(object obj)
+        {
+            return this.CeremoniallyEquals(obj, FieldsEqual);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.CombinedHashCodes(Value, Column, Row);
+        }
+
+        private bool FieldsEqual(CellInformation other)
         {
             return Equals(Value, other.Value)
                    && Equals(Column, other.Column)
                    && Equals(Row, other.Row);
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != GetType()) return false;
-            return Equals((CellInformation) obj);
         }
     }
 }

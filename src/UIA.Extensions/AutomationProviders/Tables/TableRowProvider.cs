@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
 using UIA.Extensions.AutomationProviders.Interfaces.Tables;
+using UIA.Extensions.InternalExtensions;
 
 namespace UIA.Extensions.AutomationProviders.Tables
 {
@@ -9,13 +11,19 @@ namespace UIA.Extensions.AutomationProviders.Tables
     {
         private readonly RowInformation _rowInformation;
 
-        public TableRowProvider(AutomationProvider parent, RowInformation rowInformation) : base(parent)
+        public TableRowProvider(AutomationProvider parent, RowInformation rowInformation)
+            : base(parent)
         {
             _rowInformation = rowInformation;
             Name = rowInformation.Value;
             ControlType = ControlType.DataItem;
 
             rowInformation.Cells.ForEach(x => Children.Add(new TableCellProvider(this, x)));
+        }
+
+        public override string Name
+        {
+            get { return _rowInformation.Value; }
         }
 
         protected override List<int> SupportedPatterns
@@ -45,22 +53,14 @@ namespace UIA.Extensions.AutomationProviders.Tables
 
         public IRawElementProviderSimple SelectionContainer { get; private set; }
 
-        protected bool Equals(TableRowProvider other)
-        {
-            return Equals(_rowInformation, other._rowInformation);
-        }
-
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((TableRowProvider) obj);
+            return this.CeremoniallyEquals(obj, (other) => Equals(_rowInformation, other._rowInformation));
         }
 
         public override int GetHashCode()
         {
-            return (_rowInformation != null ? _rowInformation.GetHashCode() : 0);
+            return this.CombinedHashCodes(_rowInformation);
         }
     }
 }

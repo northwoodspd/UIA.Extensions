@@ -66,6 +66,7 @@
     <Compile Include="AutomationProviders\ValueProvider.cs" />
     <Compile Include="InternalExtensions\CollectionExtensions.cs" />
     <Compile Include="InternalExtensions\EnumerableExtensions.cs" />
+    <Compile Include="InternalExtensions\ObjectExtensions.cs" />
     <Compile Include="InternalExtensions\ProviderExtensions.cs" />
     <Compile Include="InternalExtensions\SystemExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

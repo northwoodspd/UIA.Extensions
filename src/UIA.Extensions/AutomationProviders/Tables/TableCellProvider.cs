@@ -13,8 +13,12 @@ namespace UIA.Extensions.AutomationProviders.Tables
         public TableCellProvider(AutomationProvider parent, CellInformation cell) : base(parent)
         {
             _cell = cell;
-            Name = cell.Value;
             ControlType = ControlType.Text;
+        }
+
+        public override string Name
+        {
+            get { return _cell.Value; }
         }
 
         protected override List<int> SupportedPatterns
