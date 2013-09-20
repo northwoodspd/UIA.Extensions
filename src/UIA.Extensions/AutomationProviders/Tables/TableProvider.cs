@@ -14,6 +14,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
         {
             _tableInformation = tableInformation;
             SetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id, ControlType.Table.Id);
+            SetPropertyValue(AutomationElementIdentifiers.LocalizedControlTypeProperty.Id, ControlType.Table.LocalizedControlType);
         }
 
         public int RowCount { get { return _tableInformation.RowCount; } }

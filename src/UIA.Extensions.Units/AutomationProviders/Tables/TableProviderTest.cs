@@ -30,6 +30,13 @@ namespace UIA.Extensions.AutomationProviders.Tables
         }
 
         [Test]
+        public void ItLocalizesTheControlTypeAsWell()
+        {
+            _tableProvider.GetPropertyValue(AutomationElementIdentifiers.LocalizedControlTypeProperty.Id)
+                .Should().Equal(ControlType.Table.LocalizedControlType);
+        }
+
+        [Test]
         public void ItIsBothOfTypeGridAndOfTypeTable()
         {
             _tableProvider.GetPatternProvider(TablePatternIdentifiers.Pattern.Id)
