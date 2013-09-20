@@ -15,12 +15,12 @@ namespace UIA.Extensions.InternalExtensions
 
         public static int CombinedHashCodes(this object us, params object[] others)
         {
-            return others.Aggregate(0, (acc, x) => acc ^ (x ?? 0).GetHashCode());
+            return others.GetSequenceHashCode();
         }
 
-        public static int GetSequenceHashCode<T>(this IEnumerable<T> enumerable)
+        public static int GetSequenceHashCode<T>(this IEnumerable<T> enumerable) where T : class
         {
-            return CombinedHashCodes(enumerable.ToArray());
+            return enumerable.Aggregate(0, (acc, x) => acc ^ (x ?? (object)0).GetHashCode());
         }
     }
 }

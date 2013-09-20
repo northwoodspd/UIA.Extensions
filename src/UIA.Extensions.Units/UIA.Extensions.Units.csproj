@@ -69,6 +69,7 @@
     <Compile Include="AutomationProviders\Tables\TableProviderTest.cs" />
     <Compile Include="AutomationProviders\ValueProviderTest.cs" />
     <Compile Include="Extensions\EnumerableExtensionsTest.cs" />
+    <Compile Include="Extensions\ObjectExtensionsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
