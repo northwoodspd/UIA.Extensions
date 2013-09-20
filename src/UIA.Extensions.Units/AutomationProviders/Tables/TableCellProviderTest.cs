@@ -37,7 +37,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
         [Test]
         public void TheNameIsTheValue()
         {
-            _cellInformationStub.Value = "Expected Name";
+            _cellInformationStub.ExpectedValue = "Expected Name";
             CellProvider.Name.Should().Equal("Expected Name");
         }
 
@@ -52,14 +52,14 @@ namespace UIA.Extensions.AutomationProviders.Tables
         [Test]
         public void ItKnowsTheRow()
         {
-            _cellInformationStub.Row = 7;
+            _cellInformationStub.ExpectedRow= 7;
             CellProvider.Row.Should().Equal(7);
         }
 
         [Test]
         public void ItKnowsTheColumn()
         {
-            _cellInformationStub.Column = 42;
+            _cellInformationStub.ExpectedColumn = 42;
             CellProvider.Column.Should().Equal(42);
         }
 
@@ -76,7 +76,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
         public void ShouldKnowWhereItIs()
         {
             var expectedLocation = new Rect(0, 0, 100, 100);
-            _cellInformationStub.Location = expectedLocation;
+            _cellInformationStub.ExpectedLocation = expectedLocation;
 
             CellProvider.BoundingRectangle.Should().Equal(expectedLocation);
         }

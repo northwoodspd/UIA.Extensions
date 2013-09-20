@@ -22,7 +22,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
         public void SetUp()
         {
             _provider = null;
-            _rowInformationStub = new RowInformationStub { Cells = _values };
+            _rowInformationStub = new RowInformationStub(_values);
             _parent = new Mock<AutomationProvider>();
         }
 
@@ -68,8 +68,8 @@ namespace UIA.Extensions.AutomationProviders.Tables
         [Test]
         public void RowsWithTheSameValueAndChildrenAreEqual()
         {
-            var oneRow = new TableRowProvider(_parent.Object, _rowInformationStub);
-            var sameRow = new TableRowProvider(_parent.Object, _rowInformationStub);
+            var oneRow = RowWithCells("item 1", "item 2");
+            var sameRow = RowWithCells("item 1", "item 2");
 
             oneRow.Should().Equal(sameRow);
         }
@@ -77,15 +77,19 @@ namespace UIA.Extensions.AutomationProviders.Tables
         private TableRowProvider _provider;
         private TableRowProvider TableRowProvider
         {
-            get
-            {
-               return _provider ?? (_provider = new TableRowProvider(_parent.Object, _rowInformationStub));
-            }
+            get { return _provider ?? (_provider = new TableRowProvider(_parent.Object, _rowInformationStub)); }
         }
 
         private void AddCells(params string[] values)
         {
             values.ForEach(x => _values.Add(new CellInformationStub(x)));
+        }
+
+        private TableRowProvider RowWithCells(params string[] values)
+        {
+            var rowInformation = new RowInformationStub();
+            values.ForEach(x => rowInformation.Cells.Add(new CellInformationStub(x)));
+            return new TableRowProvider(_parent.Object, rowInformation); 
         }
     }
 }

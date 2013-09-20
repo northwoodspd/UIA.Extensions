@@ -24,8 +24,6 @@ namespace UIA.Extensions.TestApplication
             var people = new List<Person>();
             _bindingSource = new BindingSource { DataSource = people };
             dataGridView.DataSource = _bindingSource;
-            dataGridView.ReadOnly = true;
-
 
             _bindingSource.ListChanged += _bindingSource_ListChanged;
         }

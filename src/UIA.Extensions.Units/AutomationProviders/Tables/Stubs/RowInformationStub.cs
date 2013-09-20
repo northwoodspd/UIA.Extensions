@@ -7,6 +7,8 @@ namespace UIA.Extensions.AutomationProviders.Tables.Stubs
     public class RowInformationStub : RowInformation
     {
         private bool _wasSelected;
+        private string _value;
+        private List<CellInformation> _cells;
 
         public RowInformationStub()
             : this("Default")
@@ -18,24 +20,33 @@ namespace UIA.Extensions.AutomationProviders.Tables.Stubs
 
         public RowInformationStub(string what)
         {
-            Cells = new List<CellInformation>();
-            Value = what;
+            _cells = new List<CellInformation>();
+            _value = what;
         }
 
-        public string Value { get; private set; }
-        public List<CellInformation> Cells { get; set; }
+        public RowInformationStub(List<CellInformation> cells)
+        {
+            _cells = cells;
+        }
 
-        public void Select()
+        public override string Value
+        {
+            get { return _value; }
+        }
+
+        public override List<CellInformation> Cells
+        {
+            get { return _cells; }
+        }
+
+        public override void Select()
         {
             _wasSelected = true;
         }
 
-        public bool IsSelected
+        public override bool IsSelected
         {
-            get
-            {
-                return _wasSelected;
-            }
+            get { return _wasSelected; }
         }
 
         public void ShouldHaveBeenSelected()

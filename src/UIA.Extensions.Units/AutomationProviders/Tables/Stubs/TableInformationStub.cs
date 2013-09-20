@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
 using UIA.Extensions.AutomationProviders.Interfaces.Tables;
-using UIA.Extensions.Extensions;
 using UIA.Extensions.InternalExtensions;
 
 namespace UIA.Extensions.AutomationProviders.Tables.Stubs

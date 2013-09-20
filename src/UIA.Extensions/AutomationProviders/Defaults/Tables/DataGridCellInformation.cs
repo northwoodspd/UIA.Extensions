@@ -19,23 +19,23 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
             return new DataGridCellInformation(cell);
         }
 
-        public string Value
+        public override string Value
         {
             get { return (_cell.Value ?? "").ToString(); }
         }
 
-        public int Row
+        public override int Row
         {
             get { return _cell.RowIndex; }
         }
 
 
-        public int Column
+        public override int Column
         {
             get { return _cell.ColumnIndex; }
         }
 
-        public Rect Location
+        public override Rect Location
         {
             get { return _cell.DataGridView.GetCellDisplayRectangle(Column, Row, false).AsWindowsRect(); }
         }

@@ -20,23 +20,23 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
             return new DataGridRowInformation(row);
         }
 
-        public string Value
+        public override string Value
         {
             get { return _dataGridViewRow.Cells[0].Value as string; }
         }
 
-        public List<CellInformation> Cells
+        public override List<CellInformation> Cells
         {
             get { return _dataGridViewRow.Cells.Select(DataGridCellInformation.FromCell).ToList(); }
         }
 
-        public void Select()
+        public override void Select()
         {
             _dataGridViewRow.DataGridView.ClearSelection();
             _dataGridViewRow.Selected = true;
         }
 
-        public bool IsSelected
+        public override bool IsSelected
         {
             get { return _dataGridViewRow.Selected; }
         }
