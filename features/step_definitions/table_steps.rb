@@ -15,7 +15,8 @@ end
 
 Then(/^the table should look like this:$/) do |table_info|
   on(MainScreen) do |screen|
-    screen.the_grid_headers.map(&:to_method).should eq(table_info.hashes.map(&:keys).first)
+    expected_headers = table_info.hashes.map(&:keys).first.map(&:to_sym)
+    screen.the_grid_headers.map(&:to_method).should eq(expected_headers)
     screen.the_grid.map(&:cells).should eq(table_info.hashes.map(&:values))
   end
 end

@@ -25,9 +25,10 @@ namespace UIA.Extensions.AutomationProviders.Tables
         {
             get
             {
-                if (null == _headerProvider && HasHeaders)
+                var currentHeader = new HeaderProvider(this, _tableInformation.Headers);
+                if (!Equals(_headerProvider, currentHeader))
                 {
-                    _headerProvider = new HeaderProvider(this, _tableInformation.Headers);
+                    _headerProvider = currentHeader;
                 }
 
                 return _headerProvider;
