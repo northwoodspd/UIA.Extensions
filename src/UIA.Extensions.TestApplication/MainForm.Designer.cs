@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             this.basicPanel = new System.Windows.Forms.Panel();
+            this.deleteButton = new System.Windows.Forms.Button();
             this.numericUpDown = new System.Windows.Forms.NumericUpDown();
             this.howManyToAdd = new System.Windows.Forms.TextBox();
             this.addRowButton = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.monthCalendar = new System.Windows.Forms.MonthCalendar();
-            this.deleteButton = new System.Windows.Forms.Button();
+            this.updateHeaders = new System.Windows.Forms.Button();
             this.basicPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -45,6 +46,7 @@
             this.basicPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.basicPanel.Controls.Add(this.updateHeaders);
             this.basicPanel.Controls.Add(this.deleteButton);
             this.basicPanel.Controls.Add(this.numericUpDown);
             this.basicPanel.Controls.Add(this.howManyToAdd);
@@ -55,6 +57,17 @@
             this.basicPanel.Name = "basicPanel";
             this.basicPanel.Size = new System.Drawing.Size(613, 262);
             this.basicPanel.TabIndex = 0;
+            // 
+            // deleteButton
+            // 
+            this.deleteButton.Enabled = false;
+            this.deleteButton.Location = new System.Drawing.Point(535, 177);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(75, 23);
+            this.deleteButton.TabIndex = 5;
+            this.deleteButton.Text = "Delete Last";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // numericUpDown
             // 
@@ -104,16 +117,15 @@
             this.monthCalendar.Name = "monthCalendar";
             this.monthCalendar.TabIndex = 0;
             // 
-            // deleteButton
+            // updateHeaders
             // 
-            this.deleteButton.Enabled = false;
-            this.deleteButton.Location = new System.Drawing.Point(535, 177);
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(75, 23);
-            this.deleteButton.TabIndex = 5;
-            this.deleteButton.Text = "Delete Last";
-            this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            this.updateHeaders.Location = new System.Drawing.Point(409, 177);
+            this.updateHeaders.Name = "updateHeaders";
+            this.updateHeaders.Size = new System.Drawing.Size(111, 23);
+            this.updateHeaders.TabIndex = 6;
+            this.updateHeaders.Text = "Update Headers";
+            this.updateHeaders.UseVisualStyleBackColor = true;
+            this.updateHeaders.Click += new System.EventHandler(this.updateHeaders_Click);
             // 
             // MainForm
             // 
@@ -140,6 +152,7 @@
         private System.Windows.Forms.TextBox howManyToAdd;
         private System.Windows.Forms.NumericUpDown numericUpDown;
 		private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.Button updateHeaders;
     }
 }
 

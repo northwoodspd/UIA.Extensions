@@ -34,3 +34,9 @@ Feature: Automating table controls
       | FirstName1 | LastName1 | 1   |
       | FirstName2 | LastName2 | 2   |
 
+  Scenario: Updating header items
+    Given we add "1" rows to the table
+    When we update the headers
+    Then the table should look like this:
+      | firstname_updated | lastname_updated | age_updated |
+      | FirstName1        | LastName1        | 1           |

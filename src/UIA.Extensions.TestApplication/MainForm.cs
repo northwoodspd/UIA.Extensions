@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Windows.Forms;
 using FizzWare.NBuilder;
 using UIA.Extensions.TestApplication.Implementations;
@@ -50,6 +49,14 @@ namespace UIA.Extensions.TestApplication
         private void deleteButton_Click(object sender, EventArgs e)
         {
             _bindingSource.RemoveAt(_bindingSource.Count - 1);
+        }
+
+        private void updateHeaders_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewColumn column in dataGridView.Columns)
+            {
+                column.HeaderText += " Updated";
+            }
         }
     }
 }

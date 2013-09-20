@@ -15,6 +15,7 @@ end
 
 Then(/^the table should look like this:$/) do |table_info|
   on(MainScreen) do |screen|
+    screen.the_grid_headers.map(&:to_method).should eq(table_info.hashes.map(&:keys).first)
     screen.the_grid.map(&:cells).should eq(table_info.hashes.map(&:values))
   end
 end
@@ -25,4 +26,8 @@ end
 
 Then(/^the row at index "([^"]*)" is selected$/) do |expected_index|
   on(MainScreen).the_grid[expected_index.to_i].should be_selected
+end
+
+When(/^we update the headers$/) do
+  on(MainScreen).update_headers
 end
