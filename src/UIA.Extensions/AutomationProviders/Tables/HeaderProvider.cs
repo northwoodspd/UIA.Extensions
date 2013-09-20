@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Automation;
+using UIA.Extensions.InternalExtensions;
 
 namespace UIA.Extensions.AutomationProviders.Tables
 {
@@ -13,6 +15,16 @@ namespace UIA.Extensions.AutomationProviders.Tables
             }
 
             ControlType = ControlType.Header;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return this.CeremoniallyEquals(obj, (other) => Children.SequenceEqual(other.Children));
+        }
+
+        public override int GetHashCode()
+        {
+            return Children.GetSequenceHashCode();
         }
     }
 }

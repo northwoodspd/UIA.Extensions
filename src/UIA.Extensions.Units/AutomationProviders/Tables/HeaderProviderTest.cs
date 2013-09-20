@@ -39,6 +39,14 @@ namespace UIA.Extensions.AutomationProviders.Tables
             HeaderProvider.Children.Select(x => x.Name).Should().Equal(new[] {"first", "second", "other"});
         }
 
+        [Test]
+        public void SameHeadersAreEqualInTheEyesOfUs()
+        {
+            var firstHeader = new HeaderProvider(null, new[] {"first", "second"});
+            var secondHeader = new HeaderProvider(null, new[] {"first", "second"});
+            firstHeader.Should().Equal(secondHeader);
+        }
+
         private HeaderProvider _header;
         private HeaderProvider HeaderProvider
         {
