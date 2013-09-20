@@ -24,6 +24,12 @@ namespace UIA.Extensions.AutomationProviders.Tables
                 var secondHeader = HeaderFor("value", 0);
                 firstHeader.Should().Equal(secondHeader);
             }
+
+            [Test]
+            public void ItHashesTheCodes()
+            {
+                HeaderFor("value", 7).GetHashCode().Should().Equal("value".GetHashCode() ^ 7.GetHashCode());
+            }
         }
 
         [TestFixture]
@@ -34,6 +40,14 @@ namespace UIA.Extensions.AutomationProviders.Tables
             {
                 var firstHeader = HeaderFor("value", 0);
                 var secondHeader = HeaderFor("value", 1);
+                firstHeader.Should().Not.Equal(secondHeader);
+            }
+
+            [Test]
+            public void DifferentValuesSameIndex()
+            {
+                var firstHeader = HeaderFor("value", 0);
+                var secondHeader = HeaderFor("other value", 0);
                 firstHeader.Should().Not.Equal(secondHeader);
             }
         }

@@ -19,7 +19,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
 
         public override int GetHashCode()
         {
-            return Name.GetHashCode();
+            return this.CombinedHashCodes(Name, Index);
         }
 
         protected int Index { get; private set; }
