@@ -80,7 +80,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
 
         public IRawElementProviderSimple[] GetColumnHeaders()
         {
-            throw new System.NotImplementedException();
+            return HeaderProvider.Children.ToArray();
         }
         public RowOrColumnMajor RowOrColumnMajor { get; private set; }
     }

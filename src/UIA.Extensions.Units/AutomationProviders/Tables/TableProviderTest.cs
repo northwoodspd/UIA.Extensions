@@ -96,6 +96,19 @@ namespace UIA.Extensions.AutomationProviders.Tables
                 _tableInformationStub.AddHeaders("Some Header");
                 _tableProvider.Navigate(NavigateDirection.FirstChild).Should().Be.OfType<HeaderProvider>();
             }
+
+            [Test]
+            public void AreExposedDirectlyAsWell()
+            {
+                _tableInformationStub.AddHeaders("First Header", "Second Header");
+                _tableProvider.GetColumnHeaders().Select(HeaderValue)
+                              .Should().Equal(new[] {"First Header", "Second Header"});
+            }
+
+            public string HeaderValue(IRawElementProviderSimple element)
+            {
+                return element.GetPropertyValue(AutomationElementIdentifiers.NameProperty.Id).ToString();
+            }
         }
 
         [TestFixture]
