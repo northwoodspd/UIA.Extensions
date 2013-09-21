@@ -7,6 +7,8 @@
 * [Value Controls](#value-pattern)
 * [RangeValue Controls](#spinners)
 * [Table Controls](#tables)
+  *  [DataGridView](#datagridview)
+  *  [Custom Tables](#custom-tables)
 
 ### Value Pattern
 The [`ValuePattern`](http://msdn.microsoft.com/en-us/library/system.windows.automation.valuepattern.aspx) allows you to get an set the value of a control. Not all controls support this pattern out of the box. Here is an example of how you might use `UIA.Extensions` to expose a [`MonthCalendar`](http://msdn.microsoft.com/en-us/library/system.windows.forms.monthcalendar.aspx) control to automation:
@@ -71,6 +73,8 @@ namespace YourApp
 ```
 
 ### Tables
+
+#### DataGridView
 The [`TablePattern`](http://msdn.microsoft.com/en-us/library/system.windows.automation.tablepattern.aspx) is one that is used by `ListView`, `ListBox` and other various controls. Sometimes, however, controls that visually appear to be tables to not behave like `TablePattern` controls to automation. The [`DataGridView`](http://msdn.microsoft.com/en-us/library/system.windows.forms.datagridview.aspx) class is one of those. Here is an example of how do expose the `DataGridView` control to automation:
 
 ```csharp
@@ -87,6 +91,165 @@ namespace YourApp
       dataGridView.AsTable(); // yes, that's it
     }
   }
+}
+```
+
+#### Custom Tables
+Not everything is as easy as the `DataGridView` though. Suppose you have a custom grid control.
+How would you expose it to automation? Simple. Just implement three interfaces:
+
+```csharp
+public interface TableInformation
+{
+  int RowCount { get; }
+  int ColumnCount { get; }
+  Control Control { get; }
+  List<string> Headers { get; }
+  List<RowInformation> Rows { get; }
+}
+
+public abstract class RowInformation
+{
+  public abstract string Value { get; }
+  public abstract List<CellInformation> Cells { get; }
+  public abstract void Select();
+  public abstract bool IsSelected { get; }
+}
+
+public abstract class CellInformation
+{
+  public abstract string Value { get; }
+  public abstract int Row { get;  }
+  public abstract int Column { get;  }
+  public abstract Rect Location { get; }
+}
+
+```
+
+##### Example:
+Suppose we have a custom class:
+
+```csharp
+public class CustomData
+{
+  public string Name { get; set; }
+  public int Age { get; set; }
+}
+```
+
+Here is how we could expose a `List<CustomData>` as a table on any control.
+
+```csharp
+public MainForm()
+{
+  ...
+  anyControl.AsTable<CustomTableInformation>();
+}
+
+public class CustomTableInformation : TableInformation
+{
+  private readonly Control _control;
+  private List<CustomData> _data;
+
+  public CustomTableInformation(Control control)
+  {
+    _control = control;
+    _data = new List<CustomData>
+    {
+      new CustomData { Name = "John Elway", Age = 53 },
+      new CustomData { Name = "Levi Wilson", Age = 33 },
+    };
+  }
+
+  public Control Control
+  {
+    get { return _control; }
+  }
+
+  public int ColumnCount
+  {
+    get { return 2; }
+  }
+
+  public List<string> Headers
+  {
+    get { return new List<string> { "Name", "Age" }; }
+  }
+
+  public int RowCount
+  {
+    get { return _data.Count; }
+  }
+
+  public List<RowInformation> Rows
+  {
+    get
+    {
+      var row = 0;
+      return _data.Select(x => CustomRowInformation.FromData(x, row++)).ToList();
+    }
+  }
+}
+
+public class CustomRowInformation : RowInformation
+{
+  private readonly CustomData _data;
+  private readonly int _row;
+
+  private CustomRowInformation(CustomData data, int row)
+  {
+    _data = data;
+    _row = row;
+  }
+
+  public static RowInformation FromData(CustomData data, int row)
+  {
+    return new CustomRowInformation(data, row);
+  }
+
+  public override string Value
+  {
+    get { return _data.Name; }
+  }
+
+  public override List<CellInformation> Cells
+  {
+    get
+    {
+      return new List<CellInformation>
+      {
+        CustomCellInformation.FromCustomData(_data.Name, 0, _row),
+        CustomCellInformation.FromCustomData(_data.Age.ToString(), 1, _row),
+      };
+    }
+  }
+
+  public override void Select() { throw new NotImplementedException(); }
+  public override bool IsSelected { get { throw new NotImplementedException(); } }
+}
+
+public class CustomCellInformation : CellInformation
+{
+  private readonly string _value;
+  private readonly int _column;
+  private readonly int _row;
+
+  private CustomCellInformation(string value, int column, int row)
+  {
+    _value = value;
+    _column = column;
+    _row = row;
+  }
+
+  public static CellInformation FromCustomData(string value, int column, int row)
+  {
+    return new CustomCellInformation(value, column, row);
+  }
+
+  public override string Value { get { return _value; } }
+  public override int Row { get { return _row; } }
+  public override int Column { get { return _column; } }
+  public override Rect Location { get { return Rect.Empty; } }
 }
 ```
 
