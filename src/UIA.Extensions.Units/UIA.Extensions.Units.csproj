@@ -7,7 +7,7 @@
     <ProjectGuid>{F93524CD-06CE-495E-9E4D-43F496756C46}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UIA.Extensions.Units</RootNamespace>
+    <RootNamespace>UIA.Extensions</RootNamespace>
     <AssemblyName>UIA.Extensions.Units</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
