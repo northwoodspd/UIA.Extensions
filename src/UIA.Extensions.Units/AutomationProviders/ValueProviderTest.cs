@@ -1,7 +1,7 @@
 ﻿using System.Windows.Automation;
 using System.Windows.Forms;
+using FluentAssertions;
 using NUnit.Framework;
-using Should.Fluent;
 using UIA.Extensions.AutomationProviders.Interfaces;
 
 namespace UIA.Extensions.AutomationProviders
@@ -23,21 +23,21 @@ namespace UIA.Extensions.AutomationProviders
         public void ItHasTheCorrectPattern()
         {
             _valueProvider.GetPatternProvider(ValuePatternIdentifiers.Pattern.Id)
-                .Should().Be.SameAs(_valueProvider);
+                .Should().BeSameAs(_valueProvider);
         }
 
         [Test]
         public void ValuesCanBeRetrieved()
         {
             _valueControl.Value = "Expected Value";
-            _valueProvider.Value.Should().Equal("Expected Value");
+            _valueProvider.Value.ShouldBeEquivalentTo("Expected Value");
         }
 
         [Test]
         public void ValuesCanBeSet()
         {
             _valueProvider.SetValue("The expected value to be set");
-            _valueControl.Value.Should().Equal("The expected value to be set");
+            _valueControl.Value.ShouldBeEquivalentTo("The expected value to be set");
         }
 
         class ValueControlStub : ValueControl

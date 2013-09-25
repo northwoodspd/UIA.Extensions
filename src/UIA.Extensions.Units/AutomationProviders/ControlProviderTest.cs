@@ -1,7 +1,7 @@
 using System.Windows.Automation;
 using System.Windows.Forms;
+using FluentAssertions;
 using NUnit.Framework;
-using Should.Fluent;
 
 namespace UIA.Extensions.AutomationProviders
 {
@@ -20,7 +20,7 @@ namespace UIA.Extensions.AutomationProviders
         public void ItUsesTheControlNameForTheAutomationId()
         {
             _controlProvider.GetPropertyValue(AutomationElementIdentifiers.AutomationIdProperty.Id)
-                     .Should().Equal("expectedControlAutomationId");
+                     .ShouldBeEquivalentTo("expectedControlAutomationId");
         }
 
         [Test]
@@ -29,7 +29,7 @@ namespace UIA.Extensions.AutomationProviders
             _controlProvider.Control.Text = "The Control Text";
 
             _controlProvider.GetPropertyValue(AutomationElementIdentifiers.NameProperty.Id)
-                     .Should().Equal("The Control Text");
+                     .ShouldBeEquivalentTo("The Control Text");
         }
 
         [Test]
@@ -37,11 +37,11 @@ namespace UIA.Extensions.AutomationProviders
         {
             var originalName = "expectedControlAutomationId";
             _controlProvider.GetPropertyValue(AutomationElementIdentifiers.AutomationIdProperty.Id)
-                     .Should().Equal(originalName);
+                     .ShouldBeEquivalentTo(originalName);
 
             _controlProvider.Control.Name = "modifiedAutomationId";
             _controlProvider.GetPropertyValue(AutomationElementIdentifiers.AutomationIdProperty.Id)
-                     .Should().Equal("modifiedAutomationId");
+                     .ShouldBeEquivalentTo("modifiedAutomationId");
         }
 
         public class TestControlProvider : ControlProvider

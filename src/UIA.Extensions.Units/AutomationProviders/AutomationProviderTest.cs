@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
 using System.Windows.Forms;
+using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using Should.Fluent;
 
 namespace UIA.Extensions.AutomationProviders
 {
@@ -24,7 +24,7 @@ namespace UIA.Extensions.AutomationProviders
         public void ItDefaultsAsACustomControl()
         {
             _automationProvider.GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
-                .Should().Equal(ControlType.Custom.Id);
+                .ShouldBeEquivalentTo(ControlType.Custom.Id);
         }
 
         [Test]
@@ -32,7 +32,7 @@ namespace UIA.Extensions.AutomationProviders
         {
             _automationProvider.ControlType = ControlType.Spinner;
             _automationProvider.GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
-                .Should().Equal(ControlType.Spinner.Id);
+                .ShouldBeEquivalentTo(ControlType.Spinner.Id);
         }
 
         [Test]
@@ -41,7 +41,7 @@ namespace UIA.Extensions.AutomationProviders
             _automationProvider.ControlType = ControlType.Spinner;
 
             _automationProvider.GetPropertyValue(AutomationElementIdentifiers.LocalizedControlTypeProperty.Id)
-                     .Should().Equal("spinner");
+                     .ShouldBeEquivalentTo("spinner");
         }
 
         [Test]
@@ -49,7 +49,7 @@ namespace UIA.Extensions.AutomationProviders
         {
             _automationProvider.Name = "whatever";
             _automationProvider.GetPropertyValue(AutomationElementIdentifiers.NameProperty.Id)
-                .Should().Equal("whatever");
+                .ShouldBeEquivalentTo("whatever");
         }
 
         [Test]
@@ -57,23 +57,21 @@ namespace UIA.Extensions.AutomationProviders
         {
             _automationProvider.Id = "expectedAutomationId";
             _automationProvider.GetPropertyValue(AutomationElementIdentifiers.AutomationIdProperty.Id)
-                .Should().Equal("expectedAutomationId");
+                .ShouldBeEquivalentTo("expectedAutomationId");
         }
 
         [Test]
         public void ItIsConsideredAServerSideProvider()
         {
             (_automationProvider.ProviderOptions & ProviderOptions.ServerSideProvider)
-                .Should()
-                .Equal(ProviderOptions.ServerSideProvider);
+                .ShouldBeEquivalentTo(ProviderOptions.ServerSideProvider);
         }
 
         [Test]
         public void ItUsesComThreading()
         {
             ((int)_automationProvider.ProviderOptions & AutomationProvider.ProviderUseComThreading)
-                .Should()
-                .Equal(AutomationProvider.ProviderUseComThreading);
+                .ShouldBeEquivalentTo(AutomationProvider.ProviderUseComThreading);
         }
 
         [Test]
@@ -81,7 +79,7 @@ namespace UIA.Extensions.AutomationProviders
         {
             _automationProvider.SetPropertyValue(AutomationElementIdentifiers.ClassNameProperty.Id, "ExpectedPropertyValue");
             _automationProvider.GetPropertyValue(AutomationElementIdentifiers.ClassNameProperty.Id)
-                .Should().Equal("ExpectedPropertyValue");
+                .ShouldBeEquivalentTo("ExpectedPropertyValue");
         }
 
         [TestCase(NavigateDirection.FirstChild)]
@@ -94,7 +92,7 @@ namespace UIA.Extensions.AutomationProviders
             var expectedSurrounding = GetMockChild();
             _automationProvider.Set(whichWay, expectedSurrounding.Object);
             _automationProvider.Navigate(whichWay)
-                .Should().Be.SameAs(expectedSurrounding.Object);
+                .Should().BeSameAs(expectedSurrounding.Object);
         }
 
         private static Mock<ControlProvider> GetMockChild()

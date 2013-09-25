@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Automation;
+using FluentAssertions;
 using NUnit.Framework;
-using Should.Fluent;
 
 namespace UIA.Extensions.AutomationProviders.Tables
 {
@@ -22,21 +22,21 @@ namespace UIA.Extensions.AutomationProviders.Tables
         public void ItHasTheCorrectControlType()
         {
             HeaderProvider.GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
-                .Should().Equal(ControlType.Header.Id);
+                .ShouldBeEquivalentTo(ControlType.Header.Id);
         }
 
         [Test]
         public void ItHasHeaderItemChildren()
         {
             _headers.AddRange(new[] { "first", "second", "other" });
-            HeaderProvider.Children.TrueForAll(x => x.GetType() == typeof (HeaderItemProvider)).Should().Be.True();
+            HeaderProvider.Children.TrueForAll(x => x.GetType() == typeof (HeaderItemProvider)).Should().BeTrue();
         }
 
         [Test]
         public void TheHeaderStringsAreTheChildren()
         {
             _headers.AddRange(new[] { "first", "second", "other" });
-            HeaderProvider.Children.Select(x => x.Name).Should().Equal(new[] {"first", "second", "other"});
+            HeaderProvider.Children.Select(x => x.Name).ShouldBeEquivalentTo(new[] {"first", "second", "other"});
         }
 
         [Test]
@@ -44,7 +44,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
         {
             var firstHeader = new HeaderProvider(null, new[] {"first", "second"});
             var secondHeader = new HeaderProvider(null, new[] {"first", "second"});
-            firstHeader.Should().Equal(secondHeader);
+            firstHeader.ShouldBeEquivalentTo(secondHeader);
         }
 
         private HeaderProvider _header;

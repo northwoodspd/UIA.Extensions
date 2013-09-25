@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
+using FluentAssertions;
 using NUnit.Framework;
-using Should.Fluent;
 using UIA.Extensions.AutomationProviders.Tables.Stubs;
 using UIA.Extensions.InternalExtensions;
 
@@ -26,38 +26,38 @@ namespace UIA.Extensions.AutomationProviders.Tables
         public void ItHasTheTableControlType()
         {
             _tableProvider.GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
-                .Should().Equal(ControlType.Table.Id);
+                .ShouldBeEquivalentTo(ControlType.Table.Id);
         }
 
         [Test]
         public void ItLocalizesTheControlTypeAsWell()
         {
             _tableProvider.GetPropertyValue(AutomationElementIdentifiers.LocalizedControlTypeProperty.Id)
-                .Should().Equal(ControlType.Table.LocalizedControlType);
+                .ShouldBeEquivalentTo(ControlType.Table.LocalizedControlType);
         }
 
         [Test]
         public void ItIsBothOfTypeGridAndOfTypeTable()
         {
             _tableProvider.GetPatternProvider(TablePatternIdentifiers.Pattern.Id)
-                .Should().Be.SameAs(_tableProvider);
+                .Should().BeSameAs(_tableProvider);
 
             _tableProvider.GetPatternProvider(TablePatternIdentifiers.Pattern.Id)
-                .Should().Be.SameAs(_tableProvider);
+                .Should().BeSameAs(_tableProvider);
         }
 
         [Test]
         public void ItHasTheRowCount()
         {
             _tableInformationStub.AddRows(7);
-            _tableProvider.RowCount.Should().Equal(7);
+            _tableProvider.RowCount.ShouldBeEquivalentTo(7);
         }
 
         [Test]
         public void ItHasTheColumnCount()
         {
             _tableInformationStub.AddHeaders(Enumerable.Range(0, 42).Select(x => String.Empty).ToArray());
-            _tableProvider.ColumnCount.Should().Equal(42);
+            _tableProvider.ColumnCount.ShouldBeEquivalentTo(42);
         }
 
         [TestFixture]
@@ -79,22 +79,22 @@ namespace UIA.Extensions.AutomationProviders.Tables
                 _tableInformationStub.AddHeaders("First Header", "Second Header");
 
                 _tableProvider.Navigate(NavigateDirection.FirstChild)
-                    .Should().Be.OfType<HeaderProvider>();
+                    .Should().BeOfType<HeaderProvider>();
             }
 
             [Test]
             public void IsMissingIfThereAreNonetoSpeakOf()
             {
                 _tableProvider.Navigate(NavigateDirection.FirstChild)
-                    .Should().Be.Null();
+                    .Should().BeNull();
             }
 
             [Test]
             public void HeadersCanBeLazilyLoaded()
             {
-                _tableProvider.Navigate(NavigateDirection.FirstChild).Should().Be.Null();
+                _tableProvider.Navigate(NavigateDirection.FirstChild).Should().BeNull();
                 _tableInformationStub.AddHeaders("Some Header");
-                _tableProvider.Navigate(NavigateDirection.FirstChild).Should().Be.OfType<HeaderProvider>();
+                _tableProvider.Navigate(NavigateDirection.FirstChild).Should().BeOfType<HeaderProvider>();
             }
 
             [Test]
@@ -102,7 +102,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
             {
                 _tableInformationStub.AddHeaders("First Header", "Second Header");
                 _tableProvider.GetColumnHeaders().Select(HeaderValue)
-                              .Should().Equal(new[] {"First Header", "Second Header"});
+                              .ShouldBeEquivalentTo(new[] {"First Header", "Second Header"});
             }
 
             public string HeaderValue(IRawElementProviderSimple element)
@@ -128,7 +128,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
             public void ArePresentForEachRow()
             {
                 _tableInformationStub.AddRows(5);
-                _tableProvider.Children.Count.Should().Equal(5);
+                _tableProvider.Children.Count.ShouldBeEquivalentTo(5);
             }
 
             [Test]
@@ -139,24 +139,24 @@ namespace UIA.Extensions.AutomationProviders.Tables
                 var theSecond = theFirst.NextSibling();
                 var theLast = _tableProvider.LastChild();
 
-                theSecond.NextSibling().Should().Be.SameAs(theLast);
+                theSecond.NextSibling().Should().BeSameAs(theLast);
             }
 
             [Test]
             public void HaveValuesOnThem()
             {
                 _tableInformationStub.AddRows(2);
-                _tableProvider.Children.Select(x => x.Name).Should().Equal(new[] { "Row0", "Row1" });
+                _tableProvider.Children.Select(x => x.Name).ShouldBeEquivalentTo(new[] { "Row0", "Row1" });
             }
 
             [Test]
             public void CanBeAdded()
             {
                 _tableInformationStub.AddRows(3);
-                _tableProvider.Children.Count.Should().Equal(3);
+                _tableProvider.Children.Count.ShouldBeEquivalentTo(3);
 
                 _tableInformationStub.AddRows(2);
-                _tableProvider.Children.Count.Should().Equal(5);
+                _tableProvider.Children.Count.ShouldBeEquivalentTo(5);
             }
         }
     }

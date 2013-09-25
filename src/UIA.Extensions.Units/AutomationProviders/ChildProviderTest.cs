@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Automation.Provider;
+using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using Should.Fluent;
 
 namespace UIA.Extensions.AutomationProviders
 {
@@ -24,7 +24,7 @@ namespace UIA.Extensions.AutomationProviders
         public void ItHasAParent()
         {
             _childProvider.Navigate(NavigateDirection.Parent)
-                .Should().Be.SameAs(_parent.Object);
+                .Should().BeSameAs(_parent.Object);
         }
 
         [Test]
@@ -33,7 +33,7 @@ namespace UIA.Extensions.AutomationProviders
             var expectedRoot = new Mock<AutomationProvider>();
             _parent.Setup(x => x.FragmentRoot).Returns(expectedRoot.Object);
 
-            _childProvider.FragmentRoot.Should().Be.SameAs(expectedRoot.Object);
+            _childProvider.FragmentRoot.Should().BeSameAs(expectedRoot.Object);
         }
 
         [TestFixture]
@@ -59,8 +59,8 @@ namespace UIA.Extensions.AutomationProviders
             public void OneChildHasNoNextOrPrevious()
             {
                 var child = AddChild();
-                Before(child).Should().Be.Null();
-                After(child).Should().Be.Null();
+                Before(child).Should().BeNull();
+                After(child).Should().BeNull();
             }
 
             [Test]
@@ -68,7 +68,7 @@ namespace UIA.Extensions.AutomationProviders
             {
                 var first = AddChild();
                 var second = AddChild();
-                After(first).Should().Be.SameAs(second);
+                After(first).Should().BeSameAs(second);
             }
 
             [Test]
@@ -76,7 +76,7 @@ namespace UIA.Extensions.AutomationProviders
             {
                 var first = AddChild();
                 var second = AddChild();
-                Before(second).Should().Be.SameAs(first);
+                Before(second).Should().BeSameAs(first);
             }
 
             private ChildProvider AddChild()

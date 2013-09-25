@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
+using FluentAssertions;
 using NUnit.Framework;
-using Should.Fluent;
 using UIA.Extensions.AutomationProviders.Interfaces.Tables;
 
 namespace UIA.Extensions.AutomationProviders.Defaults.Tables
@@ -22,14 +22,14 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
         public void ItReturnsTheValue()
         {
             _cell.Value = "Expected value";
-            _cellInformation.Value.Should().Equal("Expected value");
+            _cellInformation.Value.ShouldBeEquivalentTo("Expected value");
         }
 
         [Test]
         public void ItDefaultsToEmptyIfThereIsNoValue()
         {
             _cell.Value = null;
-            _cellInformation.Value.Should().Be.Empty();
+            _cellInformation.Value.Should().BeEmpty();
         }
 
         class TestCell : DataGridViewCell

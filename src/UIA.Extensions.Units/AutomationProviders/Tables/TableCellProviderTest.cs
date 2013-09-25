@@ -1,9 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
+using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using Should.Fluent;
 using UIA.Extensions.AutomationProviders.Tables.Stubs;
 
 namespace UIA.Extensions.AutomationProviders.Tables
@@ -31,36 +31,36 @@ namespace UIA.Extensions.AutomationProviders.Tables
         public void ItIsOfTheTextControlType()
         {
             CellProvider.GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
-                .Should().Equal(ControlType.Text.Id);
+                .ShouldBeEquivalentTo(ControlType.Text.Id);
         }
 
         [Test]
         public void TheNameIsTheValue()
         {
             _cellInformationStub.ExpectedValue = "Expected Name";
-            CellProvider.Name.Should().Equal("Expected Name");
+            CellProvider.Name.ShouldBeEquivalentTo("Expected Name");
         }
 
         [Test]
         public void ItDoubleAsATableItem()
         {
-            CellProvider.Should().Be.AssignableFrom<ITableItemProvider>();
+            CellProvider.Should().BeAssignableTo<ITableItemProvider>();
             CellProvider.GetPatternProvider(TableItemPatternIdentifiers.Pattern.Id)
-                .Should().Be.SameAs(_cellProvider);
+                .Should().BeSameAs(_cellProvider);
         }
 
         [Test]
         public void ItKnowsTheRow()
         {
             _cellInformationStub.ExpectedRow= 7;
-            CellProvider.Row.Should().Equal(7);
+            CellProvider.Row.ShouldBeEquivalentTo(7);
         }
 
         [Test]
         public void ItKnowsTheColumn()
         {
             _cellInformationStub.ExpectedColumn = 42;
-            CellProvider.Column.Should().Equal(42);
+            CellProvider.Column.ShouldBeEquivalentTo(42);
         }
 
         [Test]
@@ -69,7 +69,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
             var expectedGrid = new AutomationProvider();
             _parent.Setup(x => x.FragmentRoot).Returns(expectedGrid);
 
-            CellProvider.ContainingGrid.Should().Be.SameAs(expectedGrid);
+            CellProvider.ContainingGrid.Should().BeSameAs(expectedGrid);
         }
 
         [Test]
@@ -78,7 +78,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
             var expectedLocation = new Rect(0, 0, 100, 100);
             _cellInformationStub.ExpectedLocation = expectedLocation;
 
-            CellProvider.BoundingRectangle.Should().Equal(expectedLocation);
+            CellProvider.BoundingRectangle.ShouldBeEquivalentTo(expectedLocation);
         }
 
         private TableCellProvider _cellProvider;

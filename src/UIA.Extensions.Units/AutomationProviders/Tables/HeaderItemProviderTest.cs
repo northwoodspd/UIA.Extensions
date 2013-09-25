@@ -1,6 +1,6 @@
 ﻿using System.Windows.Automation;
+using FluentAssertions;
 using NUnit.Framework;
-using Should.Fluent;
 
 namespace UIA.Extensions.AutomationProviders.Tables
 {
@@ -11,7 +11,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
         public void ItHasTheHeaderItemType()
         {
             new HeaderItemProvider(null, null, 0).GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
-                .Should().Equal(ControlType.HeaderItem.Id);
+                .ShouldBeEquivalentTo(ControlType.HeaderItem.Id);
         }
 
         [TestFixture]
@@ -22,13 +22,13 @@ namespace UIA.Extensions.AutomationProviders.Tables
             {
                 var firstHeader = HeaderFor("value", 0);
                 var secondHeader = HeaderFor("value", 0);
-                firstHeader.Should().Equal(secondHeader);
+                firstHeader.ShouldBeEquivalentTo(secondHeader);
             }
 
             [Test]
             public void ItHashesTheCodes()
             {
-                HeaderFor("value", 7).GetHashCode().Should().Equal("value".GetHashCode() ^ 7.GetHashCode());
+                HeaderFor("value", 7).GetHashCode().ShouldBeEquivalentTo("value".GetHashCode() ^ 7.GetHashCode());
             }
         }
 
@@ -40,7 +40,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
             {
                 var firstHeader = HeaderFor("value", 0);
                 var secondHeader = HeaderFor("value", 1);
-                firstHeader.Should().Not.Equal(secondHeader);
+                firstHeader.Should().NotBe(secondHeader);
             }
 
             [Test]
@@ -48,7 +48,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
             {
                 var firstHeader = HeaderFor("value", 0);
                 var secondHeader = HeaderFor("other value", 0);
-                firstHeader.Should().Not.Equal(secondHeader);
+                firstHeader.Should().NotBe(secondHeader);
             }
         }
 

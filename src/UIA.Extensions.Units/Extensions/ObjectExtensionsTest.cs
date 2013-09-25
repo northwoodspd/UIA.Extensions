@@ -1,6 +1,6 @@
 ﻿using System;
+using FluentAssertions;
 using NUnit.Framework;
-using Should.Fluent;
 using UIA.Extensions.InternalExtensions;
 
 namespace UIA.Extensions.Extensions
@@ -13,27 +13,27 @@ namespace UIA.Extensions.Extensions
             [Test]
             public void NullComparisonsAreFalse()
             {
-                "".CeremoniallyEquals(null, TrueResult).Should().Be.False();
+                "".CeremoniallyEquals(null, TrueResult).Should().BeFalse();
             }
 
             [Test]
             public void LookInsideYourself()
             {
                 const string samesies = "";
-                samesies.CeremoniallyEquals(samesies, FalseResult).Should().Be.True();
+                samesies.CeremoniallyEquals(samesies, FalseResult).Should().BeTrue();
             }
 
             [Test]
             public void DifferentStrokes()
             {
-                "".CeremoniallyEquals(1, TrueResult).Should().Be.False();
+                "".CeremoniallyEquals(1, TrueResult).Should().BeFalse();
             }
 
             [Test]
             public void TheFinalExam()
             {
                 "thes are".CeremoniallyEquals("not the same, but whatever, return a", TrueResult)
-                  .Should().Be.True();
+                  .Should().BeTrue();
             }
 
             private static bool TrueResult(object obj)
@@ -55,7 +55,7 @@ namespace UIA.Extensions.Extensions
             {
                 var now = DateTime.Now;
                 "".CombinedHashCodes(123, "", now)
-                  .Should().Equal(123.GetHashCode() ^ "".GetHashCode() ^ now.GetHashCode());
+                  .ShouldBeEquivalentTo(123.GetHashCode() ^ "".GetHashCode() ^ now.GetHashCode());
             }
 
             [Test]
@@ -63,14 +63,14 @@ namespace UIA.Extensions.Extensions
             {
                 var sequence = new[] {"a", "b", "whatever"};
                 sequence.GetSequenceHashCode()
-                 .Should().Equal("a".GetHashCode() ^ "b".GetHashCode() ^ "whatever".GetHashCode());
+                 .ShouldBeEquivalentTo("a".GetHashCode() ^ "b".GetHashCode() ^ "whatever".GetHashCode());
             }
 
             [Test]
             public void NullsAreCool()
             {
                 "".CombinedHashCodes("", null, null)
-                  .Should().Equal("".GetHashCode());
+                  .ShouldBeEquivalentTo("".GetHashCode());
             }
         }
     }

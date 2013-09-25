@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
+using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using Should.Fluent;
 using UIA.Extensions.AutomationProviders.Interfaces.Tables;
 using UIA.Extensions.AutomationProviders.Tables.Stubs;
 using UIA.Extensions.InternalExtensions;
@@ -30,15 +30,15 @@ namespace UIA.Extensions.AutomationProviders.Tables
         public void ItIsOfTheDataItemIlk()
         {
             TableRowProvider.GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
-                .Should().Equal(ControlType.DataItem.Id);
+                .ShouldBeEquivalentTo(ControlType.DataItem.Id);
         }
 
         [Test]
         public void ItDoublesAsASelectionItem()
         {
-            TableRowProvider.Should().Be.AssignableFrom<ISelectionItemProvider>();
+            TableRowProvider.Should().BeAssignableTo<ISelectionItemProvider>();
             TableRowProvider.GetPatternProvider(SelectionItemPatternIdentifiers.Pattern.Id).Should()
-                .Be.SameAs(TableRowProvider);
+                .BeSameAs(TableRowProvider);
         }
 
         [Test]
@@ -54,15 +54,15 @@ namespace UIA.Extensions.AutomationProviders.Tables
         {
             TableRowProvider.Select();
 
-            TableRowProvider.IsSelected.Should().Be.True();
+            TableRowProvider.IsSelected.Should().BeTrue();
         }
 
         [Test]
         public void TheRowValuesAreTheChildren()
         {
             AddCells("item 1", "item 2", "item 3");
-            TableRowProvider.Children.Count.Should().Equal(3);
-            TableRowProvider.Children.Select(x => x.Name).Should().Equal(new[] { "item 1", "item 2", "item 3" });
+            TableRowProvider.Children.Count.ShouldBeEquivalentTo(3);
+            TableRowProvider.Children.Select(x => x.Name).ShouldBeEquivalentTo(new[] { "item 1", "item 2", "item 3" });
         }
 
         [Test]
@@ -71,7 +71,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
             var oneRow = RowWithCells("item 1", "item 2");
             var sameRow = RowWithCells("item 1", "item 2");
 
-            oneRow.Should().Equal(sameRow);
+            oneRow.ShouldBeEquivalentTo(sameRow);
         }
 
         private TableRowProvider _provider;

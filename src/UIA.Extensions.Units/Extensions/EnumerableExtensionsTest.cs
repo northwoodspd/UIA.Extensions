@@ -1,6 +1,6 @@
 ﻿using System;
+using FluentAssertions;
 using NUnit.Framework;
-using Should.Fluent;
 using UIA.Extensions.InternalExtensions;
 
 namespace UIA.Extensions.Extensions
@@ -14,19 +14,19 @@ namespace UIA.Extensions.Extensions
             public void CanFindItemsBeforeAValue()
             {
                 var values = new[] { "first", "second", "third" };
-                values.Before("second").Should().Equal("first");
+                values.Before("second").Should().BeEquivalentTo("first");
             }
 
             [Test]
             public void DefaultIfAtTheBeginning()
             {
-                new[] { 1, 3, 5 }.Before(1).Should().Equal(0);
+                new[] { 1, 3, 5 }.Before(1).ShouldBeEquivalentTo(0);
             }
 
             [Test]
             public void DefaultIfNotFound()
             {
-                new[] { "blar" }.Before(String.Empty).Should().Be.Null();
+                new[] {"blar"}.Before(String.Empty).Should().BeNull();
             }
         }
 
@@ -37,19 +37,19 @@ namespace UIA.Extensions.Extensions
             public void CanFindItemsAfter()
             {
                 var values = new[] { "first", "second", "third" };
-                values.After("second").Should().Equal("third");
+                values.After("second").Should().BeEquivalentTo("third");
             }
 
             [Test]
             public void DefaultIfAtTheEnd()
             {
-                new[] { 1, 3, 5 }.After(5).Should().Equal(0);
+                new[] { 1, 3, 5 }.After(5).ShouldBeEquivalentTo(0);
             }
 
             [Test]
             public void DefaultIfNotFound()
             {
-                new[] { "blar" }.After(String.Empty).Should().Be.Null();
+                new[] { "blar" }.After(String.Empty).Should().BeNull();
             }
         }
     

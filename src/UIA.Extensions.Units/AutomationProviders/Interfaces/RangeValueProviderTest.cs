@@ -1,8 +1,8 @@
 ﻿using System.Windows.Automation;
 using System.Windows.Automation.Provider;
 using System.Windows.Forms;
+using FluentAssertions;
 using NUnit.Framework;
-using Should.Fluent;
 
 namespace UIA.Extensions.AutomationProviders.Interfaces
 {
@@ -21,20 +21,20 @@ namespace UIA.Extensions.AutomationProviders.Interfaces
         public void ItHasTheCorrectPattern()
         {
             _provider.GetPatternProvider(RangeValuePatternIdentifiers.Pattern.Id)
-                .Should().Be.SameAs(_provider);
+                .Should().BeSameAs(_provider);
         }
 
         [Test]
         public void ItIsOfTypeSpinner()
         {
             _provider.GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
-                .Should().Equal(ControlType.Spinner.Id);
+                .ShouldBeEquivalentTo(ControlType.Spinner.Id);
         }
         
         [Test]
         public void ItCanDoWhatItSaysItCanDo()
         {
-            _provider.Should().Be.AssignableFrom<IRangeValueProvider>();
+            _provider.Should().BeAssignableTo<IRangeValueProvider>();
         }
 
         [TestFixture]
@@ -54,49 +54,49 @@ namespace UIA.Extensions.AutomationProviders.Interfaces
             public void ItHasValue()
             {
                 _rangeValue.Value = 7.2;
-                _provider.Value.Should().Equal(7.2);
+                _provider.Value.ShouldBeEquivalentTo(7.2);
             }
 
             [Test]
             public void ItCanSetValues()
             {
                 _provider.SetValue(123.0);
-                _rangeValue.Value.Should().Equal(123.0);
+                _rangeValue.Value.ShouldBeEquivalentTo(123.0);
             }
 
             [Test]
             public void ItKnowsIfItIsReadOnly()
             {
                 _rangeValue.IsReadOnly = true;
-                _provider.IsReadOnly.Should().Be.True();
+                _provider.IsReadOnly.Should().BeTrue();
             }
 
             [Test]
             public void ItKnowsTheMinimum()
             {
                 _rangeValue.Minimum = 7.2;
-                _provider.Minimum.Should().Equal(7.2);
+                _provider.Minimum.ShouldBeEquivalentTo(7.2);
             }
 
             [Test]
             public void ItKnowsTheMaximum()
             {
                 _rangeValue.Maximum = 7.2;
-                _provider.Maximum.Should().Equal(7.2);
+                _provider.Maximum.ShouldBeEquivalentTo(7.2);
             }
 
             [Test]
             public void ItKnowsLargeChangeIncrements()
             {
                 _rangeValue.LargeChange = 2.0;
-                _provider.LargeChange.Should().Equal(2.0);
+                _provider.LargeChange.ShouldBeEquivalentTo(2.0);
             }
 
             [Test]
             public void ItKnowsSmallChangeIncrements()
             {
                 _rangeValue.SmallChange = 1.0;
-                _provider.SmallChange.Should().Equal(1.0);
+                _provider.SmallChange.ShouldBeEquivalentTo(1.0);
             }
         }
 

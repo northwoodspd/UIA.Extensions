@@ -7,7 +7,7 @@
     <ProjectGuid>{F93524CD-06CE-495E-9E4D-43F496756C46}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UIA.Extensions</RootNamespace>
+    <RootNamespace>UIA.Extensions.Units</RootNamespace>
     <AssemblyName>UIA.Extensions.Units</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -31,15 +31,24 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>UIA.Extensions.Units.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentAssertions">
+      <HintPath>..\packages\FluentAssertions.2.1.0.0\lib\net35\FluentAssertions.dll</HintPath>
+    </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET35\Moq.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Should.Fluent">
-      <HintPath>..\packages\ShouldFluent.1.1.19\lib\Should.Fluent.dll</HintPath>
+    <Reference Include="Should">
+      <HintPath>..\packages\Should.1.1.20\lib\Should.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -74,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="UIA.Extensions.Units.snk" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UIA.Extensions\UIA.Extensions.csproj">
