@@ -6,7 +6,7 @@ using UIA.Extensions.AutomationProviders.Interfaces.Tables;
 
 namespace UIA.Extensions.AutomationProviders.Tables
 {
-    public class TableProvider : ControlProvider, ITableProvider
+    public class TableProvider : ControlProvider, ISelectionProvider, ITableProvider
     {
         private readonly TableInformation _tableInformation;
 
@@ -66,7 +66,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
 
         protected override List<int> SupportedPatterns
         {
-            get { return new List<int> { TablePatternIdentifiers.Pattern.Id, GridPatternIdentifiers.Pattern.Id }; }
+            get { return new List<int> { SelectionPattern.Pattern.Id, TablePatternIdentifiers.Pattern.Id, GridPatternIdentifiers.Pattern.Id }; }
         }
 
         public IRawElementProviderSimple GetItem(int row, int column)
@@ -84,5 +84,12 @@ namespace UIA.Extensions.AutomationProviders.Tables
             return HeaderProvider.Children.ToArray();
         }
         public RowOrColumnMajor RowOrColumnMajor { get; private set; }
+        public IRawElementProviderSimple[] GetSelection()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool CanSelectMultiple { get; private set; }
+        public bool IsSelectionRequired { get; private set; }
     }
 }

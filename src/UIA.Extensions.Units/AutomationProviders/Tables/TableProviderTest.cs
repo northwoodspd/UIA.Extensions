@@ -47,6 +47,13 @@ namespace UIA.Extensions.AutomationProviders.Tables
         }
 
         [Test]
+        public void ItHousesSelections()
+        {
+            _tableProvider.GetPatternProvider(SelectionPatternIdentifiers.Pattern.Id)
+                .Should().BeSameAs(_tableProvider);
+        }
+
+        [Test]
         public void ItHasTheRowCount()
         {
             _tableInformationStub.AddRows(7);
