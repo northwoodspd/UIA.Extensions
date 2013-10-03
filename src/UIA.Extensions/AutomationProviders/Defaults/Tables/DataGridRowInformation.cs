@@ -36,6 +36,11 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
             _dataGridViewRow.Selected = true;
         }
 
+        public override void AddToSelection()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public override bool IsSelected
         {
             get { return _dataGridViewRow.Selected; }

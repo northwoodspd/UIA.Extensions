@@ -9,6 +9,7 @@ namespace UIA.Extensions.AutomationProviders.Interfaces.Tables
         public abstract string Value { get; }
         public abstract List<CellInformation> Cells { get; }
         public abstract void Select();
+        public abstract void AddToSelection();
         public abstract bool IsSelected { get; }
 
         public override bool Equals(object obj)

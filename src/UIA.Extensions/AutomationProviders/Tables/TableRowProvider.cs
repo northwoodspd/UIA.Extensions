@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
 using UIA.Extensions.AutomationProviders.Interfaces.Tables;

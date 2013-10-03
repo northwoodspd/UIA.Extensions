@@ -44,6 +44,11 @@ namespace UIA.Extensions.AutomationProviders.Tables.Stubs
             _wasSelected = true;
         }
 
+        public override void AddToSelection()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public override bool IsSelected
         {
             get { return _wasSelected; }
