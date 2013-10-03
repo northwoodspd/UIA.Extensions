@@ -25,10 +25,20 @@ When(/^we select the item with the "([^"]*)" of "([^"]*)"$/) do |column, value|
   on(MainScreen).select_the_grid column.to_sym => value
 end
 
-Then(/^the row at index "([^"]*)" is selected$/) do |expected_index|
-  on(MainScreen).the_grid[expected_index.to_i].should be_selected
+Then(/^the rows? at index "([^"]*)" (is|are) selected$/) do |expected_indexes, _|
+  on(MainScreen) do |screen|
+    expected_indexes.split(', ').each do |expected_index|
+      screen.the_grid[expected_index.to_i].should be_selected
+    end
+  end
 end
 
 When(/^we update the headers$/) do
   on(MainScreen).update_headers
+end
+
+When(/^we select the items at indexes "([^"]*)"$/) do |which|
+  on(MainScreen) do |screen|
+    which.split(', ').map(&:to_i).each { |index| screen.select_the_grid(index) }
+  end
 end

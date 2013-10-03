@@ -22,6 +22,12 @@ Feature: Automating table controls
     When we select the item with the "age" of "3"
     Then the row at index "2" is selected
 
+  Scenario: Selecting multiple grid items
+    Given we add "4" rows to the table
+    When we select the items at indexes "2, 3"
+    Then the rows at index "2, 3" are selected
+
+
   Scenario: Changing Grid Items
     When we add "1" rows to the table
     Then the table should look like this:
