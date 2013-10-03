@@ -50,6 +50,13 @@ namespace UIA.Extensions.AutomationProviders.Tables
         }
 
         [Test]
+        public void ItCanAddToTheSelection()
+        {
+            TableRowProvider.AddToSelection();
+            _rowInformationStub.ShouldHaveBeenSelected();
+        }
+
+        [Test]
         public void ItKnowsIfItIsSelected()
         {
             TableRowProvider.Select();

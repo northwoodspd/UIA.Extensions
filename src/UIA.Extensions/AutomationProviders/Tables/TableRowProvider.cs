@@ -42,7 +42,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
 
         public void AddToSelection()
         {
-            throw new System.NotImplementedException();
+            _rowInformation.AddToSelection();
         }
 
         public void RemoveFromSelection()
