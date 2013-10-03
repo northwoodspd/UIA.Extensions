@@ -69,6 +69,18 @@ namespace UIA.Extensions.AutomationProviders.Tables
             get { return new List<int> { SelectionPattern.Pattern.Id, TablePatternIdentifiers.Pattern.Id, GridPatternIdentifiers.Pattern.Id }; }
         }
 
+        public bool CanSelectMultiple
+        {
+            get { return _tableInformation.CanSelectMultiple; }
+        }
+
+        public bool IsSelectionRequired { get; private set; }
+
+        public IRawElementProviderSimple[] GetSelection()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IRawElementProviderSimple GetItem(int row, int column)
         {
             throw new System.NotImplementedException();
@@ -84,12 +96,5 @@ namespace UIA.Extensions.AutomationProviders.Tables
             return HeaderProvider.Children.ToArray();
         }
         public RowOrColumnMajor RowOrColumnMajor { get; private set; }
-        public IRawElementProviderSimple[] GetSelection()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public bool CanSelectMultiple { get; private set; }
-        public bool IsSelectionRequired { get; private set; }
     }
 }

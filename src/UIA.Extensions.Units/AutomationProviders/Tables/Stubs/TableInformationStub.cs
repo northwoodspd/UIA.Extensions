@@ -30,6 +30,7 @@ namespace UIA.Extensions.AutomationProviders.Tables.Stubs
         }
 
         public List<RowInformation> Rows { get { return _rows; } }
+        public bool CanSelectMultiple { get; set; }
 
         public void AddHeaders(params string[] headers)
         {

@@ -67,6 +67,13 @@ namespace UIA.Extensions.AutomationProviders.Tables
             _tableProvider.ColumnCount.ShouldBeEquivalentTo(42);
         }
 
+        [Test]
+        public void ItKnowsIfMultipleSelectionsAreSupported()
+        {
+            _tableInformationStub.CanSelectMultiple = true;
+            _tableProvider.CanSelectMultiple.Should().BeTrue();
+        }
+
         [TestFixture]
         public class Headers
         {

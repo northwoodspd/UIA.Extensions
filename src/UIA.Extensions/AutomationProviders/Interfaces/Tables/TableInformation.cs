@@ -10,5 +10,6 @@ namespace UIA.Extensions.AutomationProviders.Interfaces.Tables
         Control Control { get; }
         List<string> Headers { get; }
         List<RowInformation> Rows { get; }
+        bool CanSelectMultiple { get; }
     }
 }
