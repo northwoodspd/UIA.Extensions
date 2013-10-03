@@ -1,7 +1,8 @@
-When(/^we add "([^"]*)"( more)? rows to the table$/) do |rows_to_add, moar_rows|
+When(/^we add "([^"]*)"( more)?( selected)? rows to the table$/) do |rows_to_add, _, should_select|
   on(MainScreen) do |screen|
     screen.how_many = rows_to_add
     screen.add_rows
+    screen.the_grid.each(&:select) if should_select
   end
 end
 
@@ -40,5 +41,19 @@ end
 When(/^we select the items at indexes "([^"]*)"$/) do |which|
   on(MainScreen) do |screen|
     which.split(', ').map(&:to_i).each { |index| screen.select_the_grid(index) }
+  end
+end
+
+When(/^we clear the items at indexes "([^"]*)"$/) do |which|
+  on(MainScreen) do |screen|
+    which.to_indexes.each {|i| screen.clear_the_grid(i) }
+  end
+end
+
+Then(/^only rows at indexes "([^"]*)" are selected$/) do |which|
+  expected_selections = which.to_indexes
+  on(MainScreen).the_grid.each_with_index do |row, index|
+    should_or_should_not = (expected_selections.include?(index) && :should) || :should_not
+    row.send(should_or_should_not, be_selected)
   end
 end

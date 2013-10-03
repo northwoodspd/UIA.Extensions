@@ -27,6 +27,10 @@ Feature: Automating table controls
     When we select the items at indexes "2, 3"
     Then the rows at index "2, 3" are selected
 
+  Scenario: Clearing items in the grid
+    Given we add "4" selected rows to the table
+    When we clear the items at indexes "0, 3"
+    Then only rows at indexes "1, 2" are selected
 
   Scenario: Changing Grid Items
     When we add "1" rows to the table
