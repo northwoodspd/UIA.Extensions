@@ -41,6 +41,11 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
             _dataGridViewRow.Selected = true;
         }
 
+        public override void ClearSelection()
+        {
+            _dataGridViewRow.Selected = false;
+        }
+
         public override bool IsSelected
         {
             get { return _dataGridViewRow.Selected; }

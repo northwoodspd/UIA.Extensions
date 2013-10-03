@@ -10,6 +10,7 @@ namespace UIA.Extensions.AutomationProviders.Interfaces.Tables
         public abstract List<CellInformation> Cells { get; }
         public abstract void Select();
         public abstract void AddToSelection();
+        public abstract void ClearSelection();
         public abstract bool IsSelected { get; }
 
         public override bool Equals(object obj)

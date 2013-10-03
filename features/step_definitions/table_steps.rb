@@ -54,6 +54,6 @@ Then(/^only rows at indexes "([^"]*)" are selected$/) do |which|
   expected_selections = which.to_indexes
   on(MainScreen).the_grid.each_with_index do |row, index|
     should_or_should_not = (expected_selections.include?(index) && :should) || :should_not
-    row.send(should_or_should_not, be_selected)
+    row.send(should_or_should_not, be_selected, "Expected row #{index} #{should_or_should_not} be selected")
   end
 end

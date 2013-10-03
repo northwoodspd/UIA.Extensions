@@ -7,6 +7,7 @@ namespace UIA.Extensions.AutomationProviders.Tables.Stubs
     public class RowInformationStub : RowInformation
     {
         private bool _wasSelected;
+        private bool _wasCleared;
         private string _value;
         private List<CellInformation> _cells;
 
@@ -49,6 +50,11 @@ namespace UIA.Extensions.AutomationProviders.Tables.Stubs
             _wasSelected = true;
         }
 
+        public override void ClearSelection()
+        {
+            _wasCleared = true;
+        }
+
         public override bool IsSelected
         {
             get { return _wasSelected; }
@@ -56,7 +62,12 @@ namespace UIA.Extensions.AutomationProviders.Tables.Stubs
 
         public void ShouldHaveBeenSelected()
         {
-            Assert.That(_wasSelected, Is.True, "Expected Select to have been called but it was not");
+            Assert.That(_wasSelected, Is.True, "Expected Select or AddToSelection to have been called but it was not");
+        }
+
+        public void ShouldHaveBeenCleared()
+        {
+            Assert.That(_wasCleared, Is.True, "Expected ClearSelection to have been called but it was not");
         }
     }
 }

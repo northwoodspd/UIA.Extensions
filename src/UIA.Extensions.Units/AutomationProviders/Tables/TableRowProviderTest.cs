@@ -57,6 +57,13 @@ namespace UIA.Extensions.AutomationProviders.Tables
         }
 
         [Test]
+        public void ItCanClearTheSelection()
+        {
+            TableRowProvider.RemoveFromSelection();
+            _rowInformationStub.ShouldHaveBeenCleared();
+        }
+
+        [Test]
         public void ItKnowsIfItIsSelected()
         {
             TableRowProvider.Select();

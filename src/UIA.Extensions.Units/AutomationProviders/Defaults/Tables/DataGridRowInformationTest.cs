@@ -48,6 +48,16 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
             otherSelected.Selected.Should().BeTrue();
         }
 
+        [Test]
+        public void TheSelectionCanBeCleared()
+        {
+            _rowInformation.AddToSelection();
+
+            _rowInformation.ClearSelection();
+
+            _rowInformation.IsSelected.Should().BeFalse();
+        }
+
         private void SetupTheTable()
         {
             _dataGridView = new DataGridView();

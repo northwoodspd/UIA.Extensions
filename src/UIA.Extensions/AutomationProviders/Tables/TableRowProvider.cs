@@ -47,7 +47,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
 
         public void RemoveFromSelection()
         {
-            throw new System.NotImplementedException();
+            _rowInformation.ClearSelection();
         }
 
         public IRawElementProviderSimple SelectionContainer { get; private set; }
