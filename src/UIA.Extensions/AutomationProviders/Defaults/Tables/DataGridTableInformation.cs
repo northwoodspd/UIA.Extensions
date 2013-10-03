@@ -30,7 +30,10 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
             get { return _dataGrid.Rows.Select(DataGridRowInformation.FromRow).ToList(); }
         }
 
-        public bool CanSelectMultiple { get; private set; }
+        public bool CanSelectMultiple
+        {
+            get { return _dataGrid.MultiSelect; }
+        }
 
         public int RowCount
         {
