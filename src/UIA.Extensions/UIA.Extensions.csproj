@@ -54,6 +54,7 @@
     <Compile Include="AutomationProviders\ChildProvider.cs" />
     <Compile Include="AutomationProviders\ControlProvider.cs" />
     <Compile Include="AutomationProviders\AutomationProvider.cs" />
+    <Compile Include="AutomationProviders\Interfaces\InvokeControl.cs" />
     <Compile Include="AutomationProviders\InvokeProvider.cs" />
     <Compile Include="AutomationProviders\Defaults\NumericUpDownRangeValue.cs" />
     <Compile Include="AutomationProviders\Defaults\Tables\DataGridCellInformation.cs" />

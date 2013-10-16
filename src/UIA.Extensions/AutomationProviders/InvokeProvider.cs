@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
 using System.Windows.Forms;
+using UIA.Extensions.AutomationProviders.Interfaces;
 
 namespace UIA.Extensions.AutomationProviders
 {
     public class InvokeProvider : ControlProvider, IInvokeProvider
     {
-        private readonly Action _invoke;
+        private readonly Action _invokable;
 
-        public InvokeProvider(Control control, Action invoke) : base(control)
+        public InvokeProvider(InvokeControl invokable) : base(invokable.Control)
         {
-            _invoke = invoke;
+            _invokable = invokable.Invoke;
+        }
+
+        public InvokeProvider(Control control, Action invokable) : base(control)
+        {
+            _invokable = invokable;
         }
 
         protected override List<int> SupportedPatterns
@@ -22,7 +28,7 @@ namespace UIA.Extensions.AutomationProviders
 
         public void Invoke()
         {
-            _invoke();
+            _invokable();
         }
     }
 }
