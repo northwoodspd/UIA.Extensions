@@ -12,5 +12,8 @@ class MainScreen
   table(:the_grid, :id => 'dataGridView')
   text(:how_many, :id => 'howManyToAdd')
 
+  control(:invokable_control, :id => 'pictureBox1')
+  label(:status, :id => 'StatusBar.Pane0')
+
   spinner(:range_value, :id => 'numericUpDown')
 end

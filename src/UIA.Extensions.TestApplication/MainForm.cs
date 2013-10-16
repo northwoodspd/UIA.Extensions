@@ -25,6 +25,8 @@ namespace UIA.Extensions.TestApplication
             dataGridView.DataSource = _bindingSource;
 
             _bindingSource.ListChanged += _bindingSource_ListChanged;
+
+            pictureBox1.AsInvoke(() => toolStripStatusLabel1.Text = "Foos have been pitied!");
         }
 
         void _bindingSource_ListChanged(object sender, System.ComponentModel.ListChangedEventArgs e)
