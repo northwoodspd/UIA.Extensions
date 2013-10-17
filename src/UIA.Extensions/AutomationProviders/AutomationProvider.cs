@@ -24,27 +24,26 @@ namespace UIA.Extensions.AutomationProviders
             SetPropertyValue(AutomationElementIdentifiers.AutomationIdProperty.Id, () => Id);
 
             _children = new List<AutomationProvider>();
-            _supportedPatterns = new List<int>();
+            SupportedPatterns = new List<int>();
 
             ControlType = ControlType.Custom;
         }
 
-        public AutomationProvider(AutomationProvider parent) : this()
+        public AutomationProvider(params AutomationPattern[] patterns) : this()
         {
-            Parent = parent;
+            patterns.ForEach(x => SupportedPatterns.Add(x.Id));
         }
 
-        protected AutomationProvider(params AutomationPattern[] patterns) : this()
+        public AutomationProvider(AutomationProvider parent, params AutomationPattern[] patterns) : this(patterns)
         {
-            patterns.ForEach(x => _supportedPatterns.Add(x.Id));
+            Parent = parent;
         }
 
         public virtual ControlType ControlType { get; set; }
         public virtual string Id { get; set; }
         public virtual string Name { get; set; }
 
-        private List<int> _supportedPatterns; 
-        protected virtual List<int> SupportedPatterns { get { return _supportedPatterns; } }
+        private List<int> SupportedPatterns { get; set; }
 
         public const int ProviderUseComThreading = 0x20;
 

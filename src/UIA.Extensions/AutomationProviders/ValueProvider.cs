@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Windows.Automation;
+﻿using System.Windows.Automation;
 using System.Windows.Automation.Provider;
 using UIA.Extensions.AutomationProviders.Interfaces;
 
@@ -9,14 +8,9 @@ namespace UIA.Extensions.AutomationProviders
     {
         private readonly ValueControl _valueControl;
 
-        public ValueProvider(ValueControl valueControl) : base(valueControl.Control)
+        public ValueProvider(ValueControl valueControl) : base(valueControl.Control, ValuePattern.Pattern)
         {
             _valueControl = valueControl;
-        }
-
-        protected override List<int> SupportedPatterns
-        {
-            get { return new List<int> { ValuePatternIdentifiers.Pattern.Id }; }
         }
 
         public void SetValue(string value)

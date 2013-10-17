@@ -10,7 +10,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
     {
         private readonly CellInformation _cell;
 
-        public TableCellProvider(AutomationProvider parent, CellInformation cell) : base(parent)
+        public TableCellProvider(AutomationProvider parent, CellInformation cell) : base(parent, TableItemPattern.Pattern, GridItemPattern.Pattern)
         {
             _cell = cell;
             ControlType = ControlType.Text;
@@ -19,11 +19,6 @@ namespace UIA.Extensions.AutomationProviders.Tables
         public override string Name
         {
             get { return _cell.Value; }
-        }
-
-        protected override List<int> SupportedPatterns
-        {
-            get { return new List<int> { TableItemPatternIdentifiers.Pattern.Id, GridItemPatternIdentifiers.Pattern.Id }; }
         }
 
         public int Row

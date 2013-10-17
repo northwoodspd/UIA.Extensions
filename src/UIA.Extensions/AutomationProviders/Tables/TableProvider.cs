@@ -10,7 +10,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
     {
         private readonly TableInformation _tableInformation;
 
-        public TableProvider(TableInformation tableInformation) : base(tableInformation.Control)
+        public TableProvider(TableInformation tableInformation) : base(tableInformation.Control, SelectionPattern.Pattern, TablePatternIdentifiers.Pattern, GridPatternIdentifiers.Pattern)
         {
             _tableInformation = tableInformation;
             SetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id, ControlType.Table.Id);
@@ -62,11 +62,6 @@ namespace UIA.Extensions.AutomationProviders.Tables
         public bool HasHeaders
         {
             get { return _tableInformation.Headers.Count != 0; }
-        }
-
-        protected override List<int> SupportedPatterns
-        {
-            get { return new List<int> { SelectionPattern.Pattern.Id, TablePatternIdentifiers.Pattern.Id, GridPatternIdentifiers.Pattern.Id }; }
         }
 
         public bool CanSelectMultiple

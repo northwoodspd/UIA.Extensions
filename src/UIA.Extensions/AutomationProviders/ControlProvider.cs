@@ -1,3 +1,4 @@
+using System.Windows.Automation;
 using System.Windows.Automation.Provider;
 using System.Windows.Forms;
 
@@ -8,6 +9,11 @@ namespace UIA.Extensions.AutomationProviders
         public readonly Control Control;
 
         public ControlProvider(Control control)
+        {
+            Control = control;
+        }
+
+        public ControlProvider(Control control, params AutomationPattern[] patterns) : base(patterns)
         {
             Control = control;
         }

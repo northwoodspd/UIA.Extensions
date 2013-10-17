@@ -201,11 +201,6 @@ namespace UIA.Extensions.AutomationProviders
                 _surroundings = new Dictionary<NavigateDirection, AutomationProvider>();
             }
 
-            protected override List<int> SupportedPatterns
-            {
-                get { throw new NotImplementedException(); }
-            }
-
             protected override IRawElementProviderFragment FirstChild
             {
                 get { return _surroundings[NavigateDirection.FirstChild]; }

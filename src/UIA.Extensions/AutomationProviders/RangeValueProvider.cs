@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Windows.Automation;
+﻿using System.Windows.Automation;
 using System.Windows.Automation.Provider;
 using UIA.Extensions.AutomationProviders.Interfaces;
 
@@ -9,15 +8,10 @@ namespace UIA.Extensions.AutomationProviders
     {
         private readonly RangeValueControl _rangeValue;
 
-        public RangeValueProvider(RangeValueControl rangeValue) : base(rangeValue.Control)
+        public RangeValueProvider(RangeValueControl rangeValue) : base(rangeValue.Control, RangeValuePattern.Pattern)
         {
             _rangeValue = rangeValue;
             ControlType = ControlType.Spinner;
-        }
-
-        protected override List<int> SupportedPatterns
-        {
-            get { return new List<int> { RangeValuePatternIdentifiers.Pattern.Id }; }
         }
 
         public void SetValue(double value)

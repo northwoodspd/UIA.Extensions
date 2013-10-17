@@ -11,19 +11,14 @@ namespace UIA.Extensions.AutomationProviders
     {
         private readonly Action _invokable;
 
-        public InvokeProvider(InvokeControl invokable) : base(invokable.Control)
+        public InvokeProvider(InvokeControl invokable) : base(invokable.Control, InvokePattern.Pattern)
         {
             _invokable = invokable.Invoke;
         }
 
-        public InvokeProvider(Control control, Action invokable) : base(control)
+        public InvokeProvider(Control control, Action invokable) : base(control, InvokePattern.Pattern)
         {
             _invokable = invokable;
-        }
-
-        protected override List<int> SupportedPatterns
-        {
-            get { return new List<int> { InvokePattern.Pattern.Id }; }
         }
 
         public void Invoke()

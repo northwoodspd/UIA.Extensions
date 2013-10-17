@@ -10,8 +10,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
     {
         private readonly RowInformation _rowInformation;
 
-        public TableRowProvider(AutomationProvider parent, RowInformation rowInformation)
-            : base(parent)
+        public TableRowProvider(AutomationProvider parent, RowInformation rowInformation) : base(parent, SelectionItemPattern.Pattern)
         {
             _rowInformation = rowInformation;
             Name = rowInformation.Value;
@@ -23,11 +22,6 @@ namespace UIA.Extensions.AutomationProviders.Tables
         public override string Name
         {
             get { return _rowInformation.Value; }
-        }
-
-        protected override List<int> SupportedPatterns
-        {
-            get { return new List<int> { SelectionItemPatternIdentifiers.Pattern.Id }; }
         }
 
         public bool IsSelected
