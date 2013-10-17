@@ -226,7 +226,7 @@ namespace UIA.Extensions.AutomationProviders
                 get { return _surroundings[NavigateDirection.PreviousSibling]; }
             }
 
-            protected override AutomationProvider Parent
+            public override AutomationProvider Parent
             {
                 get { return _surroundings[NavigateDirection.Parent]; }
             }

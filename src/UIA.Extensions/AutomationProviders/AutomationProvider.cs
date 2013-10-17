@@ -138,12 +138,18 @@ namespace UIA.Extensions.AutomationProviders
         }
 
 
-        protected virtual AutomationProvider Parent { get; set; }
+        public virtual AutomationProvider Parent { get; set; }
 
         private readonly List<AutomationProvider> _children = new List<AutomationProvider>();
         public virtual List<AutomationProvider> Children
         {
             get { return _children; }
+        }
+
+        public virtual void AddChild(AutomationProvider child)
+        {
+            child.Parent = this;
+            Children.Add(child);
         }
 
         public IRawElementProviderFragment ElementProviderFromPoint(double x, double y)

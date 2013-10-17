@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using UIA.Extensions.AutomationProviders;
+using UIA.Extensions.InternalExtensions;
 
 namespace UIA.Extensions
 {
@@ -25,6 +26,12 @@ namespace UIA.Extensions
         public AutomationConfigurer WithName(string name)
         {
             _controlProvider.Name = name;
+            return this;
+        }
+
+        public AutomationConfigurer WithChildren(params AutomationProvider[] children)
+        {
+            children.ForEach(_controlProvider.AddChild);
             return this;
         }
     }
