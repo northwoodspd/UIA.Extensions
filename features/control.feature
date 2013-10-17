@@ -7,3 +7,5 @@ Feature:  Exposing basic automation information from controls
       | control_name             | Custom Panel Name |
       | get_current_control_type | 50025             |
 
+  Scenario: Nesting children
+    Then we can add children automation providers
