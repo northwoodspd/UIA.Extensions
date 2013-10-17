@@ -1,0 +1,23 @@
+===	Verison 1.0.6 / 2013-10-17
+*	Enhancements
+	*	Added ability to implement an InvokeProvider
+	*	Added the ability to add child providers
+
+===	Verison 1.0.5 / 2013-10-03
+*	Enhancements
+	*	Added multi-select support to tables
+
+===	Verison 1.0.4 / 2013-09-25
+*	Enhancements
+	*	Made UIA.Extensions a strongly-named assembly
+
+===	Verison 1.0.3 / 2013-09-20
+*	Fixes
+	*	Fix issue when there are header items with the same text
+
+===	Verison 1.0.2 / 2013-09-20
+*	Fixes
+	*	Fixes issues with tables not refreshing when they are modified
+
+===	Version 1.0.1 / 2013-08-14
+Initial release.
