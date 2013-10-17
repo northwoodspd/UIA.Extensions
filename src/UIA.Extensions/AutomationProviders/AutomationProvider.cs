@@ -24,6 +24,7 @@ namespace UIA.Extensions.AutomationProviders
             SetPropertyValue(AutomationElementIdentifiers.AutomationIdProperty.Id, () => Id);
 
             _children = new List<AutomationProvider>();
+            _supportedPatterns = new List<int>();
 
             ControlType = ControlType.Custom;
         }
@@ -33,11 +34,17 @@ namespace UIA.Extensions.AutomationProviders
             Parent = parent;
         }
 
+        protected AutomationProvider(params AutomationPattern[] patterns) : this()
+        {
+            patterns.ForEach(x => _supportedPatterns.Add(x.Id));
+        }
+
         public virtual ControlType ControlType { get; set; }
         public virtual string Id { get; set; }
         public virtual string Name { get; set; }
 
-        protected virtual List<int> SupportedPatterns { get { return new List<int>(); } }
+        private List<int> _supportedPatterns; 
+        protected virtual List<int> SupportedPatterns { get { return _supportedPatterns; } }
 
         public const int ProviderUseComThreading = 0x20;
 
@@ -141,6 +148,7 @@ namespace UIA.Extensions.AutomationProviders
         public virtual AutomationProvider Parent { get; set; }
 
         private readonly List<AutomationProvider> _children = new List<AutomationProvider>();
+
         public virtual List<AutomationProvider> Children
         {
             get { return _children; }

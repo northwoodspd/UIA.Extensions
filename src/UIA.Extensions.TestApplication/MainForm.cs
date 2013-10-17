@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Automation.Provider;
 using System.Windows.Forms;
 using FizzWare.NBuilder;
-using UIA.Extensions.AutomationProviders;
 using UIA.Extensions.TestApplication.Implementations;
 
 namespace UIA.Extensions.TestApplication
@@ -63,29 +61,5 @@ namespace UIA.Extensions.TestApplication
                 column.HeaderText += " Updated";
             }
         }
-    }
-
-    static class Extensions
-    {
-        public static TextProvider TextProvider(this string value)
-        {
-            return new TextProvider { Value = value };
-        }
-    }
-
-    internal class TextProvider : AutomationProvider, IValueProvider
-    {
-        public override string Name
-        {
-            get { return Value; }
-        }
-
-        public void SetValue(string value)
-        {
-            Value = value;
-        }
-
-        public string Value { get; set; }
-        public bool IsReadOnly { get; private set; }
     }
 }
