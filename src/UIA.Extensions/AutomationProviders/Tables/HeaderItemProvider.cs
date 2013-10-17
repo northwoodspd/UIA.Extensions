@@ -3,7 +3,7 @@ using UIA.Extensions.InternalExtensions;
 
 namespace UIA.Extensions.AutomationProviders.Tables
 {
-    public class HeaderItemProvider : ChildProvider
+    public class HeaderItemProvider : AutomationProvider
     {
         public HeaderItemProvider(AutomationProvider headerProvider, string header, int index) : base(headerProvider)
         {
@@ -14,7 +14,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
 
         public override bool Equals(object obj)
         {
-            return this.CeremoniallyEquals(obj, (other) => Equals(Index, other.Index) && Equals(Name, other.Name));
+            return this.CeremoniallyEquals(obj, other => Equals(Index, other.Index) && Equals(Name, other.Name));
         }
 
         public override int GetHashCode()

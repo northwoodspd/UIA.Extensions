@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
 using System.Windows.Forms;
@@ -95,6 +96,97 @@ namespace UIA.Extensions.AutomationProviders
                 .Should().BeSameAs(expectedSurrounding.Object);
         }
 
+        [TestFixture]
+        public class ChildProviders
+        {
+            private Mock<AutomationProvider> _parent;
+            private AutomationProvider _childProvider;
+
+            [SetUp]
+            public void SetUp()
+            {
+                _parent = new Mock<AutomationProvider>();
+                _childProvider = new AutomationProvider(_parent.Object);
+            }
+
+            [Test]
+            public void HaveAParent()
+            {
+                _childProvider.Navigate(NavigateDirection.Parent)
+                    .Should().BeSameAs(_parent.Object);
+            }
+
+            [Test]
+            public void ItNeverForgetsItsRoots()
+            {
+                var expectedRoot = new Mock<AutomationProvider>();
+                _parent.Setup(x => x.FragmentRoot).Returns(expectedRoot.Object);
+
+                _childProvider.FragmentRoot.Should().BeSameAs(expectedRoot.Object);
+            }
+
+            [TestFixture]
+            public class Navigation
+            {
+                private Mock<AutomationProvider> _parent;
+                private readonly List<AutomationProvider> _chillins = new List<AutomationProvider>();
+
+                [SetUp]
+                public void SetUp()
+                {
+                    _parent = new Mock<AutomationProvider>();
+                    _parent.Setup(x => x.Children).Returns(_chillins);
+                }
+
+                [TearDown]
+                public void TearDown()
+                {
+                    _chillins.Clear();
+                }
+
+                [Test]
+                public void OneChildHasNoNextOrPrevious()
+                {
+                    var child = AddChild();
+                    Before(child).Should().BeNull();
+                    After(child).Should().BeNull();
+                }
+
+                [Test]
+                public void KnowsAboutTheNextChild()
+                {
+                    var first = AddChild();
+                    var second = AddChild();
+                    After(first).Should().BeSameAs(second);
+                }
+
+                [Test]
+                public void KnowsAboutThePreviousChild()
+                {
+                    var first = AddChild();
+                    var second = AddChild();
+                    Before(second).Should().BeSameAs(first);
+                }
+
+                private AutomationProvider AddChild()
+                {
+                    _chillins.Add(new AutomationProvider(_parent.Object));
+                    return _chillins.Last();
+                }
+
+                private static IRawElementProviderFragment Before(IRawElementProviderFragment child)
+                {
+                    return child.Navigate(NavigateDirection.PreviousSibling);
+                }
+
+                private static IRawElementProviderFragment After(IRawElementProviderFragment child)
+                {
+                    return child.Navigate(NavigateDirection.NextSibling);
+                }
+            }
+        }
+
+
         private static Mock<ControlProvider> GetMockChild()
         {
             return new Mock<ControlProvider>(new Control());
@@ -102,11 +194,11 @@ namespace UIA.Extensions.AutomationProviders
 
         public class TestAutomationProvider : AutomationProvider
         {
-            private readonly Dictionary<NavigateDirection, IRawElementProviderFragment> _surroundings;
+            private readonly Dictionary<NavigateDirection, AutomationProvider> _surroundings;
 
             public TestAutomationProvider()
             {
-                _surroundings = new Dictionary<NavigateDirection, IRawElementProviderFragment>();
+                _surroundings = new Dictionary<NavigateDirection, AutomationProvider>();
             }
 
             protected override List<int> SupportedPatterns
@@ -134,7 +226,7 @@ namespace UIA.Extensions.AutomationProviders
                 get { return _surroundings[NavigateDirection.PreviousSibling]; }
             }
 
-            protected override IRawElementProviderFragment Parent
+            protected override AutomationProvider Parent
             {
                 get { return _surroundings[NavigateDirection.Parent]; }
             }

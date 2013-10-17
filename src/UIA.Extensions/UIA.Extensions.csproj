@@ -51,7 +51,6 @@
     <Compile Include="AutomationConfigurer.cs" />
     <Compile Include="AutomationExtensions.cs" />
     <Compile Include="AutomationHandler.cs" />
-    <Compile Include="AutomationProviders\ChildProvider.cs" />
     <Compile Include="AutomationProviders\ControlProvider.cs" />
     <Compile Include="AutomationProviders\AutomationProvider.cs" />
     <Compile Include="AutomationProviders\Interfaces\InvokeControl.cs" />

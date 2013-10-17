@@ -20,8 +20,8 @@ namespace UIA.Extensions.AutomationProviders.Tables
         public int RowCount { get { return _tableInformation.RowCount; } }
         public int ColumnCount { get { return _tableInformation.ColumnCount; } }
 
-        private ChildProvider _headerProvider;
-        private ChildProvider HeaderProvider
+        private AutomationProvider _headerProvider;
+        private AutomationProvider HeaderProvider
         {
             get
             {
@@ -35,8 +35,8 @@ namespace UIA.Extensions.AutomationProviders.Tables
             }
         }
 
-        private List<ChildProvider> _rows = new List<ChildProvider>();
-        private IEnumerable<ChildProvider> RowProviders
+        private List<AutomationProvider> _rows = new List<AutomationProvider>();
+        private IEnumerable<AutomationProvider> RowProviders
         {
             get
             {
@@ -47,14 +47,14 @@ namespace UIA.Extensions.AutomationProviders.Tables
 
         private void UpdateRowsIfNecessary()
         {
-            var currentRows = _tableInformation.Rows.Select(x => new TableRowProvider(this, x)).Cast<ChildProvider>().ToList();
+            var currentRows = _tableInformation.Rows.Select(x => new TableRowProvider(this, x)).Cast<AutomationProvider>().ToList();
             if (!_rows.SequenceEqual(currentRows))
             {
                 _rows = currentRows;
             }
         }
 
-        public override List<ChildProvider> Children
+        public override List<AutomationProvider> Children
         {
             get { return new[] { HeaderProvider }.Concat(RowProviders).Where(x => null != x).ToList(); }
         }

@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
+using UIA.Extensions.InternalExtensions;
 
 namespace UIA.Extensions.AutomationProviders
 {
@@ -22,9 +23,14 @@ namespace UIA.Extensions.AutomationProviders
             SetPropertyValue(AutomationElementIdentifiers.NameProperty.Id, () => Name);
             SetPropertyValue(AutomationElementIdentifiers.AutomationIdProperty.Id, () => Id);
 
-            _children = new List<ChildProvider>();
+            _children = new List<AutomationProvider>();
 
             ControlType = ControlType.Custom;
+        }
+
+        public AutomationProvider(AutomationProvider parent) : this()
+        {
+            Parent = parent;
         }
 
         public virtual ControlType ControlType { get; set; }
@@ -52,7 +58,7 @@ namespace UIA.Extensions.AutomationProviders
 
         public virtual IRawElementProviderFragmentRoot FragmentRoot
         {
-            get { return this; }
+            get { return Parent.FragmentRoot ?? this; }
         }
 
         public object GetPropertyValue(int propertyId)
@@ -123,22 +129,19 @@ namespace UIA.Extensions.AutomationProviders
 
         protected virtual IRawElementProviderFragment NextSibling
         {
-            get { return null; }
+            get { return Parent.Children.After(this); }
         }
 
         protected virtual IRawElementProviderFragment PreviousSibling
         {
-            get { return null; }
+            get { return Parent.Children.Before(this); }
         }
 
 
-        protected virtual IRawElementProviderFragment Parent
-        {
-            get { return null; }
-        }
+        protected virtual AutomationProvider Parent { get; set; }
 
-        protected readonly List<ChildProvider> _children = new List<ChildProvider>();
-        public virtual List<ChildProvider> Children
+        private readonly List<AutomationProvider> _children = new List<AutomationProvider>();
+        public virtual List<AutomationProvider> Children
         {
             get { return _children; }
         }

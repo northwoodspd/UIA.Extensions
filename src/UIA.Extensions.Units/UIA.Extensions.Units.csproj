@@ -63,7 +63,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutomationProviders\AutomationProviderTest.cs" />
-    <Compile Include="AutomationProviders\ChildProviderTest.cs" />
     <Compile Include="AutomationProviders\ControlProviderTest.cs" />
     <Compile Include="AutomationProviders\InvokeProviderTest.cs" />
     <Compile Include="AutomationProviders\Defaults\NumericUpDownRangeValueTest.cs" />

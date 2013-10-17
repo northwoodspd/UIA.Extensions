@@ -8,8 +8,8 @@ namespace UIA.Extensions.AutomationProviders.Tables.Stubs
     {
         private bool _wasSelected;
         private bool _wasCleared;
-        private string _value;
-        private List<CellInformation> _cells;
+        private readonly string _value;
+        private readonly List<CellInformation> _cells;
 
         public RowInformationStub()
             : this("Default")

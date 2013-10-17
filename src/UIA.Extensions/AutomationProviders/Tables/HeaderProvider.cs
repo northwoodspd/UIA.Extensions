@@ -5,7 +5,7 @@ using UIA.Extensions.InternalExtensions;
 
 namespace UIA.Extensions.AutomationProviders.Tables
 {
-    public class HeaderProvider : ChildProvider
+    public class HeaderProvider : AutomationProvider
     {
         public HeaderProvider(AutomationProvider automationProvider, IEnumerable<string> headers) : base(automationProvider)
         {
@@ -15,7 +15,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
 
         public override bool Equals(object obj)
         {
-            return this.CeremoniallyEquals(obj, (other) => Children.SequenceEqual(other.Children));
+            return this.CeremoniallyEquals(obj, other => Children.SequenceEqual(other.Children));
         }
 
         public override int GetHashCode()

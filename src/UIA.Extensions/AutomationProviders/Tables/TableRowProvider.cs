@@ -6,7 +6,7 @@ using UIA.Extensions.InternalExtensions;
 
 namespace UIA.Extensions.AutomationProviders.Tables
 {
-    public class TableRowProvider : ChildProvider, ISelectionItemProvider
+    public class TableRowProvider : AutomationProvider, ISelectionItemProvider
     {
         private readonly RowInformation _rowInformation;
 
@@ -54,7 +54,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
 
         public override bool Equals(object obj)
         {
-            return this.CeremoniallyEquals(obj, (other) => Equals(_rowInformation, other._rowInformation));
+            return this.CeremoniallyEquals(obj, other => Equals(_rowInformation, other._rowInformation));
         }
 
         public override int GetHashCode()

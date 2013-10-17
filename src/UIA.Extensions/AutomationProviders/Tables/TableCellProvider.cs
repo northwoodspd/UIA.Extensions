@@ -6,7 +6,7 @@ using UIA.Extensions.AutomationProviders.Interfaces.Tables;
 
 namespace UIA.Extensions.AutomationProviders.Tables
 {
-    public class TableCellProvider : ChildProvider, ITableItemProvider
+    public class TableCellProvider : AutomationProvider, ITableItemProvider
     {
         private readonly CellInformation _cell;
 

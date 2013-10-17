@@ -15,7 +15,7 @@ namespace UIA.Extensions.AutomationProviders.Interfaces.Tables
 
         public override bool Equals(object obj)
         {
-            return this.CeremoniallyEquals(obj, (other) => Equals(Value, other.Value) && Cells.SequenceEqual(other.Cells));
+            return this.CeremoniallyEquals(obj, other => Equals(Value, other.Value) && Cells.SequenceEqual(other.Cells));
         }
 
         public override int GetHashCode()
