@@ -11,7 +11,7 @@
     <iconUrl>http://www.gravatar.com/avatar/168ea36931db8b19d9e3ec1566075b2f.jpg</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Added multi-select support to tables</releaseNotes>
+    <releaseNotes>Added the ability for a provider to have children as well as an interface for the InvokePattern.</releaseNotes>
     <copyright>Copyright 2013</copyright>
     <tags>UIA UIAutomation Automation WinForms Accessibility</tags>
   </metadata>
