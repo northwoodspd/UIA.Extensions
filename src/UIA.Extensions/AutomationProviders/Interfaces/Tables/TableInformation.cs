@@ -3,13 +3,13 @@ using System.Windows.Forms;
 
 namespace UIA.Extensions.AutomationProviders.Interfaces.Tables
 {
-    public interface TableInformation
+    public abstract class TableInformation
     {
-        int RowCount { get; }
-        int ColumnCount { get; }
-        Control Control { get; }
-        List<string> Headers { get; }
-        List<RowInformation> Rows { get; }
-        bool CanSelectMultiple { get; }
+        public abstract int RowCount { get; }
+        public abstract int ColumnCount { get; }
+        public abstract Control Control { get; }
+        public abstract List<string> Headers { get; }
+        public abstract List<RowInformation> Rows { get; }
+        public abstract bool CanSelectMultiple { get; }
     }
 }

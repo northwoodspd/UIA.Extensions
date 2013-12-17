@@ -15,32 +15,32 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
             _dataGrid = dataGrid;
         }
 
-        public Control Control
+        public override Control Control
         {
             get { return _dataGrid; }
         }
 
-        public List<string> Headers
+        public override List<string> Headers
         {
             get { return _dataGrid.Columns.Select(x => x.HeaderText).ToList(); }
         }
 
-        public List<RowInformation> Rows
+        public override List<RowInformation> Rows
         {
             get { return _dataGrid.Rows.Select(DataGridRowInformation.FromRow).ToList(); }
         }
 
-        public bool CanSelectMultiple
+        public override bool CanSelectMultiple
         {
             get { return _dataGrid.MultiSelect; }
         }
 
-        public int RowCount
+        public override int RowCount
         {
             get { return _dataGrid.RowCount; }
         }
 
-        public int ColumnCount
+        public override int ColumnCount
         {
             get { return _dataGrid.ColumnCount; }
         }

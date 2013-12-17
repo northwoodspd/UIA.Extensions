@@ -70,7 +70,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
         [Test]
         public void ItKnowsIfMultipleSelectionsAreSupported()
         {
-            _tableInformationStub.CanSelectMultiple = true;
+            _tableInformationStub.OverriddenCanSelectMultiple = true;
             _tableProvider.CanSelectMultiple.Should().BeTrue();
         }
 

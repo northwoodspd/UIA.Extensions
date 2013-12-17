@@ -16,21 +16,23 @@ namespace UIA.Extensions.AutomationProviders.Tables.Stubs
             _rows = new List<RowInformation>();
         }
 
-        public int RowCount { get { return _rows.Count; } }
-        public int ColumnCount { get { return _headers.Count; } }
+        public override int RowCount { get { return _rows.Count; } }
+        public override int ColumnCount { get { return _headers.Count; } }
 
-        public Control Control
+        public override Control Control
         {
             get { return new Control(); }
         }
 
-        public List<string> Headers
+        public override List<string> Headers
         {
             get { return _headers; }
         }
 
-        public List<RowInformation> Rows { get { return _rows; } }
-        public bool CanSelectMultiple { get; set; }
+        public override List<RowInformation> Rows { get { return _rows; } }
+
+        public bool OverriddenCanSelectMultiple { get; set; }
+        public override bool CanSelectMultiple { get { return OverriddenCanSelectMultiple; } }
 
         public void AddHeaders(params string[] headers)
         {
