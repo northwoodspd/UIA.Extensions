@@ -7,11 +7,11 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
 {
     public class DataGridCellInformation : CellInformation
     {
-        private readonly DataGridViewCell _cell;
+        protected readonly DataGridViewCell Cell;
 
-        private DataGridCellInformation(DataGridViewCell cell)
+        public DataGridCellInformation(DataGridViewCell cell)
         {
-            _cell = cell;
+            Cell = cell;
         }
 
         public static CellInformation FromCell(DataGridViewCell cell)
@@ -21,23 +21,23 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
 
         public override string Value
         {
-            get { return (_cell.Value ?? "").ToString(); }
+            get { return (Cell.Value ?? "").ToString(); }
         }
 
         public override int Row
         {
-            get { return _cell.RowIndex; }
+            get { return Cell.RowIndex; }
         }
 
 
         public override int Column
         {
-            get { return _cell.ColumnIndex; }
+            get { return Cell.ColumnIndex; }
         }
 
         public override Rect Location
         {
-            get { return _cell.DataGridView.GetCellDisplayRectangle(Column, Row, false).AsWindowsRect(); }
+            get { return Cell.DataGridView.GetCellDisplayRectangle(Column, Row, false).AsWindowsRect(); }
         }
     }
 }

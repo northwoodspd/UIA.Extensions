@@ -8,11 +8,11 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
 {
     public class DataGridRowInformation : RowInformation
     {
-        private readonly DataGridViewRow _dataGridViewRow;
+        protected readonly DataGridViewRow DataGridViewRow;
 
-        private DataGridRowInformation(DataGridViewRow dataGridViewRow)
+        public DataGridRowInformation(DataGridViewRow dataGridViewRow)
         {
-            _dataGridViewRow = dataGridViewRow;
+            DataGridViewRow = dataGridViewRow;
         }
 
         public static RowInformation FromRow(DataGridViewRow row)
@@ -27,28 +27,28 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
 
         public override List<CellInformation> Cells
         {
-            get { return _dataGridViewRow.Cells.Select(DataGridCellInformation.FromCell).ToList(); }
+            get { return DataGridViewRow.Cells.Select(DataGridCellInformation.FromCell).ToList(); }
         }
 
         public override void Select()
         {
-            _dataGridViewRow.DataGridView.ClearSelection();
-            _dataGridViewRow.Selected = true;
+            DataGridViewRow.DataGridView.ClearSelection();
+            DataGridViewRow.Selected = true;
         }
 
         public override void AddToSelection()
         {
-            _dataGridViewRow.Selected = true;
+            DataGridViewRow.Selected = true;
         }
 
         public override void ClearSelection()
         {
-            _dataGridViewRow.Selected = false;
+            DataGridViewRow.Selected = false;
         }
 
         public override bool IsSelected
         {
-            get { return _dataGridViewRow.Selected; }
+            get { return DataGridViewRow.Selected; }
         }
     }
 }
