@@ -11,7 +11,7 @@
     <iconUrl>http://www.gravatar.com/avatar/168ea36931db8b19d9e3ec1566075b2f.jpg</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Expose base class for TableInformation so that it can be extended.</releaseNotes>
+    <releaseNotes>Fix some issues with the default DataGridView provider information</releaseNotes>
     <copyright>Copyright 2013</copyright>
     <tags>UIA UIAutomation Automation WinForms Accessibility</tags>
   </metadata>
