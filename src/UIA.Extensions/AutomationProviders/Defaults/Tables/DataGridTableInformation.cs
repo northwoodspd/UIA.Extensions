@@ -8,41 +8,41 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
 {
     public class DataGridTableInformation : TableInformation
     {
-        private readonly DataGridView _dataGrid;
+        protected readonly DataGridView DataGrid;
 
         public DataGridTableInformation(DataGridView dataGrid)
         {
-            _dataGrid = dataGrid;
+            DataGrid = dataGrid;
         }
 
         public override Control Control
         {
-            get { return _dataGrid; }
+            get { return DataGrid; }
         }
 
         public override List<string> Headers
         {
-            get { return _dataGrid.Columns.Select(HeaderTextOrColumnName).ToList(); }
+            get { return DataGrid.Columns.Select(HeaderTextOrColumnName).ToList(); }
         }
 
         public override List<RowInformation> Rows
         {
-            get { return _dataGrid.Rows.Select(DataGridRowInformation.FromRow).ToList(); }
+            get { return DataGrid.Rows.Select(DataGridRowInformation.FromRow).ToList(); }
         }
 
         public override bool CanSelectMultiple
         {
-            get { return _dataGrid.MultiSelect; }
+            get { return DataGrid.MultiSelect; }
         }
 
         public override int RowCount
         {
-            get { return _dataGrid.RowCount; }
+            get { return DataGrid.RowCount; }
         }
 
         public override int ColumnCount
         {
-            get { return _dataGrid.ColumnCount; }
+            get { return DataGrid.ColumnCount; }
         }
 
         private static string HeaderTextOrColumnName(DataGridViewColumn column)
