@@ -32,6 +32,13 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
             _cellInformation.Value.Should().BeEmpty();
         }
 
+        [Test]
+        public void NonStringsAreValuesToo()
+        {
+            _cell.Value = 123;
+            _cellInformation.Value.Should().BeEquivalentTo("123");
+        }
+
         class TestCell : DataGridViewCell
         { }
     }

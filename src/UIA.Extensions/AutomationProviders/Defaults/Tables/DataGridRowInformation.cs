@@ -22,7 +22,7 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
 
         public override string Value
         {
-            get { return _dataGridViewRow.Cells[0].Value as string; }
+            get { return Cells[0].Value; }
         }
 
         public override List<CellInformation> Cells
