@@ -22,7 +22,7 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
 
         public override List<string> Headers
         {
-            get { return _dataGrid.Columns.Select(x => x.HeaderText).ToList(); }
+            get { return _dataGrid.Columns.Select(HeaderTextOrColumnName).ToList(); }
         }
 
         public override List<RowInformation> Rows
@@ -43,6 +43,11 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
         public override int ColumnCount
         {
             get { return _dataGrid.ColumnCount; }
+        }
+
+        private static string HeaderTextOrColumnName(DataGridViewColumn column)
+        {
+            return string.IsNullOrEmpty(column.HeaderText) ? column.Name : column.HeaderText;
         }
     }
 }
