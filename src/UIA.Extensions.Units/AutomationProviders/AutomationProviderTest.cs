@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
 using System.Windows.Forms;
@@ -170,20 +169,12 @@ namespace UIA.Extensions.AutomationProviders
             [TestFixture]
             public class Navigation
             {
-                private Mock<AutomationProvider> _parent;
-                private readonly List<AutomationProvider> _chillins = new List<AutomationProvider>();
+                private AutomationProvider _parent;
 
                 [SetUp]
                 public void SetUp()
                 {
-                    _parent = new Mock<AutomationProvider>();
-                    _parent.Setup(x => x.Children).Returns(_chillins);
-                }
-
-                [TearDown]
-                public void TearDown()
-                {
-                    _chillins.Clear();
+                    _parent = new AutomationProvider();
                 }
 
                 [Test]
@@ -212,8 +203,9 @@ namespace UIA.Extensions.AutomationProviders
 
                 private AutomationProvider AddChild()
                 {
-                    _chillins.Add(new AutomationProvider(_parent.Object));
-                    return _chillins.Last();
+                    var child = new AutomationProvider();
+                    _parent.AddChild(child);
+                    return child;
                 }
 
                 private static IRawElementProviderFragment Before(IRawElementProviderFragment child)
@@ -227,7 +219,6 @@ namespace UIA.Extensions.AutomationProviders
                 }
             }
         }
-
 
         private static Mock<ControlProvider> GetMockChild()
         {
