@@ -163,6 +163,7 @@ namespace UIA.Extensions.AutomationProviders
         public virtual void AddChild(AutomationProvider child)
         {
             child.Parent = this;
+            child.RuntimeId = Children.Count;
             Children.Add(child);
         }
 

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
 using System.Windows.Forms;
@@ -121,6 +122,16 @@ namespace UIA.Extensions.AutomationProviders
                 _automationProvider.RuntimeId = 123;
 
                 child.GetRuntimeId().Should().Equal(new[] { AutomationInteropProvider.AppendRuntimeId, 123, 0 });
+            }
+
+            [Test]
+            public void AppendedChildrenGetTheirRuntimeIdsUpdated()
+            {
+                _automationProvider.AddChild(new AutomationProvider());
+                _automationProvider.AddChild(new AutomationProvider());
+                _automationProvider.AddChild(new AutomationProvider());
+
+                _automationProvider.Children.Select(x => x.RuntimeId).Should().Equal(new[] {0, 1, 2});
             }
         }
 
