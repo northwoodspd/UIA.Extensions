@@ -1,3 +1,7 @@
+===	Version 1.0.8 / 2014-2-5
+*	Enhancements
+	*	Modified the way that runtime ids are generated for automation elements
+
 === Version 1.0.7 / 2013-12-17
 *	Enhancements
 	*	Added the ability to override the default DataGridViewTableInformation
