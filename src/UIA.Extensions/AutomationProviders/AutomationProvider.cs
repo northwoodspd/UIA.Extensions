@@ -29,12 +29,14 @@ namespace UIA.Extensions.AutomationProviders
             ControlType = ControlType.Custom;
         }
 
-        public AutomationProvider(params AutomationPattern[] patterns) : this()
+        public AutomationProvider(params AutomationPattern[] patterns)
+            : this()
         {
             patterns.ForEach(x => SupportedPatterns.Add(x.Id));
         }
 
-        public AutomationProvider(AutomationProvider parent, params AutomationPattern[] patterns) : this(patterns)
+        public AutomationProvider(AutomationProvider parent, params AutomationPattern[] patterns)
+            : this(patterns)
         {
             Parent = parent;
         }
@@ -64,7 +66,7 @@ namespace UIA.Extensions.AutomationProviders
 
         public virtual IRawElementProviderFragmentRoot FragmentRoot
         {
-            get { return Parent.FragmentRoot ?? this; }
+            get { return null == Parent ? this : Parent.FragmentRoot ?? this; }
         }
 
         public object GetPropertyValue(int propertyId)
@@ -95,9 +97,14 @@ namespace UIA.Extensions.AutomationProviders
             return null;
         }
 
+        public int RuntimeId { get; set; }
+
         public int[] GetRuntimeId()
         {
-            return new[] { GetHashCode() };
+            if (HasWindowHandle)
+                return null;
+
+            return ParentRuntimeIdOrDefault.Concat(new[] { RuntimeId }).ToArray();
         }
 
         public void SetFocus()
@@ -167,6 +174,16 @@ namespace UIA.Extensions.AutomationProviders
         public IRawElementProviderFragment GetFocus()
         {
             return null;
+        }
+
+        private bool HasWindowHandle
+        {
+            get { return null != GetPropertyValue(AutomationElementIdentifiers.NativeWindowHandleProperty.Id); }
+        }
+
+        private IEnumerable<int> ParentRuntimeIdOrDefault
+        {
+            get { return null == Parent ? new[] {AutomationInteropProvider.AppendRuntimeId} : Parent.GetRuntimeId(); }
         }
     }
 }

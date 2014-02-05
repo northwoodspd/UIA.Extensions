@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Automation;
@@ -19,6 +18,13 @@ namespace UIA.Extensions.AutomationProviders
         public void SetUp()
         {
             _automationProvider = new TestAutomationProvider();
+        }
+
+        [Test]
+        public void IfYouHaveNoRootsYouMustHaveStartedItAll()
+        {
+            var provider = new AutomationProvider();
+            provider.FragmentRoot.Should().Be(provider);
         }
 
         [Test]
@@ -81,6 +87,42 @@ namespace UIA.Extensions.AutomationProviders
             _automationProvider.SetPropertyValue(AutomationElementIdentifiers.ClassNameProperty.Id, "ExpectedPropertyValue");
             _automationProvider.GetPropertyValue(AutomationElementIdentifiers.ClassNameProperty.Id)
                 .ShouldBeEquivalentTo("ExpectedPropertyValue");
+        }
+
+        [TestFixture]
+        public class RuntimeIds
+        {
+            private AutomationProvider _automationProvider;
+
+            [SetUp]
+            public void SetUp()
+            {
+                _automationProvider = new AutomationProvider();
+            }
+
+            [Test]
+            public void NativeWindowsNeedNoRuntimeId()
+            {
+                _automationProvider.SetPropertyValue(AutomationElementIdentifiers.NativeWindowHandleProperty.Id, 123);
+                _automationProvider.GetRuntimeId().Should().BeNull();
+            }
+
+            [Test]
+            public void IndividualElementsAppendTheirOwnRuntimeId()
+            {
+                _automationProvider.RuntimeId = 123;
+                _automationProvider.GetRuntimeId().Should().Equal(new[] { AutomationInteropProvider.AppendRuntimeId, 123 });
+            }
+
+            [Test]
+            public void ChildElementsAppendTheirsToTheirParents()
+            {
+                var child = new AutomationProvider();
+                _automationProvider.AddChild(child);
+                _automationProvider.RuntimeId = 123;
+
+                child.GetRuntimeId().Should().Equal(new[] { AutomationInteropProvider.AppendRuntimeId, 123, 0 });
+            }
         }
 
         [TestCase(NavigateDirection.FirstChild)]
