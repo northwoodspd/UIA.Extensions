@@ -9,7 +9,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
     {
         public HeaderProvider(AutomationProvider automationProvider, IEnumerable<string> headers) : base(automationProvider)
         {
-            headers.ForEachWithIndex( (header, index) => Children.Add(new HeaderItemProvider(this, header, index)));
+            headers.ForEachWithIndex( (header, index) => AddChild(new HeaderItemProvider(this, header, index)));
             ControlType = ControlType.Header;
         }
 

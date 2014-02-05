@@ -16,11 +16,12 @@ namespace UIA.Extensions.AutomationProviders.Tables
     {
         private RowInformationStub _rowInformationStub;
         private Mock<AutomationProvider> _parent;
-        private readonly List<CellInformation> _values = new List<CellInformation>();
+        private List<CellInformation> _values;
 
         [SetUp]
         public void SetUp()
         {
+            _values = new List<CellInformation>();
             _provider = null;
             _rowInformationStub = new RowInformationStub(_values);
             _parent = new Mock<AutomationProvider>();
@@ -77,6 +78,13 @@ namespace UIA.Extensions.AutomationProviders.Tables
             AddCells("item 1", "item 2", "item 3");
             TableRowProvider.Children.Count.ShouldBeEquivalentTo(3);
             TableRowProvider.Children.Select(x => x.Name).ShouldBeEquivalentTo(new[] { "item 1", "item 2", "item 3" });
+        }
+
+        [Test]
+        public void ChildrenHaveTheCorrectRuntimeIds()
+        {
+            AddCells("item 1", "item 2", "item 3");
+            TableRowProvider.Children.Select(x => x.RuntimeId).Should().Equal(new[] {0, 1, 2});
         }
 
         [Test]

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
 using UIA.Extensions.AutomationProviders.Interfaces.Tables;
+using UIA.Extensions.InternalExtensions;
 
 namespace UIA.Extensions.AutomationProviders.Tables
 {
@@ -56,7 +57,12 @@ namespace UIA.Extensions.AutomationProviders.Tables
 
         public override List<AutomationProvider> Children
         {
-            get { return new[] { HeaderProvider }.Concat(RowProviders).Where(x => null != x).ToList(); }
+            get
+            {
+                var children = new[] {HeaderProvider}.Concat(RowProviders).Where(x => null != x).ToList();
+                children.ForEachWithIndex((x, index) => x.RuntimeId = index);
+                return children;
+            }
         }
 
         public bool HasHeaders

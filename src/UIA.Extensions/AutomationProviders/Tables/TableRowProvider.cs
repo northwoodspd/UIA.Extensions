@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Windows.Automation;
+﻿using System.Windows.Automation;
 using System.Windows.Automation.Provider;
 using UIA.Extensions.AutomationProviders.Interfaces.Tables;
 using UIA.Extensions.InternalExtensions;
@@ -16,7 +15,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
             Name = rowInformation.Value;
             ControlType = ControlType.DataItem;
 
-            rowInformation.Cells.ForEach(x => Children.Add(new TableCellProvider(this, x)));
+            rowInformation.Cells.ForEach(x => AddChild(new TableCellProvider(this, x)));
         }
 
         public override string Name

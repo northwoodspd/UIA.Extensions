@@ -74,6 +74,14 @@ namespace UIA.Extensions.AutomationProviders.Tables
             _tableProvider.CanSelectMultiple.Should().BeTrue();
         }
 
+        [Test]
+        public void ImmediateChildrenHaveProperRuntimeIds()
+        {
+            _tableInformationStub.AddHeaders("Header");
+            _tableInformationStub.AddRows(5);
+            _tableProvider.Children.Select(x => x.RuntimeId).Should().Equal(Enumerable.Range(0, 6));
+        }
+
         [TestFixture]
         public class Headers
         {

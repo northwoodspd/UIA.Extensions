@@ -29,21 +29,28 @@ namespace UIA.Extensions.AutomationProviders.Tables
         public void ItHasHeaderItemChildren()
         {
             _headers.AddRange(new[] { "first", "second", "other" });
-            HeaderProvider.Children.TrueForAll(x => x.GetType() == typeof (HeaderItemProvider)).Should().BeTrue();
+            HeaderProvider.Children.TrueForAll(x => x.GetType() == typeof(HeaderItemProvider)).Should().BeTrue();
+        }
+
+        [Test]
+        public void ChildrenHaveTheCorrectRuntimeIds()
+        {
+            _headers.AddRange(new[] { "one", "two", "three" });
+            HeaderProvider.Children.Select(x => x.RuntimeId).Should().Equal(new[] { 0, 1, 2 });
         }
 
         [Test]
         public void TheHeaderStringsAreTheChildren()
         {
             _headers.AddRange(new[] { "first", "second", "other" });
-            HeaderProvider.Children.Select(x => x.Name).ShouldBeEquivalentTo(new[] {"first", "second", "other"});
+            HeaderProvider.Children.Select(x => x.Name).ShouldBeEquivalentTo(new[] { "first", "second", "other" });
         }
 
         [Test]
         public void SameHeadersAreEqualInTheEyesOfUs()
         {
-            var firstHeader = new HeaderProvider(null, new[] {"first", "second"});
-            var secondHeader = new HeaderProvider(null, new[] {"first", "second"});
+            var firstHeader = new HeaderProvider(null, new[] { "first", "second" });
+            var secondHeader = new HeaderProvider(null, new[] { "first", "second" });
             firstHeader.ShouldBeEquivalentTo(secondHeader);
         }
 
