@@ -37,7 +37,11 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
 
         public override Rect Location
         {
-            get { return Cell.DataGridView.GetCellDisplayRectangle(Column, Row, false).AsWindowsRect(); }
+            get
+            {
+                var cellDisplayRectangle = Cell.DataGridView.GetCellDisplayRectangle(Column, Row, false);
+                return Cell.DataGridView.RectangleToScreen(cellDisplayRectangle).AsWindowsRect();
+            }
         }
     }
 }
