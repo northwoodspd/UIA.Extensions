@@ -20,7 +20,7 @@ build :build_release do |b|
 end
 
 desc 'Package for NuGet'
-task :package => :build_release do
+task :package => [:build, :spec, :build_release] do
   puts `nuget pack src/UIA.Extensions/UIA.Extensions.csproj -Prop Configuration=Release`
 end
 
