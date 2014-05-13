@@ -16,13 +16,24 @@ describe 'table' do
     Then { screen.the_grid_headers == ['FirstName', 'LastName', 'Age'] }
   end
 
-  context 'grid items' do
-    When { screen.add_grid_items 3 }
-    Then { all_items == [
-        ['FirstName1', 'LastName1', '1'],
-        ['FirstName2', 'LastName2', '2'],
-        ['FirstName3', 'LastName3', '3'],
-    ]}
+  context 'grid item' do
+    context 'values' do
+      When { screen.add_grid_items 3 }
+      Then { all_items == [
+          ['FirstName1', 'LastName1', '1'],
+          ['FirstName2', 'LastName2', '2'],
+          ['FirstName3', 'LastName3', '3'],
+      ]}
+    end
+
+    context 'locations' do
+      Given(:cell_1_1) do
+        screen.add_grid_items 3
+        screen.the_grid_view.element.row_at(1).items[1]
+      end
+      When { cell_1_1.click_center }
+      Then { expect(screen.the_grid[1]).to be_selected }
+    end
   end
 
   context 'changing row selections' do
@@ -48,7 +59,7 @@ describe 'table' do
     context 'selecting multiple' do
       Given { four_rows }
       When { select_row 2, 3 }
-      Then { selected_rows == [2, 3] }
+      Then { selected_rows == [0, 2, 3] }
     end
 
     context 'clearing' do
