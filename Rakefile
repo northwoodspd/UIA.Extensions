@@ -1,17 +1,11 @@
 require 'bundler/setup'
 
 require 'rubygems'
-require 'cucumber'
-require 'cucumber/rake/task'
 require 'albacore'
 require 'rspec/core/rake_task'
 require 'rspec/given'
 
-Cucumber::Rake::Task.new(:features) do |t|
-  t.profile = 'default'
-end
-
-task :default => [:build, :features, :spec]
+task :default => [:build, :spec]
 
 desc 'Build UIA.Extensions'
 build :build do |b|
