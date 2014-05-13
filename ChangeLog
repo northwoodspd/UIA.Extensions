@@ -1,3 +1,7 @@
+=== Version 1.0.8.2 / 2014-5-13
+*   Bug Fixes
+    *    uses screen coordinates for DataGridView cells
+
 ===	Version 1.0.8 / 2014-2-5
 *	Enhancements
 	*	Modified the way that runtime ids are generated for automation elements
