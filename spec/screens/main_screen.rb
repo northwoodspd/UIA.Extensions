@@ -5,4 +5,5 @@ class MainScreen
   button(:invokable_control, id: 'pictureBox1')
   label(:status, id: 'StatusBar.Pane0')
   control(:calendar, :id => 'monthCalendar')
+  spinner(:range_value, :id => 'numericUpDown')
 end
