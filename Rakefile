@@ -11,7 +11,7 @@ Cucumber::Rake::Task.new(:features) do |t|
   t.profile = 'default'
 end
 
-task :default => [:build, :features]
+task :default => [:build, :features, :spec]
 
 desc 'Build UIA.Extensions'
 build :build do |b|
