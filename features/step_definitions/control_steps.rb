@@ -9,6 +9,5 @@ Then(/^we are able to expose the following basic information from controls:$/) d
 end
 
 Then(/^we can add children automation providers$/) do
-  picture_box = find_element id: 'pictureBox1'
-  picture_box.children.map(&:name).should eq(['First Child', 'Second Child'])
+  on(MainScreen).invokable_control_view.element.children.map(&:name).should eq(['First Child', 'Second Child'])
 end

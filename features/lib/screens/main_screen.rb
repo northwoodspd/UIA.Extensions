@@ -1,5 +1,5 @@
 class MainScreen
-  include Mohawk, RAutomation::Adapter::MsUia
+  include Mohawk
   window :title => /UIA\.Fluent/
 
   control(:panel, :id => 'basicPanel')
@@ -12,7 +12,7 @@ class MainScreen
   table(:the_grid, :id => 'dataGridView')
   text(:how_many, :id => 'howManyToAdd')
 
-  control(:invokable_control, :id => 'pictureBox1')
+  button(:invokable_control, :id => 'pictureBox1')
   label(:status, :id => 'StatusBar.Pane0')
 
   spinner(:range_value, :id => 'numericUpDown')

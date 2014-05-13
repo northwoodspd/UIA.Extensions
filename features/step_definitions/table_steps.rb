@@ -2,7 +2,7 @@ When(/^we add "([^"]*)"( more)?( selected)? rows to the table$/) do |rows_to_add
   on(MainScreen) do |screen|
     screen.how_many = rows_to_add
     screen.add_rows
-    screen.the_grid.each(&:select) if should_select
+    screen.the_grid.each(&:add) if should_select
   end
 end
 
@@ -40,7 +40,7 @@ end
 
 When(/^we select the items at indexes "([^"]*)"$/) do |which|
   on(MainScreen) do |screen|
-    which.split(', ').map(&:to_i).each { |index| screen.select_the_grid(index) }
+    which.split(', ').map(&:to_i).each { |index| screen.add_the_grid(index) }
   end
 end
 
