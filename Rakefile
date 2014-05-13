@@ -4,6 +4,8 @@ require 'rubygems'
 require 'cucumber'
 require 'cucumber/rake/task'
 require 'albacore'
+require 'rspec/core/rake_task'
+require 'rspec/given'
 
 Cucumber::Rake::Task.new(:features) do |t|
   t.profile = 'default'
@@ -26,4 +28,10 @@ end
 desc 'Package for NuGet'
 task :package => :build_release do
   puts `nuget pack src/UIA.Extensions/UIA.Extensions.csproj -Prop Configuration=Release`
+end
+
+RSpec::Core::RakeTask.new(:spec) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = 'spec/**/*_spec.rb'
+  spec.rspec_opts = "--color -f documentation"
 end
