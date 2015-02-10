@@ -8,6 +8,7 @@ class MainScreen
   button(:invokable_control, id: 'pictureBox1')
   button(:add_rows, :value => 'Add Row')
   button(:update_headers, :value => 'Update Headers')
+  button(:hide_headers, :value => 'Hide Headers')
 
   label(:status, id: 'StatusBar.Pane0')
 

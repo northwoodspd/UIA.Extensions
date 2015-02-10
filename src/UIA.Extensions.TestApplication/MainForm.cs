@@ -61,5 +61,13 @@ namespace UIA.Extensions.TestApplication
                 column.HeaderText += " Updated";
             }
         }
+
+        private void hideHeaders_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dataGridView.ColumnCount - 1; i++)
+            {
+                dataGridView.Columns[i].Visible = false;
+            }
+        }
     }
 }

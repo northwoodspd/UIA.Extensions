@@ -24,14 +24,12 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
             _dataGridView.MultiSelect = true;
             _tableInformation.CanSelectMultiple.Should().BeTrue();
         }
-
         [Test]
         public void ItKnowsAboutTheHeaders()
         {
             AddHeaders("First", "Second");
             _tableInformation.Headers.Should().Equal(new[] { "First", "Second" });
         }
-
         [Test]
         public void HeadersUseTheColumnNameIfThereIsNoDisplayName()
         {
@@ -39,15 +37,24 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
             AddHeader("otherName", "");
             _tableInformation.Headers.Should().Equal(new[] { "Display Name", "otherName" });
         }
-
-        private void AddHeader(string columnName, string displayName)
+        [Test]
+        public void HiddenHeadersAreNotIncluded()
         {
-            _dataGridView.Columns.Add(columnName, displayName);
+            AddHeader("Visible Column", string.Empty);
+            AddHeader("Invisible Column", string.Empty, false);
+
+            _tableInformation.Headers.Should().Equal(new[] { "Visible Column" });
+        }
+
+        private void AddHeader(string columnName, string displayName, bool visible = true)
+        {
+            int index = _dataGridView.Columns.Add(columnName, displayName);
+            _dataGridView.Columns[index].Visible = visible;
         }
 
         private void AddHeaders(params string[] headers)
         {
-            headers.ForEach(x => _dataGridView.Columns.Add(x, x));
+            headers.ForEach(x => AddHeader(x, x));
         }
     }
 }
