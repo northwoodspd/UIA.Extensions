@@ -22,7 +22,7 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
 
         public override List<string> Headers
         {
-            get { return DataGrid.Columns.Where(x => x.Visible).Select(HeaderTextOrColumnName).ToList(); }
+            get { return DataGrid.Columns.Select(HeaderTextOrColumnName).ToList(); }
         }
 
         public override List<RowInformation> Rows

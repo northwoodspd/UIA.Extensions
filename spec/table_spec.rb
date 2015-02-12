@@ -23,7 +23,7 @@ describe 'table' do
           ['FirstName1', 'LastName1', '1'],
           ['FirstName2', 'LastName2', '2'],
           ['FirstName3', 'LastName3', '3'],
-      ] }
+      ]}
     end
 
     context 'locations' do
@@ -39,15 +39,15 @@ describe 'table' do
   context 'changing row selections' do
     Given(:four_rows) { screen.add_grid_items 4 }
     Given(:selected_rows) do
-      screen.the_grid.count.times.select { |row| screen.the_grid[row].selected? }
+      screen.the_grid.count.times.select {|row| screen.the_grid[row].selected? }
     end
 
     def select_row(*rows)
-      rows.each { |row| screen.add_the_grid row }
+      rows.each {|row| screen.add_the_grid row}
     end
 
     def clear_row(*rows)
-      rows.each { |row| screen.clear_the_grid row }
+      rows.each {|row| screen.clear_the_grid row}
     end
 
     context 'selecting' do
@@ -63,7 +63,7 @@ describe 'table' do
     end
 
     context 'clearing' do
-      Given { four_rows; 4.times { |n| screen.add_the_grid n } }
+      Given { four_rows; 4.times {|n| screen.add_the_grid n } }
       When { clear_row 0, 3 }
       Then { selected_rows == [1, 2] }
     end
@@ -74,24 +74,18 @@ describe 'table' do
 
       Then { original == [
           ['FirstName1', 'LastName1', '1']
-      ] }
+      ]}
       And { more_rows == [
           ['FirstName1', 'LastName1', '1'],
           ['FirstName1', 'LastName1', '1'],
           ['FirstName2', 'LastName2', '2'],
-      ] }
+      ]}
     end
 
     context 'changing headers' do
       Given { screen.add_grid_items 1 }
       When { screen.update_headers }
       Then { screen.the_grid_headers == ['FirstName Updated', 'LastName Updated', 'Age Updated'] }
-    end
-
-    context 'hiding headers' do
-      Given { screen.add_grid_items 1 }
-      When { screen.hide_headers }
-      Then { screen.the_grid_headers == ['Age'] }
     end
   end
 end

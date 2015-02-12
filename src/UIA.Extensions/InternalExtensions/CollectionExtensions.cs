@@ -26,10 +26,5 @@ namespace UIA.Extensions.InternalExtensions
         {
             return cells.As<DataGridViewCell>().Select(selector);
         }
-
-        public static IEnumerable<DataGridViewColumn> Where(this DataGridViewColumnCollection columns, Func<DataGridViewColumn, bool> predicate)
-        {
-            return columns.As<DataGridViewColumn>().Where(predicate);
-        }
     }
 }
