@@ -1,7 +1,3 @@
-===	Version 1.0.8.3 / 2014-2-5
-*	Enhancements
-	*	Modified the headers collection to only return visible headers
-
 === Version 1.0.8.2 / 2014-5-13
 *   Bug Fixes
     *    uses screen coordinates for DataGridView cells
