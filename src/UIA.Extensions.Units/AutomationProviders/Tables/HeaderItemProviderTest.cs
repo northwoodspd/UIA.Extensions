@@ -1,6 +1,7 @@
 ﻿using System.Windows.Automation;
 using FluentAssertions;
 using NUnit.Framework;
+using UIA.Extensions.AutomationProviders.Interfaces.Tables;
 
 namespace UIA.Extensions.AutomationProviders.Tables
 {
@@ -54,7 +55,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
 
         private static HeaderItemProvider HeaderFor(string value, int index)
         {
-            return new HeaderItemProvider(null, value, index);
+            return new HeaderItemProvider(null, new HeaderInformation(value), index);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Linq;
+using System.Windows.Forms;
 using FluentAssertions;
 using NUnit.Framework;
 using UIA.Extensions.InternalExtensions;
@@ -29,7 +30,7 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
         public void ItKnowsAboutTheHeaders()
         {
             AddHeaders("First", "Second");
-            _tableInformation.Headers.Should().Equal(new[] { "First", "Second" });
+            _tableInformation.Headers.Select(x => x.Text).Should().Equal(new[] { "First", "Second" });
         }
 
         [Test]
@@ -37,7 +38,7 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
         {
             AddHeader("headerName", "Display Name");
             AddHeader("otherName", "");
-            _tableInformation.Headers.Should().Equal(new[] { "Display Name", "otherName" });
+            _tableInformation.Headers.Select(x => x.Text).Should().Equal(new[] { "Display Name", "otherName" });
         }
 
         private void AddHeader(string columnName, string displayName)

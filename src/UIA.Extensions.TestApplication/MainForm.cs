@@ -23,6 +23,7 @@ namespace UIA.Extensions.TestApplication
             var people = new List<Person>();
             _bindingSource = new BindingSource { DataSource = people };
             dataGridView.DataSource = _bindingSource;
+            dataGridView.Columns["SuperSecret"].Visible = false;
 
             _bindingSource.ListChanged += _bindingSource_ListChanged;
 
@@ -40,7 +41,9 @@ namespace UIA.Extensions.TestApplication
             public string FirstName { get; set; }
             public string LastName { get; set; }
             public int Age { get; set; }
+            public string SuperSecret { get; set; }
         }
+
 
         private void addRowButton_Click(object sender, EventArgs e)
         {

@@ -7,12 +7,12 @@ namespace UIA.Extensions.AutomationProviders.Tables.Stubs
 {
     public class TableInformationStub : TableInformation
     {
-        private readonly List<string> _headers;
+        private readonly List<HeaderInformation> _headers;
         private readonly List<RowInformation> _rows;
 
         public TableInformationStub()
         {
-            _headers = new List<string>();
+            _headers = new List<HeaderInformation>();
             _rows = new List<RowInformation>();
         }
 
@@ -24,7 +24,7 @@ namespace UIA.Extensions.AutomationProviders.Tables.Stubs
             get { return new Control(); }
         }
 
-        public override List<string> Headers
+        public override List<HeaderInformation> Headers
         {
             get { return _headers; }
         }
@@ -34,7 +34,7 @@ namespace UIA.Extensions.AutomationProviders.Tables.Stubs
         public bool OverriddenCanSelectMultiple { get; set; }
         public override bool CanSelectMultiple { get { return OverriddenCanSelectMultiple; } }
 
-        public void AddHeaders(params string[] headers)
+        public void AddHeaders(params HeaderInformation[] headers)
         {
             _headers.AddRange(headers);
         }

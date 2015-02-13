@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe 'table' do
   Given(:screen) { on(MainScreen) }
+  Given(:grid) { screen.the_grid_view.element }
 
   def all_items
     screen.the_grid.map { |r| [r.firstname, r.lastname, r.age] }
@@ -13,7 +14,10 @@ describe 'table' do
   end
 
   context 'headers' do
-    Then { screen.the_grid_headers == ['FirstName', 'LastName', 'Age'] }
+    Given(:headers) { grid.filter(control_type: :header_item) }
+
+    Then { screen.the_grid_headers == ['FirstName', 'LastName', 'Age', 'SuperSecret'] }
+    Then { headers.map(&:visible?) == [true, true, true, false] }
   end
 
   context 'grid item' do
@@ -85,7 +89,7 @@ describe 'table' do
     context 'changing headers' do
       Given { screen.add_grid_items 1 }
       When { screen.update_headers }
-      Then { screen.the_grid_headers == ['FirstName Updated', 'LastName Updated', 'Age Updated'] }
+      Then { screen.the_grid_headers == ['FirstName Updated', 'LastName Updated', 'Age Updated', 'SuperSecret Updated'] }
     end
   end
 end

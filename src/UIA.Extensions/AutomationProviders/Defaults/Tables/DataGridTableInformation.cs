@@ -20,9 +20,9 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
             get { return DataGrid; }
         }
 
-        public override List<string> Headers
+        public override List<HeaderInformation> Headers
         {
-            get { return DataGrid.Columns.Select(HeaderTextOrColumnName).ToList(); }
+            get { return DataGrid.Columns.Select(ToHeaderInformation).ToList(); }
         }
 
         public override List<RowInformation> Rows
@@ -43,6 +43,11 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
         public override int ColumnCount
         {
             get { return DataGrid.ColumnCount; }
+        }
+
+        private static HeaderInformation ToHeaderInformation(DataGridViewColumn column)
+        {
+            return new HeaderInformation {Text = HeaderTextOrColumnName(column), IsVisible = column.Visible};
         }
 
         private static string HeaderTextOrColumnName(DataGridViewColumn column)

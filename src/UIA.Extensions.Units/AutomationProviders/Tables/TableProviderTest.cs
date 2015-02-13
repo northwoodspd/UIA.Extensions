@@ -4,6 +4,7 @@ using System.Windows.Automation;
 using System.Windows.Automation.Provider;
 using FluentAssertions;
 using NUnit.Framework;
+using UIA.Extensions.AutomationProviders.Interfaces.Tables;
 using UIA.Extensions.AutomationProviders.Tables.Stubs;
 using UIA.Extensions.InternalExtensions;
 
@@ -13,7 +14,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
     public class TableProviderTest
     {
         private TableProvider _tableProvider;
-        private TableInformationStub _tableInformationStub;
+        private static TableInformationStub _tableInformationStub;
 
         [SetUp]
         public void SetUp()
@@ -63,7 +64,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
         [Test]
         public void ItHasTheColumnCount()
         {
-            _tableInformationStub.AddHeaders(Enumerable.Range(0, 42).Select(x => String.Empty).ToArray());
+            ExpectHeaders(Enumerable.Range(0, 42).Select(x => String.Empty).ToArray());
             _tableProvider.ColumnCount.ShouldBeEquivalentTo(42);
         }
 
@@ -77,67 +78,15 @@ namespace UIA.Extensions.AutomationProviders.Tables
         [Test]
         public void ImmediateChildrenHaveProperRuntimeIds()
         {
-            _tableInformationStub.AddHeaders("Header");
+            ExpectHeaders("Header");
             _tableInformationStub.AddRows(5);
             _tableProvider.Children.Select(x => x.RuntimeId).Should().Equal(Enumerable.Range(0, 6));
-        }
-
-        [TestFixture]
-        public class Headers
-        {
-            private TableProvider _tableProvider;
-            private TableInformationStub _tableInformationStub;
-
-            [SetUp]
-            public void SetUp()
-            {
-                _tableInformationStub = new TableInformationStub();
-                _tableProvider = new TableProvider(_tableInformationStub);
-            }
-
-            [Test]
-            public void ArePresentIfThereAreHeaders()
-            {
-                _tableInformationStub.AddHeaders("First Header", "Second Header");
-
-                _tableProvider.Navigate(NavigateDirection.FirstChild)
-                    .Should().BeOfType<HeaderProvider>();
-            }
-
-            [Test]
-            public void IsMissingIfThereAreNonetoSpeakOf()
-            {
-                _tableProvider.Navigate(NavigateDirection.FirstChild)
-                    .Should().BeNull();
-            }
-
-            [Test]
-            public void HeadersCanBeLazilyLoaded()
-            {
-                _tableProvider.Navigate(NavigateDirection.FirstChild).Should().BeNull();
-                _tableInformationStub.AddHeaders("Some Header");
-                _tableProvider.Navigate(NavigateDirection.FirstChild).Should().BeOfType<HeaderProvider>();
-            }
-
-            [Test]
-            public void AreExposedDirectlyAsWell()
-            {
-                _tableInformationStub.AddHeaders("First Header", "Second Header");
-                _tableProvider.GetColumnHeaders().Select(HeaderValue)
-                              .ShouldBeEquivalentTo(new[] {"First Header", "Second Header"});
-            }
-
-            public string HeaderValue(IRawElementProviderSimple element)
-            {
-                return element.GetPropertyValue(AutomationElementIdentifiers.NameProperty.Id).ToString();
-            }
         }
 
         [TestFixture]
         public class DataItems
         {
             private TableProvider _tableProvider;
-            private TableInformationStub _tableInformationStub;
 
             [SetUp]
             public void SetUp()
@@ -180,6 +129,61 @@ namespace UIA.Extensions.AutomationProviders.Tables
                 _tableInformationStub.AddRows(2);
                 _tableProvider.Children.Count.ShouldBeEquivalentTo(5);
             }
+        }
+
+        [TestFixture]
+        public class Headers
+        {
+            private TableProvider _tableProvider;
+
+            [SetUp]
+            public void SetUp()
+            {
+                _tableInformationStub = new TableInformationStub();
+                _tableProvider = new TableProvider(_tableInformationStub);
+            }
+
+            [Test]
+            public void ArePresentIfThereAreHeaders()
+            {
+                ExpectHeaders("First Header", "Second Header");
+
+                _tableProvider.Navigate(NavigateDirection.FirstChild)
+                    .Should().BeOfType<HeaderProvider>();
+            }
+
+            [Test]
+            public void IsMissingIfThereAreNonetoSpeakOf()
+            {
+                _tableProvider.Navigate(NavigateDirection.FirstChild)
+                    .Should().BeNull();
+            }
+
+            [Test]
+            public void HeadersCanBeLazilyLoaded()
+            {
+                _tableProvider.Navigate(NavigateDirection.FirstChild).Should().BeNull();
+                ExpectHeaders("Some Header");
+                _tableProvider.Navigate(NavigateDirection.FirstChild).Should().BeOfType<HeaderProvider>();
+            }
+
+            [Test]
+            public void AreExposedDirectlyAsWell()
+            {
+                ExpectHeaders("First Header", "Second Header");
+                _tableProvider.GetColumnHeaders().Select(HeaderValue)
+                    .ShouldBeEquivalentTo(new[] { "First Header", "Second Header" });
+            }
+
+            public string HeaderValue(IRawElementProviderSimple element)
+            {
+                return element.GetPropertyValue(AutomationElementIdentifiers.NameProperty.Id).ToString();
+            }
+        }
+
+        private static void ExpectHeaders(params string[] headers)
+        {
+            _tableInformationStub.AddHeaders(headers.Select(x => new HeaderInformation { Text = x }).ToArray());
         }
     }
 }

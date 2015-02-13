@@ -8,7 +8,7 @@ namespace UIA.Extensions.AutomationProviders.Interfaces.Tables
         public abstract int RowCount { get; }
         public abstract int ColumnCount { get; }
         public abstract Control Control { get; }
-        public abstract List<string> Headers { get; }
+        public abstract List<HeaderInformation> Headers { get; }
         public abstract List<RowInformation> Rows { get; }
         public abstract bool CanSelectMultiple { get; }
     }
