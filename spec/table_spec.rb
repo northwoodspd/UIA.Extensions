@@ -17,7 +17,7 @@ describe 'table' do
     When do
 		screen.add_grid_items 3 
 		screen.toggle_row
-	end
+    end
     Then { screen.the_grid.rows.map(&:visible?) == [false, true, true] }
   end
   
@@ -26,7 +26,7 @@ describe 'table' do
 		screen.add_grid_items 3 
 		screen.toggle_row
 		screen.toggle_row
-	end
+    end
     Then { screen.the_grid.rows.map(&:visible?) == [true, true, true] }
   end
 
