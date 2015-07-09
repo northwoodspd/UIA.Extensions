@@ -39,6 +39,7 @@
             this.monthCalendar = new System.Windows.Forms.MonthCalendar();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toggleRowButton = new System.Windows.Forms.Button();
             this.basicPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).BeginInit();
@@ -51,6 +52,7 @@
             this.basicPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.basicPanel.Controls.Add(this.toggleRowButton);
             this.basicPanel.Controls.Add(this.pictureBox1);
             this.basicPanel.Controls.Add(this.updateHeaders);
             this.basicPanel.Controls.Add(this.deleteButton);
@@ -160,6 +162,16 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
+            // toggleRowButton
+            // 
+            this.toggleRowButton.Location = new System.Drawing.Point(269, 207);
+            this.toggleRowButton.Name = "toggleRowButton";
+            this.toggleRowButton.Size = new System.Drawing.Size(75, 23);
+            this.toggleRowButton.TabIndex = 8;
+            this.toggleRowButton.Text = "Toggle Row";
+            this.toggleRowButton.UseVisualStyleBackColor = true;
+            this.toggleRowButton.Click += new System.EventHandler(this.toggleRowButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -194,6 +206,7 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button toggleRowButton;
     }
 }
 

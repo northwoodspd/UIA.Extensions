@@ -12,6 +12,7 @@ namespace UIA.Extensions.AutomationProviders.Interfaces.Tables
         public abstract void AddToSelection();
         public abstract void ClearSelection();
         public abstract bool IsSelected { get; }
+        public abstract bool IsVisible { get; set; }
 
         public override bool Equals(object obj)
         {

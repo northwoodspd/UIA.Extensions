@@ -50,5 +50,11 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
         {
             get { return DataGridViewRow.Selected; }
         }
+
+        public override bool IsVisible
+        {
+            get { return DataGridViewRow.Visible; }
+            set { DataGridViewRow.Visible = value; }
+        }
     }
 }

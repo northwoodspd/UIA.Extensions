@@ -64,5 +64,15 @@ namespace UIA.Extensions.TestApplication
                 column.HeaderText += " Updated";
             }
         }
+
+        private void toggleRowButton_Click(object sender, EventArgs e)
+        {
+            if (dataGridView.RowCount > 0)
+            {
+                _bindingSource.SuspendBinding();
+                dataGridView.Rows[0].Visible = !dataGridView.Rows[0].Visible;
+                _bindingSource.ResumeBinding();
+            }
+        }
     }
 }

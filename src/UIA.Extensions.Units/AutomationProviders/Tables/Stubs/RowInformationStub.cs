@@ -8,17 +8,16 @@ namespace UIA.Extensions.AutomationProviders.Tables.Stubs
     {
         private bool _wasSelected;
         private bool _wasCleared;
+        private bool _wasHidden;
         private readonly string _value;
         private readonly List<CellInformation> _cells;
 
         public RowInformationStub()
             : this("Default")
         { }
-
         public RowInformationStub(int which)
             : this("Row" + which)
         { }
-
         public RowInformationStub(string what)
         {
             _cells = new List<CellInformation>();
@@ -58,6 +57,12 @@ namespace UIA.Extensions.AutomationProviders.Tables.Stubs
         public override bool IsSelected
         {
             get { return _wasSelected; }
+        }
+
+        public override bool IsVisible
+        {
+            get { return !_wasHidden; }
+            set { _wasHidden = !value; }
         }
 
         public void ShouldHaveBeenSelected()
