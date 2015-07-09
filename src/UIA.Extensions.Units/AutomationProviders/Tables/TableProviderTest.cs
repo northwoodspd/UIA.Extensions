@@ -62,6 +62,14 @@ namespace UIA.Extensions.AutomationProviders.Tables
         }
 
         [Test]
+        public void ItHasTheVisibleRowCount()
+        {
+            _tableInformationStub.AddRows(7);
+            _tableInformationStub.Rows[0].IsVisible = false;
+            _tableProvider.RowCount.ShouldBeEquivalentTo(6);
+        }
+
+        [Test]
         public void ItHasTheColumnCount()
         {
             ExpectHeaders(Enumerable.Range(0, 42).Select(x => String.Empty).ToArray());

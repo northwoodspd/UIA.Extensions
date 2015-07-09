@@ -27,7 +27,7 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
 
         public override List<RowInformation> Rows
         {
-            get { return DataGrid.Rows.Select(DataGridRowInformation.FromRow).ToList(); }
+            get { return DataGrid.Rows.Select(DataGridRowInformation.FromRow).Where(x => x.IsVisible).ToList(); }
         }
 
         public override bool CanSelectMultiple
@@ -37,7 +37,7 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
 
         public override int RowCount
         {
-            get { return DataGrid.RowCount; }
+            get { return Rows.Count; }
         }
 
         public override int ColumnCount
@@ -47,7 +47,7 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
 
         private static HeaderInformation ToHeaderInformation(DataGridViewColumn column)
         {
-            return new HeaderInformation {Text = HeaderTextOrColumnName(column), IsVisible = column.Visible};
+            return new HeaderInformation { Text = HeaderTextOrColumnName(column), IsVisible = column.Visible };
         }
 
         private static string HeaderTextOrColumnName(DataGridViewColumn column)

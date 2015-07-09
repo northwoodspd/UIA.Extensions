@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using UIA.Extensions.AutomationProviders.Interfaces.Tables;
 using UIA.Extensions.InternalExtensions;
@@ -16,7 +17,7 @@ namespace UIA.Extensions.AutomationProviders.Tables.Stubs
             _rows = new List<RowInformation>();
         }
 
-        public override int RowCount { get { return _rows.Count; } }
+        public override int RowCount { get { return Rows.Count; } }
         public override int ColumnCount { get { return _headers.Count; } }
 
         public override Control Control
@@ -29,7 +30,7 @@ namespace UIA.Extensions.AutomationProviders.Tables.Stubs
             get { return _headers; }
         }
 
-        public override List<RowInformation> Rows { get { return _rows; } }
+        public override List<RowInformation> Rows { get { return _rows.Where(x => x.IsVisible).ToList(); } }
 
         public bool OverriddenCanSelectMultiple { get; set; }
         public override bool CanSelectMultiple { get { return OverriddenCanSelectMultiple; } }
