@@ -12,6 +12,23 @@ describe 'table' do
     When { screen.add_grid_items 10 }
     Then { screen.the_grid.count == 10 }
   end
+  
+  context('table hides rows') do
+    When do
+		screen.add_grid_items 3 
+		screen.toggle_row
+    end
+    Then { screen.the_grid.rows.map(&:visible?) == [false, true, true] }
+  end
+  
+  context('table shows rows') do
+    When do
+		screen.add_grid_items 3 
+		screen.toggle_row
+		screen.toggle_row
+    end
+    Then { screen.the_grid.rows.map(&:visible?) == [true, true, true] }
+  end
 
   context 'headers' do
     Given(:headers) { grid.filter(control_type: :header_item) }

@@ -9,13 +9,16 @@ namespace UIA.Extensions.AutomationProviders.Tables
     {
         private readonly RowInformation _rowInformation;
 
-        public TableRowProvider(AutomationProvider parent, RowInformation rowInformation) : base(parent, SelectionItemPattern.Pattern)
+        public TableRowProvider(AutomationProvider parent, RowInformation rowInformation)
+            : base(parent, SelectionItemPattern.Pattern)
         {
             _rowInformation = rowInformation;
             Name = rowInformation.Value;
             ControlType = ControlType.DataItem;
 
             rowInformation.Cells.ForEach(x => AddChild(new TableCellProvider(this, x)));
+
+            SetPropertyValue(AutomationElementIdentifiers.IsOffscreenProperty.Id, () => !rowInformation.IsVisible);
         }
 
         public override string Name
