@@ -31,6 +31,13 @@ namespace UIA.Extensions.AutomationProviders.Tables
             _comboProvider.GetPropertyValue(AutomationElementIdentifiers.LocalizedControlTypeProperty.Id)
                 .Should().Be(ControlType.ComboBox.LocalizedControlType);
         }
+
+        [Test]
+        public void ItReportsAsSelectionPattern()
+        {
+            _comboProvider.GetPatternProvider(SelectionPatternIdentifiers.Pattern.Id)
+                .Should().BeSameAs(_comboProvider);
+        }
     }
 
     internal class ComboBoxInformationStub : ComboBoxInformation

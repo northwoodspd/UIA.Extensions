@@ -4,4 +4,5 @@ describe 'combo boxes' do
   Given(:combo) { on(MainScreen).combo_view }
 
   Then { combo.control_type === :combo_box }
+  Then { combo.patterns === [:selection] }
 end
