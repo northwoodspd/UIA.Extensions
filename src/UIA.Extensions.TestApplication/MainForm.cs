@@ -11,8 +11,6 @@ namespace UIA.Extensions.TestApplication
     {
         private readonly BindingSource _bindingSource;
 
-        private readonly string[] _listOptions = { "First Option", "Second Option", "Third Option", };
-
         public MainForm()
         {
             InitializeComponent();
@@ -33,7 +31,6 @@ namespace UIA.Extensions.TestApplication
             pictureBox1.AsInvoke(() => toolStripStatusLabel1.Text = "Foos have been pitied!")
                 .WithChildren("First Child".TextProvider(), "Second Child".TextProvider());
 
-            fakeCombo.Text = _listOptions.First();
             fakeCombo.AsList<ListActingLabel>();
         }
 

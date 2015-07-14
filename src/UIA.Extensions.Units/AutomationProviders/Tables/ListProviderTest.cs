@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
 using System.Windows.Forms;
@@ -14,7 +16,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
 
         private ISelectionProvider Selection
         {
-            get { return (ISelectionProvider) _listProvider.GetPatternProvider(SelectionPatternIdentifiers.Pattern.Id); }
+            get { return (ISelectionProvider)_listProvider.GetPatternProvider(SelectionPatternIdentifiers.Pattern.Id); }
         }
 
         [SetUp]
@@ -60,11 +62,23 @@ namespace UIA.Extensions.AutomationProviders.Tables
 
             Selection.CanSelectMultiple.Should().BeTrue();
         }
+
+        [Test]
+        public void ItCanHaveChildren()
+        {
+            _listInformation.AddItems("First", "Second", "Third");
+
+            _listProvider.Children.Select(x => x.GetPropertyValue(AutomationElementIdentifiers.NameProperty.Id).ToString())
+                .ShouldBeEquivalentTo(new[] { "First", "Second", "Third" });
+        }
     }
 
     internal class ListInformationStub : ListInformation
     {
-        public ListInformationStub(Control control) : base(control)
+        private List<ListItemInformation> _items;
+
+        public ListInformationStub(Control control)
+            : base(control)
         { }
 
         public void SetIsRequired(bool isRequired)
@@ -75,6 +89,16 @@ namespace UIA.Extensions.AutomationProviders.Tables
         public void SetCanSelectMultiple(bool canSelectMultiple)
         {
             CanSelectMultiple = canSelectMultiple;
+        }
+
+        public void AddItems(params string[] items)
+        {
+            _items = items.Select(x => new ListItemInformation(x)).ToList();
+        }
+
+        public override List<ListItemInformation> ListItems
+        {
+            get { return _items ?? new List<ListItemInformation>(); }
         }
     }
 }
