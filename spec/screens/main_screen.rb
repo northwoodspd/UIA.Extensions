@@ -18,6 +18,8 @@ class MainScreen
 
   text(:how_many, :id => 'howManyToAdd')
 
+  combo_box(:combo, id: 'fakeCombo')
+
   def add_grid_items(how_many)
     self.how_many = how_many.to_s
     add_rows

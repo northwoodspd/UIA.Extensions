@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using FizzWare.NBuilder;
 using UIA.Extensions.TestApplication.Implementations;
@@ -9,6 +10,8 @@ namespace UIA.Extensions.TestApplication
     public partial class MainForm : Form
     {
         private readonly BindingSource _bindingSource;
+
+        private readonly string[] _comboOptions = { "First Option", "Second Option", "Third Option", };
 
         public MainForm()
         {
@@ -29,6 +32,9 @@ namespace UIA.Extensions.TestApplication
 
             pictureBox1.AsInvoke(() => toolStripStatusLabel1.Text = "Foos have been pitied!")
                 .WithChildren("First Child".TextProvider(), "Second Child".TextProvider());
+
+            fakeCombo.Text = _comboOptions.First();
+            fakeCombo.AsComboBox<ComboBoxActingLabel>();
         }
 
         void _bindingSource_ListChanged(object sender, System.ComponentModel.ListChangedEventArgs e)
@@ -43,7 +49,6 @@ namespace UIA.Extensions.TestApplication
             public int Age { get; set; }
             public string SuperSecret { get; set; }
         }
-
 
         private void addRowButton_Click(object sender, EventArgs e)
         {

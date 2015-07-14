@@ -54,5 +54,11 @@ namespace UIA.Extensions
             var provider = (T)Activator.CreateInstance(typeof(T), control);
             return new AutomationConfigurer(control, new TableProvider(provider));
         }
+
+        public static AutomationConfigurer AsComboBox<T>(this Control control) where T : ComboBoxInformation
+        {
+            var provider = (T)Activator.CreateInstance(typeof(T), control);
+            return new AutomationConfigurer(control, new ComboBoxProvider(provider));
+        }
     }
 }
