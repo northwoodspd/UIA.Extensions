@@ -1,4 +1,5 @@
 using System.Windows.Automation;
+using System.Windows.Automation.Provider;
 using System.Windows.Forms;
 using FluentAssertions;
 using NUnit.Framework;
@@ -10,6 +11,11 @@ namespace UIA.Extensions.AutomationProviders.Tables
     {
         private ComboBoxInformationStub _comboInformation;
         private ComboBoxProvider _comboProvider;
+
+        private ISelectionProvider Selection
+        {
+            get { return (ISelectionProvider) _comboProvider.GetPatternProvider(SelectionPatternIdentifiers.Pattern.Id); }
+        }
 
         [SetUp]
         public void SetUp()
@@ -38,11 +44,24 @@ namespace UIA.Extensions.AutomationProviders.Tables
             _comboProvider.GetPatternProvider(SelectionPatternIdentifiers.Pattern.Id)
                 .Should().BeSameAs(_comboProvider);
         }
+
+        [Test]
+        public void ItCanReportIfSelectionIsRequired()
+        {
+            _comboInformation.SetIsRequired(true);
+
+            Selection.IsSelectionRequired.Should().BeTrue();
+        }
     }
 
     internal class ComboBoxInformationStub : ComboBoxInformation
     {
         public ComboBoxInformationStub(Control control) : base(control)
         { }
+
+        public void SetIsRequired(bool isRequired)
+        {
+            IsRequired = isRequired;
+        }
     }
 }

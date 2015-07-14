@@ -10,5 +10,6 @@ namespace UIA.Extensions.AutomationProviders.Interfaces
         }
 
         public Control Control { get; protected set; }
+        public bool IsRequired { get; protected set; }
     }
 }

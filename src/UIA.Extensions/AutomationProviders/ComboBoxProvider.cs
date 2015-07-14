@@ -6,8 +6,11 @@ namespace UIA.Extensions.AutomationProviders
 {
     public class ComboBoxProvider : ControlProvider, ISelectionProvider
     {
+        private readonly ComboBoxInformation _provider;
+
         public ComboBoxProvider(ComboBoxInformation provider) : base(provider.Control, SelectionPattern.Pattern)
         {
+            _provider = provider;
             SetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id, ControlType.ComboBox.Id);
             SetPropertyValue(AutomationElementIdentifiers.LocalizedControlTypeProperty.Id, ControlType.ComboBox.LocalizedControlType);
         }
@@ -18,6 +21,10 @@ namespace UIA.Extensions.AutomationProviders
         }
 
         public bool CanSelectMultiple { get; private set; }
-        public bool IsSelectionRequired { get; private set; }
+
+        public bool IsSelectionRequired
+        {
+            get { return _provider.IsRequired; }
+        }
     }
 }
