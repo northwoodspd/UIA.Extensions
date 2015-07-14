@@ -52,7 +52,7 @@
   <ItemGroup>
     <Compile Include="Implementations\TextProvider.cs" />
     <Compile Include="Implementations\ValueMonthCalendar.cs" />
-    <Compile Include="ComboBoxActingLabel.cs" />
+    <Compile Include="ListActingLabel.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

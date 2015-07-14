@@ -3,9 +3,9 @@ using UIA.Extensions.AutomationProviders.Interfaces;
 
 namespace UIA.Extensions.TestApplication
 {
-    public class ComboBoxActingLabel : ComboBoxInformation
+    public class ListActingLabel : ListInformation
     {
-        public ComboBoxActingLabel(Control control) : base(control)
+        public ListActingLabel(Control control) : base(control)
         {
             IsRequired = true;
             CanSelectMultiple = true;

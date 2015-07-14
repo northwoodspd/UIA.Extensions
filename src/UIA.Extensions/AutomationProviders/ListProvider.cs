@@ -4,15 +4,15 @@ using UIA.Extensions.AutomationProviders.Interfaces;
 
 namespace UIA.Extensions.AutomationProviders
 {
-    public class ComboBoxProvider : ControlProvider, ISelectionProvider
+    public class ListProvider : ControlProvider, ISelectionProvider
     {
-        private readonly ComboBoxInformation _provider;
+        private readonly ListInformation _provider;
 
-        public ComboBoxProvider(ComboBoxInformation provider) : base(provider.Control, SelectionPattern.Pattern)
+        public ListProvider(ListInformation provider) : base(provider.Control, SelectionPattern.Pattern)
         {
             _provider = provider;
-            SetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id, ControlType.ComboBox.Id);
-            SetPropertyValue(AutomationElementIdentifiers.LocalizedControlTypeProperty.Id, ControlType.ComboBox.LocalizedControlType);
+            SetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id, ControlType.List.Id);
+            SetPropertyValue(AutomationElementIdentifiers.LocalizedControlTypeProperty.Id, ControlType.List.LocalizedControlType);
         }
 
         public IRawElementProviderSimple[] GetSelection()

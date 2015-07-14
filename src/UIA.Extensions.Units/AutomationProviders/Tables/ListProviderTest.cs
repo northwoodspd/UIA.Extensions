@@ -7,48 +7,48 @@ using UIA.Extensions.AutomationProviders.Interfaces;
 
 namespace UIA.Extensions.AutomationProviders.Tables
 {
-    class ComboBoxProviderTest
+    class ListProviderTest
     {
-        private ComboBoxInformationStub _comboInformation;
-        private ComboBoxProvider _comboProvider;
+        private ListInformationStub _listInformation;
+        private ListProvider _listProvider;
 
         private ISelectionProvider Selection
         {
-            get { return (ISelectionProvider) _comboProvider.GetPatternProvider(SelectionPatternIdentifiers.Pattern.Id); }
+            get { return (ISelectionProvider) _listProvider.GetPatternProvider(SelectionPatternIdentifiers.Pattern.Id); }
         }
 
         [SetUp]
         public void SetUp()
         {
-            _comboInformation = new ComboBoxInformationStub(new Control());
-            _comboProvider = new ComboBoxProvider(_comboInformation);
+            _listInformation = new ListInformationStub(new Control());
+            _listProvider = new ListProvider(_listInformation);
         }
 
         [Test]
         public void ItHasTheCorrectControlType()
         {
-            _comboProvider.GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
-                .Should().Be(ControlType.ComboBox.Id);
+            _listProvider.GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
+                .Should().Be(ControlType.List.Id);
         }
 
         [Test]
         public void ItLocalizesTheControlType()
         {
-            _comboProvider.GetPropertyValue(AutomationElementIdentifiers.LocalizedControlTypeProperty.Id)
-                .Should().Be(ControlType.ComboBox.LocalizedControlType);
+            _listProvider.GetPropertyValue(AutomationElementIdentifiers.LocalizedControlTypeProperty.Id)
+                .Should().Be(ControlType.List.LocalizedControlType);
         }
 
         [Test]
         public void ItReportsAsSelectionPattern()
         {
-            _comboProvider.GetPatternProvider(SelectionPatternIdentifiers.Pattern.Id)
-                .Should().BeSameAs(_comboProvider);
+            _listProvider.GetPatternProvider(SelectionPatternIdentifiers.Pattern.Id)
+                .Should().BeSameAs(_listProvider);
         }
 
         [Test]
         public void ItCanReportIfSelectionIsRequired()
         {
-            _comboInformation.SetIsRequired(true);
+            _listInformation.SetIsRequired(true);
 
             Selection.IsSelectionRequired.Should().BeTrue();
         }
@@ -56,15 +56,15 @@ namespace UIA.Extensions.AutomationProviders.Tables
         [Test]
         public void ItCanReportIfMultipleSelectionIsPossible()
         {
-            _comboInformation.SetCanSelectMultiple(true);
+            _listInformation.SetCanSelectMultiple(true);
 
             Selection.CanSelectMultiple.Should().BeTrue();
         }
     }
 
-    internal class ComboBoxInformationStub : ComboBoxInformation
+    internal class ListInformationStub : ListInformation
     {
-        public ComboBoxInformationStub(Control control) : base(control)
+        public ListInformationStub(Control control) : base(control)
         { }
 
         public void SetIsRequired(bool isRequired)

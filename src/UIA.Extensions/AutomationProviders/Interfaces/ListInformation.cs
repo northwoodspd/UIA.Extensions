@@ -2,9 +2,9 @@ using System.Windows.Forms;
 
 namespace UIA.Extensions.AutomationProviders.Interfaces
 {
-    public abstract class ComboBoxInformation
+    public abstract class ListInformation
     {
-        protected ComboBoxInformation(Control control)
+        protected ListInformation(Control control)
         {
             Control = control;
         }
