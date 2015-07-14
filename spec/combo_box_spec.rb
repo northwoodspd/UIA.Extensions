@@ -10,5 +10,6 @@ describe 'combo boxes' do
     Given(:selection) { combo.element.as(:selection) }
 
     Then { selection.selection_required? === true }
+    Then { selection.multi_select? === true }
   end
 end

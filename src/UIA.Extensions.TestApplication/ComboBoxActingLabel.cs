@@ -8,6 +8,7 @@ namespace UIA.Extensions.TestApplication
         public ComboBoxActingLabel(Control control) : base(control)
         {
             IsRequired = true;
+            CanSelectMultiple = true;
         }
     }
 }

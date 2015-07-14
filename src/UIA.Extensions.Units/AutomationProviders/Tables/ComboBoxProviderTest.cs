@@ -52,6 +52,14 @@ namespace UIA.Extensions.AutomationProviders.Tables
 
             Selection.IsSelectionRequired.Should().BeTrue();
         }
+
+        [Test]
+        public void ItCanReportIfMultipleSelectionIsPossible()
+        {
+            _comboInformation.SetCanSelectMultiple(true);
+
+            Selection.CanSelectMultiple.Should().BeTrue();
+        }
     }
 
     internal class ComboBoxInformationStub : ComboBoxInformation
@@ -62,6 +70,11 @@ namespace UIA.Extensions.AutomationProviders.Tables
         public void SetIsRequired(bool isRequired)
         {
             IsRequired = isRequired;
+        }
+
+        public void SetCanSelectMultiple(bool canSelectMultiple)
+        {
+            CanSelectMultiple = canSelectMultiple;
         }
     }
 }

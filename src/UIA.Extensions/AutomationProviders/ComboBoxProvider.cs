@@ -20,7 +20,10 @@ namespace UIA.Extensions.AutomationProviders
             throw new System.NotImplementedException();
         }
 
-        public bool CanSelectMultiple { get; private set; }
+        public bool CanSelectMultiple
+        {
+            get { return _provider.CanSelectMultiple; }
+        }
 
         public bool IsSelectionRequired
         {
