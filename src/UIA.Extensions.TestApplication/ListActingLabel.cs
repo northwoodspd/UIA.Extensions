@@ -22,12 +22,12 @@ namespace UIA.Extensions.TestApplication
 
         public void UpdateSelection(ListActingLabelItem toSelect)
         {
-            Control.Text = toSelect.Text;
-
             foreach (var selected in _listOptions.Where(x => x.IsSelected && x != toSelect))
             {
                 selected.RemoveFromSelection();
             }
+
+            Control.Text = toSelect.Text;
         }
 
         public override List<ListItemInformation> ListItems
