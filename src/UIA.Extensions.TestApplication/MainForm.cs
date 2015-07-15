@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using FizzWare.NBuilder;
 using UIA.Extensions.TestApplication.Implementations;
@@ -29,6 +30,8 @@ namespace UIA.Extensions.TestApplication
 
             pictureBox1.AsInvoke(() => toolStripStatusLabel1.Text = "Foos have been pitied!")
                 .WithChildren("First Child".TextProvider(), "Second Child".TextProvider());
+
+            fakeCombo.AsList<ListActingLabel>();
         }
 
         void _bindingSource_ListChanged(object sender, System.ComponentModel.ListChangedEventArgs e)
@@ -43,7 +46,6 @@ namespace UIA.Extensions.TestApplication
             public int Age { get; set; }
             public string SuperSecret { get; set; }
         }
-
 
         private void addRowButton_Click(object sender, EventArgs e)
         {

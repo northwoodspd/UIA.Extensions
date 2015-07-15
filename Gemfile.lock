@@ -72,3 +72,6 @@ DEPENDENCIES
   mohawk (~> 0.2)
   rake
   rspec-given
+
+BUNDLED WITH
+   1.10.5

@@ -72,8 +72,11 @@
     <Compile Include="AutomationProviders\Defaults\Tables\DataGridRowInformationTest.cs" />
     <Compile Include="AutomationProviders\Defaults\Tables\DataGridTableInformationTest.cs" />
     <Compile Include="AutomationProviders\Interfaces\RangeValueProviderTest.cs" />
+    <Compile Include="AutomationProviders\Tables\ListItemProviderTest.cs" />
+    <Compile Include="AutomationProviders\Tables\ListProviderTest.cs" />
     <Compile Include="AutomationProviders\Tables\HeaderItemProviderTest.cs" />
     <Compile Include="AutomationProviders\Tables\HeaderProviderTest.cs" />
+    <Compile Include="AutomationProviders\Tables\ProviderTest.cs" />
     <Compile Include="AutomationProviders\Tables\Stubs\CellInformationStub.cs" />
     <Compile Include="AutomationProviders\Tables\Stubs\RowInformationStub.cs" />
     <Compile Include="AutomationProviders\Tables\Stubs\TableInformationStub.cs" />
