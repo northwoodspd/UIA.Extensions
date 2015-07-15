@@ -15,7 +15,7 @@ namespace UIA.Extensions.TestApplication
             CanSelectMultiple = true;
 
             _listOptions = new[] {"First Option", "Second Option", "Third Option"}
-                .Select(x => new ListItemInformation(x)).ToList();
+                .Select(ListActingLabelItem.Create).ToList();
 
             control.Text = _listOptions.First().Text;
         }
@@ -23,6 +23,26 @@ namespace UIA.Extensions.TestApplication
         public override List<ListItemInformation> ListItems
         {
             get { return _listOptions; }
+        }
+    }
+
+    public class ListActingLabelItem : ListItemInformation
+    {
+        private ListActingLabelItem(string text) : base(text)
+        { }
+
+        public override void Select()
+        { }
+
+        public override void AddToSelection()
+        { }
+
+        public override void RemoveFromSelection()
+        { }
+
+        public static ListItemInformation Create(string text)
+        {
+            return new ListActingLabelItem(text);
         }
     }
 }

@@ -1,12 +1,16 @@
 namespace UIA.Extensions.AutomationProviders.Interfaces
 {
-    public class ListItemInformation
+    public abstract class ListItemInformation
     {
-        public ListItemInformation(string text)
+        protected ListItemInformation(string text)
         {
             Text = text;
         }
 
-        public string Text { get; set; }
+        public string Text { get; protected set; }
+        public bool IsSelected { get; protected set; }
+        public abstract void Select();
+        public abstract void AddToSelection();
+        public abstract void RemoveFromSelection();
     }
 }

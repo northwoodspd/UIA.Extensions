@@ -78,7 +78,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
 
         public void AddItems(params string[] items)
         {
-            _items = items.Select(x => new ListItemInformation(x)).ToList();
+            _items = items.Select(ListItemInformationStub.Create).ToList();
         }
 
         public override List<ListItemInformation> ListItems

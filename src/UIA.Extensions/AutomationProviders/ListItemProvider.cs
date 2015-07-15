@@ -7,28 +7,35 @@ namespace UIA.Extensions.AutomationProviders
 {
     public class ListItemProvider : AutomationProvider, ISelectionItemProvider
     {
+        private readonly ListItemInformation _listItem;
+
         public ListItemProvider(AutomationProvider listProvider, ListItemInformation listItem) : base(listProvider, SelectionItemPattern.Pattern)
         {
+            _listItem = listItem;
             Name = listItem.Text;
             ControlType = ControlType.ListItem;
         }
 
         public void Select()
         {
-            throw new System.NotImplementedException();
+            _listItem.Select();
         }
 
         public void AddToSelection()
         {
-            throw new System.NotImplementedException();
+            _listItem.AddToSelection();
         }
 
         public void RemoveFromSelection()
         {
-            throw new System.NotImplementedException();
+            _listItem.RemoveFromSelection();
         }
 
-        public bool IsSelected { get; private set; }
+        public bool IsSelected
+        {
+            get { return _listItem.IsSelected; }
+        }
+
         public IRawElementProviderSimple SelectionContainer { get; private set; }
 
         public override bool Equals(object obj)
