@@ -15,34 +15,61 @@ namespace UIA.Extensions.TestApplication
             CanSelectMultiple = true;
 
             _listOptions = new[] {"First Option", "Second Option", "Third Option"}
-                .Select(ListActingLabelItem.Create).ToList();
+                .Select(x => ListActingLabelItem.Create(x, this)).ToList();
 
-            control.Text = _listOptions.First().Text;
+            _listOptions.First().Select();
+        }
+
+        public void UpdateSelection(ListActingLabelItem toSelect)
+        {
+            Control.Text = toSelect.Text;
+
+            foreach (var selected in _listOptions.Where(x => x.IsSelected && x != toSelect))
+            {
+                selected.RemoveFromSelection();
+            }
         }
 
         public override List<ListItemInformation> ListItems
         {
             get { return _listOptions; }
         }
+
+        public void Clear()
+        {
+            Control.Text = string.Empty;
+        }
     }
 
     public class ListActingLabelItem : ListItemInformation
     {
-        private ListActingLabelItem(string text) : base(text)
-        { }
+        private readonly ListActingLabel _parent;
+
+        private ListActingLabelItem(string text, ListActingLabel parent) : base(text)
+        {
+            _parent = parent;
+        }
 
         public override void Select()
-        { }
+        {
+            IsSelected = true;
+            _parent.UpdateSelection(this);
+        }
 
         public override void AddToSelection()
-        { }
+        {
+            Select();
+        }
 
         public override void RemoveFromSelection()
-        { }
-
-        public static ListItemInformation Create(string text)
         {
-            return new ListActingLabelItem(text);
+            IsSelected = false;
+            _parent.Clear();
+        }
+
+        public static ListItemInformation Create(string text, ListActingLabel parent)
+        {
+            return new ListActingLabelItem(text, parent);
         }
     }
 }
