@@ -9,42 +9,38 @@ using UIA.Extensions.AutomationProviders.Interfaces;
 
 namespace UIA.Extensions.AutomationProviders.Tables
 {
-    class ListProviderTest
+    class ListProviderTest : ProviderTest<ListProvider>
     {
         private ListInformationStub _listInformation;
-        private ListProvider _listProvider;
 
         private ISelectionProvider Selection
         {
-            get { return (ISelectionProvider)_listProvider.GetPatternProvider(SelectionPatternIdentifiers.Pattern.Id); }
+            get { return Pattern<ISelectionProvider>(SelectionPatternIdentifiers.Pattern.Id); }
         }
 
-        [SetUp]
-        public void SetUp()
+        protected override ListProvider Create()
         {
             _listInformation = new ListInformationStub(new Control());
-            _listProvider = new ListProvider(_listInformation);
+            return new ListProvider(_listInformation);
         }
 
         [Test]
         public void ItHasTheCorrectControlType()
         {
-            _listProvider.GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
-                .Should().Be(ControlType.List.Id);
+            ControlTypeId.Should().Be(ControlType.List.Id);
         }
 
         [Test]
         public void ItLocalizesTheControlType()
         {
-            _listProvider.GetPropertyValue(AutomationElementIdentifiers.LocalizedControlTypeProperty.Id)
-                .Should().Be(ControlType.List.LocalizedControlType);
+            LocalizedControlType.Should().Be(ControlType.List.LocalizedControlType);
         }
 
         [Test]
         public void ItReportsAsSelectionPattern()
         {
-            _listProvider.GetPatternProvider(SelectionPatternIdentifiers.Pattern.Id)
-                .Should().BeSameAs(_listProvider);
+            Subject.GetPatternProvider(SelectionPatternIdentifiers.Pattern.Id)
+                .Should().BeSameAs(Subject);
         }
 
         [Test]
@@ -68,7 +64,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
         {
             _listInformation.AddItems("First", "Second", "Third");
 
-            _listProvider.Children.Select(x => x.GetPropertyValue(AutomationElementIdentifiers.NameProperty.Id).ToString())
+            Children.Select(x => x.GetPropertyValue(AutomationElementIdentifiers.NameProperty.Id).ToString())
                 .ShouldBeEquivalentTo(new[] { "First", "Second", "Third" });
         }
     }

@@ -52,6 +52,7 @@
     <Compile Include="AutomationExtensions.cs" />
     <Compile Include="AutomationHandler.cs" />
     <Compile Include="AutomationProviders\Interfaces\ListItemInformation.cs" />
+    <Compile Include="AutomationProviders\ListItemProvider.cs" />
     <Compile Include="AutomationProviders\ListProvider.cs" />
     <Compile Include="AutomationProviders\ControlProvider.cs" />
     <Compile Include="AutomationProviders\AutomationProvider.cs" />
