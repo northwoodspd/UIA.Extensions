@@ -14,6 +14,12 @@ namespace UIA.Extensions.AutomationProviders.Tables
         { }
 
         [Test]
+        public void ItKnowsWhereItComesFrom()
+        {
+            Subject.SelectionContainer.Should().Be(_provider);
+        }
+
+        [Test]
         public void ItKnowsWhenSelected()
         {
             _listItem.SetSelected(true);

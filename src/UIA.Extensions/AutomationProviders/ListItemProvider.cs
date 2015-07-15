@@ -7,10 +7,12 @@ namespace UIA.Extensions.AutomationProviders
 {
     public class ListItemProvider : AutomationProvider, ISelectionItemProvider
     {
+        private readonly AutomationProvider _listProvider;
         private readonly ListItemInformation _listItem;
 
         public ListItemProvider(AutomationProvider listProvider, ListItemInformation listItem) : base(listProvider, SelectionItemPattern.Pattern)
         {
+            _listProvider = listProvider;
             _listItem = listItem;
             Name = listItem.Text;
             ControlType = ControlType.ListItem;
@@ -36,7 +38,10 @@ namespace UIA.Extensions.AutomationProviders
             get { return _listItem.IsSelected; }
         }
 
-        public IRawElementProviderSimple SelectionContainer { get; private set; }
+        public IRawElementProviderSimple SelectionContainer
+        {
+            get { return _listProvider; }
+        }
 
         public override bool Equals(object obj)
         {
