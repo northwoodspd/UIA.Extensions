@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using FluentAssertions;
 using NUnit.Framework;
 using UIA.Extensions.AutomationProviders.Interfaces;
+using UIA.Extensions.InternalExtensions;
 
 namespace UIA.Extensions.AutomationProviders.Tables
 {
@@ -13,7 +14,8 @@ namespace UIA.Extensions.AutomationProviders.Tables
     {
         private ListInformationStub _listInformation;
 
-        public ListProviderTest() : base(ControlType.List)
+        public ListProviderTest()
+            : base(ControlType.List)
         { }
 
         private ISelectionProvider Selection
@@ -57,13 +59,24 @@ namespace UIA.Extensions.AutomationProviders.Tables
             Children.Select(x => x.GetPropertyValue(AutomationElementIdentifiers.NameProperty.Id).ToString())
                 .ShouldBeEquivalentTo(new[] { "First", "Second", "Third" });
         }
+
+        [Test]
+        public void ItKnowsTheCurrentSelection()
+        {
+            _listInformation.AddItems("First", "Second", "Third", "Fourth");
+            _listInformation.SelectItems("Second", "Third");
+
+            Subject.GetSelection().Cast<ListItemProvider>().Select(x => x.Name)
+                .ShouldBeEquivalentTo(new[] { "Second", "Third" });
+        }
     }
 
     internal class ListInformationStub : ListInformation
     {
         private List<ListItemInformation> _items;
 
-        public ListInformationStub() : base(new Control())
+        public ListInformationStub()
+            : base(new Control())
         { }
 
         public void SetIsRequired(bool isRequired)
@@ -84,6 +97,12 @@ namespace UIA.Extensions.AutomationProviders.Tables
         public override List<ListItemInformation> ListItems
         {
             get { return _items ?? new List<ListItemInformation>(); }
+        }
+
+        public void SelectItems(params string[] toSelect)
+        {
+            _items.Where(x => toSelect.Contains(x.Text))
+                .ForEach(x => x.Select());
         }
     }
 }

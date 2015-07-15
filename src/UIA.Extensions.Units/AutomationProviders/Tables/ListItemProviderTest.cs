@@ -75,16 +75,19 @@ namespace UIA.Extensions.AutomationProviders.Tables
 
         public override void Select()
         {
+            IsSelected = true;
             SelectWasCalled = true;
         }
 
         public override void AddToSelection()
         {
+            IsSelected = true;
             AddToSelectionWasCalled = true;
         }
 
         public override void RemoveFromSelection()
         {
+            IsSelected = false;
             RemoveFromSelectionWasCalled = true;
         }
 
