@@ -10,6 +10,7 @@ namespace UIA.Extensions.AutomationProviders
         public ListItemProvider(AutomationProvider listProvider, ListItemInformation listItem) : base(listProvider, SelectionItemPattern.Pattern)
         {
             Name = listItem.Text;
+            ControlType = ControlType.ListItem;
         }
 
         public void Select()

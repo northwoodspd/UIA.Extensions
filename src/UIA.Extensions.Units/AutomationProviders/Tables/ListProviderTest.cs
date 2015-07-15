@@ -13,6 +13,9 @@ namespace UIA.Extensions.AutomationProviders.Tables
     {
         private ListInformationStub _listInformation;
 
+        public ListProviderTest() : base(ControlType.List)
+        { }
+
         private ISelectionProvider Selection
         {
             get { return Pattern<ISelectionProvider>(SelectionPatternIdentifiers.Pattern.Id); }
@@ -20,20 +23,8 @@ namespace UIA.Extensions.AutomationProviders.Tables
 
         protected override ListProvider Create()
         {
-            _listInformation = new ListInformationStub(new Control());
+            _listInformation = new ListInformationStub();
             return new ListProvider(_listInformation);
-        }
-
-        [Test]
-        public void ItHasTheCorrectControlType()
-        {
-            ControlTypeId.Should().Be(ControlType.List.Id);
-        }
-
-        [Test]
-        public void ItLocalizesTheControlType()
-        {
-            LocalizedControlType.Should().Be(ControlType.List.LocalizedControlType);
         }
 
         [Test]
@@ -72,8 +63,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
     {
         private List<ListItemInformation> _items;
 
-        public ListInformationStub(Control control)
-            : base(control)
+        public ListInformationStub() : base(new Control())
         { }
 
         public void SetIsRequired(bool isRequired)

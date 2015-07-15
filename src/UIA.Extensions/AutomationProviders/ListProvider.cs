@@ -13,8 +13,7 @@ namespace UIA.Extensions.AutomationProviders
         public ListProvider(ListInformation provider) : base(provider.Control, SelectionPattern.Pattern)
         {
             _provider = provider;
-            SetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id, ControlType.List.Id);
-            SetPropertyValue(AutomationElementIdentifiers.LocalizedControlTypeProperty.Id, ControlType.List.LocalizedControlType);
+            ControlType = ControlType.List;
         }
 
         public IRawElementProviderSimple[] GetSelection()
