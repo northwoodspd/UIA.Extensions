@@ -6,6 +6,7 @@
 
 * [Value Controls](#value-pattern)
 * [RangeValue Controls](#spinners)
+* [List Controls](#lists)
 * [Table Controls](#tables)
   *  [DataGridView](#datagridview)
   *  [Custom Tables](#custom-tables)
@@ -67,6 +68,74 @@ namespace YourApp
       InitializeComponent();
 
       numericUpDown.AsRangeValue(); // yes, that's it
+    }
+  }
+}
+```
+
+### Lists
+The [`SelectionPattern`](https://msdn.microsoft.com/en-us/library/system.windows.automation.selectionpattern(v=vs.110).aspx) / [`SelectionItemPattern`](https://msdn.microsoft.com/en-us/library/system.windows.automation.selectionitempattern(v=vs.110).aspx) are generally used by controls that have a list of available options as well as the ability to set / clear the currently selected items (think `ListBox`, `ComboBox`, etc.). While the `ComboBox` control exposes itself to automation slightly differently than a `ListBox` does, the underlying structure is the same.
+
+The `AsList<T>` extension will allow you to expose a custom control that behaves similiarly to UI Automation as a `ListBox` or a `ComboBox` control. In order to fully expose your custom control as a list, you must implement the `ListInformation` / `ListItemInformation` classes to expose the behavior from your custom control. Here is a quick example of how one might tackle such an effort:
+
+```csharp
+using UIA.Extensions
+
+namespace YourApp
+{
+  public partial class MainForm : Form
+  {
+    public MainForm()
+    {
+      InitializeComponent();
+
+      customComboBox.AsList<CustomComboList>();
+    }
+  }
+  
+  class CustomComboList : ListInformation
+  {
+    private MyCustomCombo _comboBox;
+    
+    public CustomComboList(MyCustomCombo comboBox) : base(comboBox)
+    {
+      _comboBox = comboBox;
+      IsRequired = false;
+      CanSelectMultiple = true; // report that multiple selections are acceptable
+    }
+    
+    public override List<ListItemInformation> ListItems
+    {
+      get { return _comboBox.Items.Select(CustomComboItem.Create).ToList(); }
+    }
+  }
+  
+  class CustomComboItem : ListItemInformation
+  {
+    private readonly MyCustomComboItem _item;
+    private CustomComboItem(MyCustomComboItem item)
+    {
+      _item = item;
+    }
+    
+    public ListItemInformation Create(MyCustomComboItem item)
+    {
+      return new CustomComboItem(item);
+    }
+    
+    public override void Select()
+    {
+      _item.Select();
+    }
+    
+    public override void AddToSelection()
+    {
+      Select();
+    }
+    
+    public override void RemoveFromSelection()
+    {
+      _item.UnSelect();
     }
   }
 }
