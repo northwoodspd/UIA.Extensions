@@ -39,8 +39,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
         [Test]
         public void ItReportsAsSelectionPattern()
         {
-            Subject.GetPatternProvider(SelectionPatternIdentifiers.Pattern.Id)
-                .Should().BeSameAs(Subject);
+            Selection.Should().BeSameAs(Subject);
         }
 
         [Test]
