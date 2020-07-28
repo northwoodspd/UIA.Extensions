@@ -22,7 +22,7 @@ namespace UIA.Extensions.AutomationProviders.Defaults.Tables
         public void ItReturnsTheValue()
         {
             _cell.Value = "Expected value";
-            _cellInformation.Value.ShouldBeEquivalentTo("Expected value");
+            _cellInformation.Value.Should().BeEquivalentTo("Expected value");
         }
 
         [Test]

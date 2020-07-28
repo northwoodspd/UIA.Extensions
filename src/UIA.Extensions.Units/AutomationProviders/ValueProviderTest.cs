@@ -30,14 +30,14 @@ namespace UIA.Extensions.AutomationProviders
         public void ValuesCanBeRetrieved()
         {
             _valueControl.Value = "Expected Value";
-            _valueProvider.Value.ShouldBeEquivalentTo("Expected Value");
+            _valueProvider.Value.Should().BeEquivalentTo("Expected Value");
         }
 
         [Test]
         public void ValuesCanBeSet()
         {
             _valueProvider.SetValue("The expected value to be set");
-            _valueControl.Value.ShouldBeEquivalentTo("The expected value to be set");
+            _valueControl.Value.Should().BeEquivalentTo("The expected value to be set");
         }
 
         class ValueControlStub : ValueControl

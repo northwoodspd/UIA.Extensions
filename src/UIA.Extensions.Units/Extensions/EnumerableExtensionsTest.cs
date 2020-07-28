@@ -1,5 +1,4 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
 using NUnit.Framework;
 using UIA.Extensions.InternalExtensions;
 
@@ -20,13 +19,13 @@ namespace UIA.Extensions.Extensions
             [Test]
             public void DefaultIfAtTheBeginning()
             {
-                new[] { 1, 3, 5 }.Before(1).ShouldBeEquivalentTo(0);
+                new[] { 1, 3, 5 }.Before(1).Should().Be(0);
             }
 
             [Test]
             public void DefaultIfNotFound()
             {
-                new[] {"blar"}.Before(String.Empty).Should().BeNull();
+                new[] { "blar" }.Before(string.Empty).Should().BeNull();
             }
         }
 
@@ -43,15 +42,14 @@ namespace UIA.Extensions.Extensions
             [Test]
             public void DefaultIfAtTheEnd()
             {
-                new[] { 1, 3, 5 }.After(5).ShouldBeEquivalentTo(0);
+                new[] { 1, 3, 5 }.After(5).Should().Be(0);
             }
 
             [Test]
             public void DefaultIfNotFound()
             {
-                new[] { "blar" }.After(String.Empty).Should().BeNull();
+                new[] { "blar" }.After(string.Empty).Should().BeNull();
             }
         }
-    
     }
 }

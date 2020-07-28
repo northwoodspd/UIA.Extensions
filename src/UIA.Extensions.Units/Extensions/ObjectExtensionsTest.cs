@@ -55,22 +55,22 @@ namespace UIA.Extensions.Extensions
             {
                 var now = DateTime.Now;
                 "".CombinedHashCodes(123, "", now)
-                  .ShouldBeEquivalentTo(123.GetHashCode() ^ "".GetHashCode() ^ now.GetHashCode());
+                  .Should().Be(123.GetHashCode() ^ "".GetHashCode() ^ now.GetHashCode());
             }
 
             [Test]
             public void SequencesAreTheSameIfDesired()
             {
-                var sequence = new[] {"a", "b", "whatever"};
+                var sequence = new[] { "a", "b", "whatever" };
                 sequence.GetSequenceHashCode()
-                 .ShouldBeEquivalentTo("a".GetHashCode() ^ "b".GetHashCode() ^ "whatever".GetHashCode());
+                 .Should().Be("a".GetHashCode() ^ "b".GetHashCode() ^ "whatever".GetHashCode());
             }
 
             [Test]
             public void NullsAreCool()
             {
                 "".CombinedHashCodes("", null, null)
-                  .ShouldBeEquivalentTo("".GetHashCode());
+                  .Should().Be("".GetHashCode());
             }
         }
     }

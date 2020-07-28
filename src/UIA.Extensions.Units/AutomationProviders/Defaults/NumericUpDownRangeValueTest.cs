@@ -13,7 +13,7 @@ namespace UIA.Extensions.AutomationProviders.Defaults
         [SetUp]
         public void SetUp()
         {
-            _spinner = new NumericUpDown {Maximum = decimal.MaxValue};
+            _spinner = new NumericUpDown { Maximum = decimal.MaxValue };
             _numericUpDownProvider = new NumericUpDownRangeValue(_spinner);
         }
 
@@ -21,14 +21,14 @@ namespace UIA.Extensions.AutomationProviders.Defaults
         public void ItCanGetTheValue()
         {
             _spinner.Value = 123.0m;
-            _numericUpDownProvider.Value.ShouldBeEquivalentTo(123.0);
+            _numericUpDownProvider.Value.Should().Be(123.0);
         }
 
         [Test]
         public void ItCanSetTheValue()
         {
             _numericUpDownProvider.Value = 10.0;
-            _spinner.Value.ShouldBeEquivalentTo(10.0m);
+            _spinner.Value.Should().Be(10.0m);
         }
 
         [Test]
@@ -42,27 +42,21 @@ namespace UIA.Extensions.AutomationProviders.Defaults
         public void ItKnowsTheMinimum()
         {
             _spinner.Minimum = -1.0m;
-            _numericUpDownProvider.Minimum.ShouldBeEquivalentTo(-1.0);
+            _numericUpDownProvider.Minimum.Should().Be(-1.0);
         }
 
         [Test]
         public void ItKnowsTheMaxiumum()
         {
             _spinner.Maximum = 100.0m;
-            _numericUpDownProvider.Maximum.ShouldBeEquivalentTo(100.0);
-        }
-
-        [Test]
-        public void WhoKnowsWhatLargeChangesAre()
-        {
-            // ??????
+            _numericUpDownProvider.Maximum.Should().Be(100.0);
         }
 
         [Test]
         public void SmallChangesAreTheIncrement()
         {
             _spinner.Increment = 2.0m;
-            _numericUpDownProvider.SmallChange.ShouldBeEquivalentTo(2.0);
+            _numericUpDownProvider.SmallChange.Should().Be(2.0);
         }
     }
 }
