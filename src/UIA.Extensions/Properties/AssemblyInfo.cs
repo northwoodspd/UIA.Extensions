@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Northwoods Consulting Partners")]
 [assembly: AssemblyProduct("UIA.Extensions")]
-[assembly: AssemblyCopyright("Copyright ©  2013")]
+[assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -22,18 +22,6 @@ using System.Runtime.InteropServices;
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("ae10cb98-b115-42f8-9a9b-2e572c767ccf")]
 
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.11.0")]
-[assembly: AssemblyFileVersion("1.0.11.0")]
 [assembly: InternalsVisibleTo("UIA.Extensions.Units,PublicKey=002400000480000094000000060200000024000052534131000400000100010083671eb3742e62" +
 "427388c9e512020d945fa7ba10b5a1605d534ec7504c89ec99571c3ab023c04733fb0b15eedd1c" +
 "270f62b8519ddf44b5ba2f8045dca32ab054946aafe2734637409d0723aa186376f7b8b3a603c5" +

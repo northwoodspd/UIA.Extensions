@@ -1,19 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30128.74
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIA.Extensions", "UIA.Extensions\UIA.Extensions.csproj", "{27FDFE95-4641-4929-9887-0FB39BD52594}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIA.Extensions.Units", "UIA.Extensions.Units\UIA.Extensions.Units.csproj", "{F93524CD-06CE-495E-9E4D-43F496756C46}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{C2E45102-A773-4D20-BA20-07FAFB61C02F}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIA.Extensions.TestApplication", "UIA.Extensions.TestApplication\UIA.Extensions.TestApplication.csproj", "{B850B751-5009-46B9-9D54-75722428311C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{380D61F5-2817-4E5C-9A3A-543FD2C180DD}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+		build.cake = build.cake
+		build.ps1 = build.ps1
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		SolutionAssemblyInfo.cs = SolutionAssemblyInfo.cs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,5 +39,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {41284AE2-DE7C-4C6B-BD1B-8A2820B00C53}
 	EndGlobalSection
 EndGlobal

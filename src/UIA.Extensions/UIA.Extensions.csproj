@@ -84,6 +84,9 @@
     <Compile Include="InternalExtensions\ProviderExtensions.cs" />
     <Compile Include="InternalExtensions\SystemExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\SolutionAssemblyInfo.cs">
+      <Link>Properties\SolutionAssemblyInfo.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="UIA.Extensions.snk" />
