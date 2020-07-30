@@ -347,6 +347,72 @@ Action nugetPush = () =>
     });
 };
 
+Action bundleInstall = () =>
+{
+    IEnumerable<string> standardOutput;
+    IEnumerable<string> standardError;
+    
+    var exitCode = StartProcess(bundleLocation(), new ProcessSettings
+    { 
+        WorkingDirectory = "../", 
+        RedirectStandardOutput = true, 
+        RedirectStandardError = true 
+    }, out standardOutput, out standardError);
+    
+    Information(string.Join(Environment.NewLine, standardOutput));
+    
+    if(exitCode != 0)
+    {
+        Error(string.Join(Environment.NewLine, standardError));
+        throw new Exception("Unable to install bundle packages");
+    }
+};
+
+Action runSpecs = () =>
+{
+    IEnumerable<string> standardOutput;
+    IEnumerable<string> standardError;
+    
+    var exitCode = StartProcess(bundleLocation(), new ProcessSettings
+    { 
+        Arguments = "exec rake",
+        WorkingDirectory = "../", 
+        RedirectStandardOutput = true, 
+        RedirectStandardError = true 
+    }, out standardOutput, out standardError);
+    
+    Information(string.Join(Environment.NewLine, standardOutput));
+    
+    if(exitCode != 0)
+    {
+        Error(string.Join(Environment.NewLine, standardError));
+        throw new Exception("Error running specs");
+    }
+};
+
+Func<string> bundleLocation = () =>
+{
+    IEnumerable<string> standardOutput;
+    IEnumerable<string> standardError;
+    
+    var exitCode = StartProcess("which", new ProcessSettings
+    { 
+        Arguments = "bundle.bat",
+        RedirectStandardOutput = true, 
+        RedirectStandardError = true 
+    }, out standardOutput, out standardError);
+    
+    string location = string.Join("", standardOutput);
+        
+    if(exitCode != 0 || String.IsNullOrWhiteSpace(location))
+    {
+        Error(string.Join(Environment.NewLine, standardError));
+        throw new Exception($"Unable to find bundle {location}");
+    }
+    
+    return location;
+};
+
 ///
 /// //////////////////////////////////////////////////
 ///
@@ -378,7 +444,8 @@ Task("Clean")
 /// Restores Nugets from configured artifact repository(ies)
 ///
 Task("Restore")
-    .Does(nugetRestore);
+    .Does(nugetRestore)
+    .Does(bundleInstall);
 
 ///
 /// Restores Nugets from configured artifact repository(ies)
@@ -403,6 +470,7 @@ Task("Build")
 Task("Test")
     .IsDependentOn("Build")
     .Does(() => {
+        runSpecs();
         executeTests(testAssemblyPattern, "unit", dotCoversettings => { }, 60000, TimeSpan.FromMinutes(5));
     });
 
