@@ -31,7 +31,7 @@ namespace UIA.Extensions.AutomationProviders
         public void ItDefaultsAsACustomControl()
         {
             _automationProvider.GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
-                .ShouldBeEquivalentTo(ControlType.Custom.Id);
+                .Should().BeEquivalentTo(ControlType.Custom.Id);
         }
 
         [Test]
@@ -39,7 +39,7 @@ namespace UIA.Extensions.AutomationProviders
         {
             _automationProvider.ControlType = ControlType.Spinner;
             _automationProvider.GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
-                .ShouldBeEquivalentTo(ControlType.Spinner.Id);
+                .Should().BeEquivalentTo(ControlType.Spinner.Id);
         }
 
         [Test]
@@ -48,7 +48,7 @@ namespace UIA.Extensions.AutomationProviders
             _automationProvider.ControlType = ControlType.Spinner;
 
             _automationProvider.GetPropertyValue(AutomationElementIdentifiers.LocalizedControlTypeProperty.Id)
-                     .ShouldBeEquivalentTo("spinner");
+                     .Should().BeEquivalentTo("spinner");
         }
 
         [Test]
@@ -56,7 +56,7 @@ namespace UIA.Extensions.AutomationProviders
         {
             _automationProvider.Name = "whatever";
             _automationProvider.GetPropertyValue(AutomationElementIdentifiers.NameProperty.Id)
-                .ShouldBeEquivalentTo("whatever");
+                .Should().BeEquivalentTo("whatever");
         }
 
         [Test]
@@ -64,21 +64,21 @@ namespace UIA.Extensions.AutomationProviders
         {
             _automationProvider.Id = "expectedAutomationId";
             _automationProvider.GetPropertyValue(AutomationElementIdentifiers.AutomationIdProperty.Id)
-                .ShouldBeEquivalentTo("expectedAutomationId");
+                .Should().BeEquivalentTo("expectedAutomationId");
         }
 
         [Test]
         public void ItIsConsideredAServerSideProvider()
         {
             (_automationProvider.ProviderOptions & ProviderOptions.ServerSideProvider)
-                .ShouldBeEquivalentTo(ProviderOptions.ServerSideProvider);
+                .Should().BeEquivalentTo(ProviderOptions.ServerSideProvider);
         }
 
         [Test]
         public void ItUsesComThreading()
         {
             ((int)_automationProvider.ProviderOptions & AutomationProvider.ProviderUseComThreading)
-                .ShouldBeEquivalentTo(AutomationProvider.ProviderUseComThreading);
+                .Should().Be(AutomationProvider.ProviderUseComThreading);
         }
 
         [Test]
@@ -86,7 +86,7 @@ namespace UIA.Extensions.AutomationProviders
         {
             _automationProvider.SetPropertyValue(AutomationElementIdentifiers.ClassNameProperty.Id, "ExpectedPropertyValue");
             _automationProvider.GetPropertyValue(AutomationElementIdentifiers.ClassNameProperty.Id)
-                .ShouldBeEquivalentTo("ExpectedPropertyValue");
+                .Should().BeEquivalentTo("ExpectedPropertyValue");
         }
 
         [TestFixture]
@@ -131,7 +131,7 @@ namespace UIA.Extensions.AutomationProviders
                 _automationProvider.AddChild(new AutomationProvider());
                 _automationProvider.AddChild(new AutomationProvider());
 
-                _automationProvider.Children.Select(x => x.RuntimeId).Should().Equal(new[] {0, 1, 2});
+                _automationProvider.Children.Select(x => x.RuntimeId).Should().Equal(new[] { 0, 1, 2 });
             }
         }
 

@@ -13,14 +13,14 @@ namespace UIA.Extensions.AutomationProviders
         [SetUp]
         public void SetUp()
         {
-            _controlProvider = new ControlProvider(new Control {Name = "expectedControlAutomationId"});
+            _controlProvider = new ControlProvider(new Control { Name = "expectedControlAutomationId" });
         }
 
         [Test]
         public void ItUsesTheControlNameForTheAutomationId()
         {
             _controlProvider.GetPropertyValue(AutomationElementIdentifiers.AutomationIdProperty.Id)
-                     .ShouldBeEquivalentTo("expectedControlAutomationId");
+                     .Should().BeEquivalentTo("expectedControlAutomationId");
         }
 
         [Test]
@@ -29,7 +29,7 @@ namespace UIA.Extensions.AutomationProviders
             _controlProvider.Control.Text = "The Control Text";
 
             _controlProvider.GetPropertyValue(AutomationElementIdentifiers.NameProperty.Id)
-                     .ShouldBeEquivalentTo("The Control Text");
+                     .Should().BeEquivalentTo("The Control Text");
         }
 
         [Test]
@@ -37,17 +37,11 @@ namespace UIA.Extensions.AutomationProviders
         {
             var originalName = "expectedControlAutomationId";
             _controlProvider.GetPropertyValue(AutomationElementIdentifiers.AutomationIdProperty.Id)
-                     .ShouldBeEquivalentTo(originalName);
+                     .Should().BeEquivalentTo(originalName);
 
             _controlProvider.Control.Name = "modifiedAutomationId";
             _controlProvider.GetPropertyValue(AutomationElementIdentifiers.AutomationIdProperty.Id)
-                     .ShouldBeEquivalentTo("modifiedAutomationId");
-        }
-
-        public class TestControlProvider : ControlProvider
-        {
-            public TestControlProvider(Control control) : base(control)
-            { }
+                     .Should().BeEquivalentTo("modifiedAutomationId");
         }
     }
 }

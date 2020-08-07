@@ -31,7 +31,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
         public void ItIsOfTheDataItemIlk()
         {
             TableRowProvider.GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
-                .ShouldBeEquivalentTo(ControlType.DataItem.Id);
+                .Should().BeEquivalentTo(ControlType.DataItem.Id);
         }
 
         [Test]
@@ -76,15 +76,15 @@ namespace UIA.Extensions.AutomationProviders.Tables
         public void TheRowValuesAreTheChildren()
         {
             AddCells("item 1", "item 2", "item 3");
-            TableRowProvider.Children.Count.ShouldBeEquivalentTo(3);
-            TableRowProvider.Children.Select(x => x.Name).ShouldBeEquivalentTo(new[] { "item 1", "item 2", "item 3" });
+            TableRowProvider.Children.Count.Should().Be(3);
+            TableRowProvider.Children.Select(x => x.Name).Should().BeEquivalentTo("item 1", "item 2", "item 3");
         }
 
         [Test]
         public void ChildrenHaveTheCorrectRuntimeIds()
         {
             AddCells("item 1", "item 2", "item 3");
-            TableRowProvider.Children.Select(x => x.RuntimeId).Should().Equal(new[] {0, 1, 2});
+            TableRowProvider.Children.Select(x => x.RuntimeId).Should().Equal(0, 1, 2);
         }
 
         [Test]
@@ -93,14 +93,11 @@ namespace UIA.Extensions.AutomationProviders.Tables
             var oneRow = RowWithCells("item 1", "item 2");
             var sameRow = RowWithCells("item 1", "item 2");
 
-            oneRow.ShouldBeEquivalentTo(sameRow);
+            oneRow.Should().BeEquivalentTo(sameRow);
         }
 
         private TableRowProvider _provider;
-        private TableRowProvider TableRowProvider
-        {
-            get { return _provider ?? (_provider = new TableRowProvider(_parent.Object, _rowInformationStub)); }
-        }
+        private TableRowProvider TableRowProvider => _provider ?? (_provider = new TableRowProvider(_parent.Object, _rowInformationStub));
 
         private void AddCells(params string[] values)
         {
@@ -111,7 +108,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
         {
             var rowInformation = new RowInformationStub();
             values.ForEach(x => rowInformation.Cells.Add(new CellInformationStub(x)));
-            return new TableRowProvider(_parent.Object, rowInformation); 
+            return new TableRowProvider(_parent.Object, rowInformation);
         }
     }
 }

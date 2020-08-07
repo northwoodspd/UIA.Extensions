@@ -23,7 +23,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
         public void ItHasTheCorrectControlType()
         {
             HeaderProvider.GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
-                .ShouldBeEquivalentTo(ControlType.Header.Id);
+                .Should().BeEquivalentTo(ControlType.Header.Id);
         }
 
         [Test]
@@ -37,14 +37,14 @@ namespace UIA.Extensions.AutomationProviders.Tables
         public void ChildrenHaveTheCorrectRuntimeIds()
         {
             _headers.AddRange(HeadersFor("one", "two", "three"));
-            HeaderProvider.Children.Select(x => x.RuntimeId).Should().Equal(new[] { 0, 1, 2 });
+            HeaderProvider.Children.Select(x => x.RuntimeId).Should().Equal(0, 1, 2);
         }
 
         [Test]
         public void TheHeaderStringsAreTheChildren()
         {
             _headers.AddRange(HeadersFor("first", "second", "other"));
-            HeaderProvider.Children.Select(x => x.Name).ShouldBeEquivalentTo(new[] { "first", "second", "other" });
+            HeaderProvider.Children.Select(x => x.Name).Should().BeEquivalentTo("first", "second", "other");
         }
 
         [Test]
@@ -52,15 +52,11 @@ namespace UIA.Extensions.AutomationProviders.Tables
         {
             var firstHeader = new HeaderProvider(null, new[] { new HeaderInformation("first"), new HeaderInformation("second") });
             var secondHeader = new HeaderProvider(null, new[] { new HeaderInformation("first"), new HeaderInformation("second") });
-            firstHeader.ShouldBeEquivalentTo(secondHeader);
+            firstHeader.Should().BeEquivalentTo(secondHeader);
         }
 
         private HeaderProvider _header;
-
-        private HeaderProvider HeaderProvider
-        {
-            get { return _header ?? (_header = new HeaderProvider(null, _headers)); }
-        }
+        private HeaderProvider HeaderProvider => _header ?? (_header = new HeaderProvider(null, _headers));
 
         private static IEnumerable<HeaderInformation> HeadersFor(params string[] headers)
         {

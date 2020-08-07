@@ -28,9 +28,9 @@ namespace UIA.Extensions.AutomationProviders.Interfaces
         public void ItIsOfTypeSpinner()
         {
             _provider.GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
-                .ShouldBeEquivalentTo(ControlType.Spinner.Id);
+                .Should().BeEquivalentTo(ControlType.Spinner.Id);
         }
-        
+
         [Test]
         public void ItCanDoWhatItSaysItCanDo()
         {
@@ -54,14 +54,14 @@ namespace UIA.Extensions.AutomationProviders.Interfaces
             public void ItHasValue()
             {
                 _rangeValue.Value = 7.2;
-                _provider.Value.ShouldBeEquivalentTo(7.2);
+                _provider.Value.Should().Be(7.2);
             }
 
             [Test]
             public void ItCanSetValues()
             {
                 _provider.SetValue(123.0);
-                _rangeValue.Value.ShouldBeEquivalentTo(123.0);
+                _rangeValue.Value.Should().Be(123.0);
             }
 
             [Test]
@@ -75,36 +75,35 @@ namespace UIA.Extensions.AutomationProviders.Interfaces
             public void ItKnowsTheMinimum()
             {
                 _rangeValue.Minimum = 7.2;
-                _provider.Minimum.ShouldBeEquivalentTo(7.2);
+                _provider.Minimum.Should().Be(7.2);
             }
 
             [Test]
             public void ItKnowsTheMaximum()
             {
                 _rangeValue.Maximum = 7.2;
-                _provider.Maximum.ShouldBeEquivalentTo(7.2);
+                _provider.Maximum.Should().Be(7.2);
             }
 
             [Test]
             public void ItKnowsLargeChangeIncrements()
             {
                 _rangeValue.LargeChange = 2.0;
-                _provider.LargeChange.ShouldBeEquivalentTo(2.0);
+                _provider.LargeChange.Should().Be(2.0);
             }
 
             [Test]
             public void ItKnowsSmallChangeIncrements()
             {
                 _rangeValue.SmallChange = 1.0;
-                _provider.SmallChange.ShouldBeEquivalentTo(1.0);
+                _provider.SmallChange.Should().Be(1.0);
             }
         }
 
         class RangeValueControlStub : RangeValueControl
         {
             public RangeValueControlStub(Control control) : base(control)
-            {
-            }
+            { }
 
             public override double Value { get; set; }
             public override bool IsReadOnly { get; set; }

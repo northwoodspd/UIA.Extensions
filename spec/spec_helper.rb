@@ -1,7 +1,8 @@
 require 'rspec/given'
 require 'childprocess'
 require 'uia'
-require 'require_all'
+require 'mohawk/waiter'
+require 'mohawk/adapters/uia/control'
 require 'mohawk'
 
 require_rel 'screens'

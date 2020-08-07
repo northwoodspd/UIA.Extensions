@@ -12,7 +12,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
         public void ItHasTheHeaderItemType()
         {
             new HeaderItemProvider(null, null, 0).GetPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id)
-                .ShouldBeEquivalentTo(ControlType.HeaderItem.Id);
+                .Should().BeEquivalentTo(ControlType.HeaderItem.Id);
         }
 
         [TestFixture]
@@ -23,13 +23,13 @@ namespace UIA.Extensions.AutomationProviders.Tables
             {
                 var firstHeader = HeaderFor("value", 0);
                 var secondHeader = HeaderFor("value", 0);
-                firstHeader.ShouldBeEquivalentTo(secondHeader);
+                firstHeader.Should().BeEquivalentTo(secondHeader);
             }
 
             [Test]
             public void ItHashesTheCodes()
             {
-                HeaderFor("value", 7).GetHashCode().ShouldBeEquivalentTo("value".GetHashCode() ^ 7.GetHashCode());
+                HeaderFor("value", 7).GetHashCode().Should().Be("value".GetHashCode() ^ 7.GetHashCode());
             }
         }
 

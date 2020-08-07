@@ -18,10 +18,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
             : base(ControlType.List)
         { }
 
-        private ISelectionProvider Selection
-        {
-            get { return Pattern<ISelectionProvider>(SelectionPatternIdentifiers.Pattern.Id); }
-        }
+        private ISelectionProvider Selection => Pattern<ISelectionProvider>(SelectionPatternIdentifiers.Pattern.Id);
 
         protected override ListProvider Create()
         {
@@ -57,7 +54,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
             _listInformation.AddItems("First", "Second", "Third");
 
             Children.Select(x => x.GetPropertyValue(AutomationElementIdentifiers.NameProperty.Id).ToString())
-                .ShouldBeEquivalentTo(new[] { "First", "Second", "Third" });
+                .Should().BeEquivalentTo("First", "Second", "Third");
         }
 
         [Test]
@@ -67,7 +64,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
             _listInformation.SelectItems("Second", "Third");
 
             Subject.GetSelection().Cast<ListItemProvider>().Select(x => x.Name)
-                .ShouldBeEquivalentTo(new[] { "Second", "Third" });
+                .Should().BeEquivalentTo("Second", "Third");
         }
     }
 
@@ -94,10 +91,7 @@ namespace UIA.Extensions.AutomationProviders.Tables
             _items = items.Select(ListItemInformationStub.Create).ToList();
         }
 
-        public override List<ListItemInformation> ListItems
-        {
-            get { return _items ?? new List<ListItemInformation>(); }
-        }
+        public override List<ListItemInformation> ListItems => _items ?? new List<ListItemInformation>();
 
         public void SelectItems(params string[] toSelect)
         {
