@@ -308,7 +308,7 @@ Action nugetPack = () =>
 
         var project = ParseProject(slnProject.Path);
         var dill = slnProject.Path.GetDirectory().CombineWithFilePath(File($"./bin/{configuration}/{project.AssemblyName}.dll"));
-        var target = "lib/" + project.TargetFrameworkVersion.Replace(".", "");
+        var target = "lib/" + project.TargetFrameworkVersion.Replace(".", "").Replace("v", "net");
 
         var nuGetPackSettings   = new NuGetPackSettings {
             Id                       = project.AssemblyName,
