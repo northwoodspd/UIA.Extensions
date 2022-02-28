@@ -395,7 +395,7 @@ Func<string> bundleLocation = () =>
     IEnumerable<string> standardOutput;
     IEnumerable<string> standardError;
     
-    var exitCode = StartProcess("which", new ProcessSettings
+    var exitCode = StartProcess("where", new ProcessSettings
     { 
         Arguments = "bundle.bat",
         RedirectStandardOutput = true, 
