@@ -20,22 +20,22 @@ GEM
     diff-lcs (1.4.4)
     faker (2.12.0)
       i18n (>= 1.6, < 2)
-    ffi (1.11.3-x86-mingw32)
+    ffi (1.15.5-x86-mingw32)
     given_core (3.8.0)
       sorcerer (>= 0.3.7)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     map (6.6.0)
-    mini_portile2 (2.4.0)
     mohawk (0.4.2)
       childprocess (~> 0.5)
       page_navigation (>= 0.7)
       require_all
       uia (~> 0.5)
-    nokogiri (1.10.10-x86-mingw32)
-      mini_portile2 (~> 2.4.0)
+    nokogiri (1.13.3-x86-mingw32)
+      racc (~> 1.4)
     page_navigation (0.10)
       data_magic (>= 0.22)
+    racc (1.6.0)
     rake (12.3.3)
     require_all (3.0.0)
     rspec (3.9.0)
@@ -56,8 +56,8 @@ GEM
     rspec-support (3.9.3)
     semver2 (3.4.2)
     sorcerer (2.0.1)
-    uia (0.7)
-      ffi (~> 1.11.2)
+    uia (0.8)
+      ffi (~> 1.14)
       require_all (~> 3.0)
     yml_reader (0.7)
 
@@ -72,4 +72,4 @@ DEPENDENCIES
   rspec-given
 
 BUNDLED WITH
-   2.1.4
+   2.2.32
