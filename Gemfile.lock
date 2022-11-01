@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/Albacore/albacore.git
-  revision: af29f9ba4e0c858cd113757f414f212c099171e3
+  revision: e316e2098c3cf15857216e8773d6c101bc91df40
   specs:
     albacore (3.0.1)
       map (~> 6.5)
@@ -18,12 +18,12 @@ GEM
       faker (>= 1.1.2)
       yml_reader (>= 0.6)
     diff-lcs (1.5.0)
-    faker (2.20.0)
+    faker (2.23.0)
       i18n (>= 1.8.11, < 2)
     ffi (1.15.5-x86-mingw32)
     given_core (3.8.2)
       sorcerer (>= 0.3.7)
-    i18n (1.10.0)
+    i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     map (6.6.0)
     mohawk (0.4.4)
@@ -31,29 +31,29 @@ GEM
       page_navigation (>= 0.7)
       require_all (~> 3.0)
       uia (~> 0.5)
-    nokogiri (1.13.4-x86-mingw32)
+    nokogiri (1.13.9-x86-mingw32)
       racc (~> 1.4)
     page_navigation (0.10)
       data_magic (>= 0.22)
     racc (1.6.0)
     rake (12.3.3)
     require_all (3.0.0)
-    rspec (3.11.0)
-      rspec-core (~> 3.11.0)
-      rspec-expectations (~> 3.11.0)
-      rspec-mocks (~> 3.11.0)
-    rspec-core (3.11.0)
-      rspec-support (~> 3.11.0)
-    rspec-expectations (3.11.0)
+    rspec (3.12.0)
+      rspec-core (~> 3.12.0)
+      rspec-expectations (~> 3.12.0)
+      rspec-mocks (~> 3.12.0)
+    rspec-core (3.12.0)
+      rspec-support (~> 3.12.0)
+    rspec-expectations (3.12.0)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.11.0)
+      rspec-support (~> 3.12.0)
     rspec-given (3.8.2)
       given_core (= 3.8.2)
       rspec (>= 2.14.0)
-    rspec-mocks (3.11.1)
+    rspec-mocks (3.12.0)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.11.0)
-    rspec-support (3.11.0)
+      rspec-support (~> 3.12.0)
+    rspec-support (3.12.0)
     semver2 (3.4.2)
     sorcerer (2.0.1)
     uia (0.8)
@@ -68,7 +68,7 @@ DEPENDENCIES
   albacore!
   childprocess
   mohawk (= 0.4.4)
-  nokogiri (>= 1.13.4)
+  nokogiri (>= 1.13.9)
   rake
   rspec-given
 
