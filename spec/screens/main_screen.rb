@@ -10,7 +10,7 @@ class MainScreen
   button(:update_headers, :value => 'Update Headers')
   button(:toggle_row, :value => 'Toggle Row')
 
-  label(:status, id: 'StatusBar.Pane0')
+  label(:status_strip, id: 'statusStrip1')
 
   table(:the_grid, :id => 'dataGridView')
 
@@ -23,5 +23,9 @@ class MainScreen
   def add_grid_items(how_many)
     self.how_many = how_many.to_s
     add_rows
+  end
+
+  def status
+    self.status_strip_view.children[0].name
   end
 end
