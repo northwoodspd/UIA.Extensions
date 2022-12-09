@@ -18,7 +18,7 @@
 var testAssemblyPattern = "*.Units";
 var integrationTestAssemblyPattern = "*.Tests.Integration";
 
-var msBuildToolVersion = MSBuildToolVersion.VS2019;
+var msBuildToolVersion = MSBuildToolVersion.VS2022;
 
 var target         = Argument("target", "Default");
 var configuration  = Argument("configuration", "Release");

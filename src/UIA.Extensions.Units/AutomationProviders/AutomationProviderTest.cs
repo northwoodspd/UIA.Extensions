@@ -71,7 +71,7 @@ namespace UIA.Extensions.AutomationProviders
         public void ItIsConsideredAServerSideProvider()
         {
             (_automationProvider.ProviderOptions & ProviderOptions.ServerSideProvider)
-                .Should().BeEquivalentTo(ProviderOptions.ServerSideProvider);
+                .Should().HaveFlag(ProviderOptions.ServerSideProvider);
         }
 
         [Test]
