@@ -1,26 +1,22 @@
 require 'bundler/setup'
 
 require 'rubygems'
-require 'albacore'
 require 'rspec/core/rake_task'
 require 'rspec/given'
 
 task :default => [:build, :spec]
 
-desc 'Build UIA.Extensions'
-build :build do |b|
-  b.sln = 'src/UIA.Extensions.sln'
-  b.prop :Configuration, :Debug
-end
-
 desc 'Build the Release UIA.Extensions'
-build :build_release do |b|
-  b.sln = 'src/UIA.Extensions.sln'
-  b.prop :Configuration, :Release
+task :build do
+  Dir.chdir('src') do
+    if !system('msbuild UIA.Extensions.sln -target:Rebuild -property:Configuration=Release')
+      fail "Failed to build UIA.Extensions: #{$?.exitstatus}"
+    end
+  end
 end
 
 desc 'Package for NuGet'
-task :package => [:build, :spec, :build_release] do
+task :package => [:build, :spec] do
   puts `nuget pack src/UIA.Extensions/UIA.Extensions.csproj -Prop Configuration=Release`
 end
 
