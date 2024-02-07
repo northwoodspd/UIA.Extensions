@@ -55,7 +55,7 @@ PLATFORMS
 DEPENDENCIES
   childprocess
   mohawk (~> 1.0)
-  nokogiri (~> 1.15)
+  nokogiri (~> 1.16)
   rake
   rspec-given
 
