@@ -20,7 +20,7 @@ GEM
       page_navigation (>= 0.7)
       require_all (~> 3.0)
       uia (~> 1.0)
-    nokogiri (1.15.4-x86-mingw32)
+    nokogiri (1.16.2-x86-mingw32)
       racc (~> 1.4)
     page_navigation (0.10)
       data_magic (>= 0.22)
@@ -55,7 +55,7 @@ PLATFORMS
 DEPENDENCIES
   childprocess
   mohawk (~> 1.0)
-  nokogiri (~> 1.15)
+  nokogiri (~> 1.16)
   rake
   rspec-given
 
